@@ -20,36 +20,42 @@ For the objects, the relevant parameters will also be introduced, along with the
 
 * 'parameter_name' : "Allowed value type"
 
-#### [Object Classes](@ref)
+#### `model_instance`
 Each `model_instance` object holds general information about the model at hand. Here we only discuss the time related parameters:
 * `model_start` and `model_end` : "Date time value"
 These two parameters define the model horizon. A Datetime value is to be taken for both parameters, in which case they directly mark respectively the beginning and end of the modeled time horizon.[^1]
 
-[^1]: In the documentation of Maren, it is mentioned that the `model_end` parameter can also be given as a duration. However, this does not seem to work when I try it. I get the following error: MethodError: no method matching SpineInterface.TimeSlice(::Dates.DateTime, ::Dates.Minute; duration_unit=Dates.Minute). Furthermore, an array of DateTimes should be possible, to create non-connected periods -> to be tested.
+[^1]: In the documentation of Maren, it is mentioned that the `model_end` parameter can also be given as a duration. However, this does not seem to work when I try it. I get the following error: MethodError: no method matching SpineInterface.TimeSlice(::Dates.DateTime, ::Dates.Minute; duration_unit=Dates.Minute). Furthermore, an array of DateTimes should be possible, to create non-connected periods -> seems to be not working either. Issue has been filed.
 
 * `duration_unit` (optional): "hour or minute"
  This parameters gives the unit of duration that is used in the model calculations. The allowed values are 'hour' and 'minute'. This parameter should be aligned with other parameters in the model, for example: when fuel costs are expressed in euro/MWh, and unit capacity in MW, then the `duration_unit` should be 'hour'. The default value for this parameter is 'minute'.
 
 * `roll_forward` (optional): "duration value"
-This parameter defines how much the optimization window rolls forward in a rolling horizon optimization and should be expressed as a duration. In a rolling horizon optimization, a (small) part of the model is optimized at each iteration, after which the window rolls forward to optimize a different part. Overlap between consecutive optimization windows is possible. Let's take a look at this by means of an example. Suppose we have a model that has a time horizon of one week. When no `roll_forward` is defined, the full week is optimized in a single solve. However, when `roll_forward` is set to 24h, an optimization would take place for the first day only, after which the window rolls forward and optimizes the second day separately and so on. The default value of this parameter is the entire model time horizon, which leads to a single optimization for the entire time horizon.
-
-
+This parameter defines how much the optimization window rolls forward in a rolling horizon optimization and should be expressed as a duration. In a rolling horizon optimization, a (small) part of the model is optimized at each iteration, after which the window rolls forward to optimize a different part. Overlap between consecutive optimization windows is possible. In the practical approaches presented below, the rolling window optimization will be explained in more detail. The default value of this parameter is the entire model time horizon, which leads to a single optimization for the entire time horizon.
 
 
 #### `temporal_block`
-A temporal block defines the properties of the time range that is to be solved. A single model can have multiple temporal blocks, which is one of the main sources of temporal flexibility in Spine: by linking different parts of the model to different temporal blocks, a single model can contain aspects that are solved with different temporal resolutions or time horizons.
+A temporal block defines the properties of the horizon that is to be solved in the current window. Most importantly, it holds the necessary information about the resolution of the optimization. A single model can have multiple temporal blocks, which is one of the main sources of temporal flexibility in Spine: by linking different parts of the model to different temporal blocks, a single model can contain aspects that are solved with different temporal resolutions or time horizons.
 
 * `resolution` (optional): "duration value" or "array of duration values"
-This parameter specifies the resolution of the temporal block, or in other words: the length of the timesteps used in the optimization run. Generally speaking, variables and constraints are generated for each timestep of an optimization. For example, the nodal balance constraint must hold for each timestep.[^3] The default value for this parameter is 1 hour.
+This parameter specifies the resolution of the temporal block, or in other words: the length of the timesteps used in the optimization run. Generally speaking, variables and constraints are generated for each timestep of an optimization. For example, the nodal balance constraint must hold for each timestep. An array of duration values can be used to have a resolution that varies with time itself. It can for example be used when uncertainty in one of the inputs rises as the optimization moves away from the model start. Think of a forecast of for instance wind power generation, which might be available in quarter hourly detail for one day in the future, and in hourly detail for the next two days. It is possible to take a quarter hourly resolution for the full horizon of three days, one then simply takes an equal value for all four quarters belonging to the same hour of the two final days. However, by lowering the temporal resolution after the first day, the computational burden is lowered substantially. [^3] The default value for this parameter is 1 hour.
 
 [^3]: It is possible to give as input an array of durations, but this does not seem to be working for me. error message: MethodError: no method matching zero(::SpineInterface.Duration) in the code line: _time_interval_blocks at SpineOpt\nWeao\src\data_structure\temporal_structure.jl:153
 
 * `block_start` (optional): "duration value" or "Date time value"
-Indicates the start of this temporal block. When a Date time value is chosen, this is directly the start of the optimization for this temporal block. When a duration is chosen, it is added to the `model_start` to obtain the start of this `temporal_block`. The default value for this parameter is the `model_start`.
-* `block_end`(optional): "duration value" or "Date time value"
-Completely equivalent to `block_start` except that the default value is now `model_end`. When a duration is taken, it is also added to the `model_start`.
+Indicates the start of this temporal block. The main use of this parameter is to create an offset from the model start. It is useful to distinguish here between two cases: a single solve, or a rolling window optimization.
 
-Note that when a single temporal block is defined for the model, the more stringent borders of the two intervals [`model_start` , `model_end`], [`block_start` , `block_end`] will be used for the optimization timeframe.
+**single solve**
+When a Date time value is chosen, this is directly the start of the optimization for this temporal block. When a duration is chosen, it is added to the `model_start` to obtain the start of this `temporal_block`. In the case of a duration, the chosen value directly marks the offset of the optimization with respect to the `model_start`. The default value for this parameter is the `model_start`. In a single solve optimization, a combination of `block_start` and `block_end` can easily be used to run optimizations that cover only part of the model horizon. Multiple `temporal_block` objects can then be used to create optimizations for disconnected time periods, which is commonly used in the method of representative days.
+
+**rolling window optimization**
+In this case, a duration value should be chosen, and it will again mark the offset of the optimization start but now with respect to the start of each optimization window.
+
+* `block_end`(optional): "duration value" or "Date time value"
+**single solve**
+**rolling window optimization**
+In this case, a duration value should be chosen, and it will determine the size of the optimization window. Not that this is different from the `roll_forward` parameter, which determines how much the window moves for after each optimization. For more info, see [Minimal requirements to get a model running: one single `temporal_block`](@ref)
+
 
 ### Relationships
 
@@ -58,13 +64,13 @@ In this relationship, a model instance is linked to a temporal block.
 #### `model_default_temporal_block`
 Defines the default temporal block used for model objects, which will be replaced when a specific relationship is defined for a model in `model_instance_temporal_block`.
 #### `node_temporal_block`
-This relationship will link a node to a temporal block. A node has to be linked to a temporal block, otherwise it will not be included in an optimization. When multiple nodes should be linked to the same temporal block, a node group can be defined and instead of linking all the individual nodes to a temporal block, the action can be performed once for the entire node group.[^4]
+This relationship will link a node to a temporal block. A node has to be linked to a temporal block, otherwise it will not be included in an optimization. The advantage of linking nodes explicitly to a temporal block is that different nodes within the same model can be modeled differently. This leads to the possibility of modeling different commodities with a different resolution (e.g. electricity quarter-hourly and gas hourly). Furthermore, resolutions can be made different across regions by representing each region with its own node. When multiple nodes should be linked to the same temporal block, a node group can be defined and instead of linking all the individual nodes to a temporal block, the action can be performed once for the entire node group.[^4]
 
 [^4]: I noticed that the result of this action is not the same as linking the individual nodes to a temporal block, it looked like the node group does not take over the demand attribute of the included nodes.
 #### `units_on_temporal_block`
 This relationship links the `units_on` variable of a unit to a temporal block and will therefore govern the time-resolution of the unit's online/offline status. Note that the separation between this relationship and the `node_temporal_block` relationship allows the user to give different time resolutions to the optimization of a unit's output (`unit_flow` variable) on the one hand and the same unit's on- and off status (`units_on` variable) on the other hand.
 #### `unit_investment_temporal_block`
-This relationship sets the temporal dimensions for investment decisions of a certain unit. The separation between this relationship and the `units_on_temporal_block`, allows the user for example to give a much coarser resolution to a unit's on- or offline status than to it's investment decisions.
+This relationship sets the temporal dimensions for investment decisions of a certain unit. The separation between this relationship and the `units_on_temporal_block`, allows the user for example to give a much finer resolution to a unit's on- or offline status than to it's investment decisions.
 #### `model_default_investment_temporal_block`
 Defines the default temporal block used for investment decisions, which will be replaced when a specific relationship is defined for a unit in `unit_investment_temporal_block`.
 ## General principle
