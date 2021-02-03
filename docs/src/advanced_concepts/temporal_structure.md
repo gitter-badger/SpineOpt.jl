@@ -49,7 +49,7 @@ Indicates the start of this temporal block. The main use of this parameter is to
 When a Date time value is chosen, this is directly the start of the optimization for this temporal block. When a duration is chosen, it is added to the `model_start` to obtain the start of this `temporal_block`. In the case of a duration, the chosen value directly marks the offset of the optimization with respect to the `model_start`. The default value for this parameter is the `model_start`.
 
 **rolling window optimization**
-In the case of a rolling optimization window, a duration value should be chosen, and it will again mark the offset of the optimization start but now with respect to the start of each optimization window.
+To create a temporal_block that is rolling along with the optimization window, a rolling temporal_block, a duration value should be chosen. The temporal `block_start` will again mark the offset of the optimization start but now with respect to the start of each optimization window. To create a static temporal_block, that has a fixed `block_start` (and `block_end`, see below) and does not move along with the rolling window but rather splats into the rolling window, once the rolling window hits the start of the static temporal_block, the `block_start`parameter needs to be defined as a `DateTime` value. #TODO: this is not supported yet!
 
 * `block_end`(optional): "duration value" or "Date time value"
 
@@ -57,7 +57,8 @@ In the case of a rolling optimization window, a duration value should be chosen,
 When a Date time value is chosen, this is directly the end of the optimization for this temporal block. In a single solve optimization, a combination of `block_start` and `block_end` can easily be used to run optimizations that cover only part of the model horizon. Multiple `temporal_block` objects can then be used to create optimizations for disconnected time periods, which is commonly used in the method of representative days.
 
 **rolling window optimization**
-In this case, a duration value should be chosen, and it will determine the size of the optimization window. Not that this is different from the `roll_forward` parameter, which determines how much the window moves for after each optimization. For more info, see [Minimal requirements to get a model running: one single `temporal_block`](@ref) The default value in this case is equal to the
+To create a temporal_block that is rolling along with the optimization window, a rolling temporal_block, a duration value should be chosen. The `block_end` parameter will in this case determine the size of the optimization window, with respect to the start of each optimization window. If multiple temporal_blocks with different `block_end` parameters exist, the maximum value will determine the size of the optimization window. Note, this is different from the `roll_forward` parameter, which determines how much the window moves for after each optimization. For more info, see [Minimal requirements to get a model running: one single `temporal_block`](@ref).\\
+To create a static temporal_block, that doesn't move along with the rolling optimization window, the `block_end` needs to be defined as a `DateTime` value. #TODO: this is not yet supported
 
 
 ### Relationships
@@ -130,7 +131,8 @@ Similarly, the on- and offline status of a unit can be modeled with a lower reso
 
 #### Rolling horizon
 ##### Rolling horizon with different window sizes
-Similar to what has been discussed above in [Different regions/commodities in different resolutions](@ref), different commodities or regions can be modeled with a different resolution in the rolling horizon setting. The way to do it is completely analogous. Furthermore, when using the rolling horizon framework, a different window size can be chosen for the different modeled components, by simply using a different `temporal_block_end` paramter.
+Similar to what has been discussed above in [Different regions/commodities in different resolutions](@ref), different commodities or regions can be modeled with a different resolution in the rolling horizon setting. The way to do it is completely analogous. Furthermore, when using the rolling horizon framework, a different window size can be chosen for the different modeled components, by simply using a different `temporal_block_end` paramter. #TODO: What happens to coupling constraints between different regions?
+
 ##### Rolling horizon where the resolution is dependent on the absolute time
 TODO : How can this be done, since there is no parameter that indicates whether a temporal block is static or rolling
 
