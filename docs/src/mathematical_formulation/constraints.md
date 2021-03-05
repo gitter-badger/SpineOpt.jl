@@ -277,7 +277,7 @@ Similarly, the downward ramp of a unit is split into online, shut-down and non-s
 \end{aligned}
 ```
 
-##### Constraint on spinning upwards ramp_up
+##### Constraint on spinning upward ramps
 The online ramp up ability of a unit can be constraint by the [`ramp_up_limit`](@ref), expressed as a share of the [`unit_capacity`](@ref). With this constraint, ramps can be applied to groups of commodities (e.g. electricity + balancing capacity). Moreover, balancing product might have specific ramping requirements, which can herewith also be enforced.
 
 ```math
@@ -293,7 +293,7 @@ The online ramp up ability of a unit can be constraint by the [`ramp_up_limit`](
 & \forall (u,ng,d,s,t) \in ind(constraint\_ramp\_up)\\
 \end{aligned}
 ```
-##### Constraint on upward start up ramp_up
+##### Constraint on maximum upward start up ramps
 
 This constraint enforces a limit on the unit ramp during startup process. Usually, we consider only non-balancing commodities. However, it is possible to include them, by adding them to the ramp defining node `ng`.
 ```math
@@ -302,6 +302,20 @@ This constraint enforces a limit on the unit ramp during startup process. Usuall
 & <= \\
 & + \sum_{\substack{(u,s,t') \in ind(units_{on}): \\ (u,s) \in (u,s) \\ t'\in t\_overlap\_t(t)}}
 & \cdot p_{max\_startup\_ramp}(u,ng,d,s,t) \\
+& \cdot p_{unit\_capacity}(u,ng,d,t) \\
+& \cdot p_{conversion\_capacity\_to\_unit_{flow}}(u,ng,d,t) \\
+& \forall (u,ng,d,s,t) \in ind(constraint\_start\_up\_ramp)\\
+\end{aligned}
+```
+##### Constraint on minimum upward start up ramps
+
+This constraint enforces a limit on the unit ramp during startup process. Usually, we consider only non-balancing commodities. However, it is possible to include them, by adding them to the ramp defining node `ng`.
+```math
+\begin{aligned}
+& + \sum_{\substack{(u,n,d,s,t) \in ind(unit_{start\_up\_flow}): \\ (u,n,d) \, \in \, (u,ng,d)}} unit_{start\_up\_flow}(u,n,d,s,t)  \\
+& = \\
+& + \sum_{\substack{(u,s,t') \in ind(units_{on}): \\ (u,s) \in (u,s) \\ t'\in t\_overlap\_t(t)}}
+& \cdot p_{min\_startup\_ramp}(u,ng,d,s,t) \\
 & \cdot p_{unit\_capacity}(u,ng,d,t) \\
 & \cdot p_{conversion\_capacity\_to\_unit_{flow}}(u,ng,d,t) \\
 & \forall (u,ng,d,s,t) \in ind(constraint\_start\_up\_ramp)\\
@@ -353,8 +367,8 @@ The ramp a non-spinning unit can provide is constraint through the [`max_res_sta
 \end{aligned}
 ```
 
-##### Constraint on downward shut-down ramps
-This constraint enforces a limit on the unit ramp during shutdown process. Usually, we consider only non-balancing commodities. However, it is possible to include them, by adding them to the ramp defining node `ng`.
+##### Constraint on maximum downward shut-down ramps
+This constraint enforces an upper limit on the unit ramp during shutdown process. Usually, we consider only non-balancing commodities. However, it is possible to include them, by adding them to the ramp defining node `ng`.
 ```math
 \begin{aligned}
 & + \sum_{\substack{(u,n,d,s,t) \in ind(unit_{shut\_down\_flow}): \\ (u,n,d) \, \in \, (u,ng,d)}} unit_{shut\_down\_flow}(u,n,d,s,t)  \\
@@ -366,6 +380,20 @@ This constraint enforces a limit on the unit ramp during shutdown process. Usual
 & \forall (u,ng,d,s,t) \in ind(constraint\_shut\_down\_ramp)\\
 \end{aligned}
 ```
+##### Constraint on minimum downward shut-down ramps
+This constraint enforces a lower limit on the unit ramp during shutdown process. Usually, we consider only non-balancing commodities. However, it is possible to include them, by adding them to the ramp defining node `ng`.
+```math
+\begin{aligned}
+& + \sum_{\substack{(u,n,d,s,t) \in ind(unit_{shut\_down\_flow}): \\ (u,n,d) \, \in \, (u,ng,d)}} unit_{shut\_down\_flow}(u,n,d,s,t)  \\
+& >= \\
+& + \sum_{\substack{(u,s,t') \in ind(units_{on}): \\ (u,s) \in (u,s) \\ t'\in t\_overlap\_t(t)}} units_{shut\_down}(u,s,t') \\
+& \cdot p_{min\_shutdown\_ramp}(u,ng,d,s,t) \\
+& \cdot p_{unit\_capacity}(u,ng,d,t) \\
+& \cdot p_{conversion\_capacity\_to\_unit_{flow}}(u,ng,d,t) \\
+& \forall (u,ng,d,s,t) \in ind(constraint\_shut\_down\_ramp)\\
+\end{aligned}
+```
+
 ##### Constraint on downward non-spinning shut-down ramps
 For non-spinning downward reserves, online units can be scheduled for reserve provision through shut down if they have recovered their minimum up time. If nonspinning reserves are used the minimum up-time constraint becomes:
 ```math
