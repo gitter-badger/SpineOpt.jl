@@ -33,7 +33,8 @@ makedocs(
             "Temporal Structure"=>joinpath("advanced_concepts", "temporal_structure.md"),
             "Stochastic Structure"=>joinpath("advanced_concepts", "stochastic_structure.md"),
             "Investment Optimization"=>joinpath("advanced_concepts", "investment_optimization.md"),
-            "Ramping Constraints"=>joinpath("advanced_concepts", "ramping_constraints.md")
+            "Ramping Constraints"=>joinpath("advanced_concepts", "ramping_constraints.md"),
+            "Unit Commitment"=>joinpath("advanced_concepts", "unit_commitment.md")
         ],
         "Library" => "library.md"
     ],
