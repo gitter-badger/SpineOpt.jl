@@ -1,18 +1,18 @@
 # Unit commitment constraints
 
-## Motivation
-Spine Model provides flexibility in the imposed restrictions for the on- and offline status of different units. These are particularly important in Unit Commitment problems. Spine Model supports the clustered unit commitment framework, in which commitment and ramping constraints are defined on a technology level, rather than for individual units. Since technology types are represented by a single unit object in Spine, but actually represent multiple *real* units, the distinction will be made hereafter by explicitly stating that it concerns *real* units where relevant.
+To incorporate technical detail about (clustered) unit-commitment statuses of units, the online, started and shutdown status of units can be tracked and constrained in SpineOpt.
+In the following, relevant relationships and parameters are introduced and the general working principle is described.
+@Kristof: maybe we should quickly talk about the units tomorrow.
 
-This document aims to inform the reader with which parameters are relevant to impose commitment restrictions, and demonstrate how they can be used to do so.
-## Relevant parameters
-This section gives an overview of the relevant parameters for unit commitment restrictions. All of them are defined for a [unit object](../../concept_reference/object_classes.html#unit). The parameters are presented in the following format:
+## Key concepts
+Here, we briefly describe the key concepts involved in the representation of (clustered) unit commitment models:
 
-* `parameter_name` : "Allowed value type" or "Allowed value"
-Brief explanation of what this parameter means or does.
+1. [number\_of\_units](@ref) defines how many units of a certain unit type are available. Typically this parameter takes a binary (UC) or integer (clustered UC) value. [^1]
+Comment @Kristof: soory, didn't see that you introduce this later on
+[^1] There should be a note somewhere that the number of available units can also be increased by invest + cross-reference to investment chapter
 
-
-* `online_variable_type`: "unit\_online\_variable\_type\_binary", "unit\_online\_variable\_type\_integer", "unit\_online\_variable\_type\_linear"
-Determine what the Spine unit represents: a single unit or a group of *real* units with the same characteristics.
+* [online\_variable\_type](@ref) is a method parameter and can take the values "unit\_online\_variable\_type\_binary", "unit\_online\_variable\_type\_integer", "unit\_online\_variable\_type\_linear". If the binary value is chosen, the units status is modelled as a binary (classic UC). For clustered unit commitment units, the integer type is applicable. Note that if the parameter is not defined, the default will be linear. If the units status is not crucial, this can reduce the computational burden.
+...
 
  When the binary type is selected, the [`units_on`](../mathematical_formulation/variables#units_on) variable is restricted to $0$, or $1$, thus representing a single *real* unit which is either on- or offline. When the integer type is chosen, this variable can be any positive integer, bounded by the `units_available` variable. This means that the single unit in the model, now actually represents a number of *real* units that have the same characteristics, but can be activated separately.[^1] When it is not necessary to restrict the `units_on` variable to integer values, the parameter value can also be taken as the linear type. In that case, all values in the bounding interval $[0,$`units_available`$]$ are allowed for the `units_on` variable. The default type is linear.  
 
@@ -43,3 +43,10 @@ Inclusion of this parameter will trigger the creation of the [constraint on Mini
 Cost associated with starting up a unit.
 * `shut_down_cost`: "number value"
 Cost associated with shutting down a unit.
+
+Note: I'd probably also add minimum operating point here. Without the minimum operating point, UC does probably not make much sense.
+
+I feel like `units_on__temporal_block` should be added here aswell.
+Also we need to add the unit status variables to the mathematical_formulation, but should probably also briefly explain them here.
+
+Also can we change the formatting a bit? When I build the documentation, the indentations are a bit off

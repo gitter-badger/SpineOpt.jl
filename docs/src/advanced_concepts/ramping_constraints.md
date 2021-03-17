@@ -8,14 +8,14 @@ Ramping constraints are meant to reflect the technical capabilities of real-life
 This documentation aims to inform the reader on which parameters are relevant for these restrictions, and which constraints that they will trigger.
 ## Relevant parameters
 Everything that is related to ramping is defined in parameters of the [unit__to_node](../concept_reference/relationship_classes.md#unit__to_node) relationship. Generally speaking, the ramping constraints will impose restrictions on the change in the [`unit_flow`](../mathematical_formulation/variables.md#unit_flow) variable between two consecutive timesteps. All parameters that limit the ramping abilities of a unit are expressed as a fraction of the unit capacity. This means that a value of 1 indicates the full capacity of a unit. The discussion here will be kept conceptual, for the more technical description the reader is referred to the [formulation of ramping constraints](../mathematical_formulation/constraints.md#Ramping-and-reserve-constraints)
-### Shutdowns
-  * `max_shutdown_ramp` : limit the maximum of the `unit_flow` variable the timestep right before a shutdown. Inclusion of this parameter will trigger the creation of the [Constraint on maximum downward shut down ramps](../mathematical_formulation/constraints.md#Constraint-on-maximum-downward-shut-down-ramps)
+### Constraining shutdown ramps
+  * `max_shutdown_ramp` : limit the maximum of the `unit_flow` variable the timestep right before a shutdown. The parameter is given as a fraction of the [unit\_flow\_capacity](@ref) parameter. Inclusion of this parameter will trigger the creation of the [Constraint on maximum downward shut down ramps](../mathematical_formulation/constraints.md#Constraint-on-maximum-downward-shut-down-ramps)
   * `min_shutdown_ramp` : limit the minimum of the `unit_flow` variable the timestep right before a shutdown. Inclusion of this parameter will trigger the creation of the [Constraint on minimum downward shut down ramps](../mathematical_formulation/constraints.md#Constraint-on-minimum-downward-shut-down-ramps)
 
-### Startups
+### Constraining startup ramps
   * `max_start_up_ramp` : limit the maximum of the `unit_flow` variable the timestep right after a start-up. Inclusion of this parameter will trigger the creation of the [Constraint on maximum upward start up ramps](../mathematical_formulation/constraints.md#Constraint-on-maximum-upward-start-up-ramps)
   * `min_start_up_ramp` : limit the minimum of the `unit_flow` variable the timestep right after a start-up. Inclusion of this parameter will trigger the creation of the [Constraint on minimum upward start up ramps](../mathematical_formulation/constraints.md#Constraint-on-minimum-upward-start-up-ramps)
-### Regular operation
+### Constraining spinning ramps
   * `ramp_up_limit` : limit the maximum increase in the `unit_flow` variable between two consecutive timesteps for which the unit is online. Inclusion of this parameter will trigger the creation of the [Constraint on spinning upward ramps](../mathematical_formulation/constraints.md#Constraint-on-spinning-upward-ramps)
   * `ramp_down_limit` : limit the maximum decrease in the `unit_flow` variable between two consecutive timesteps for which the unit is online. Inclusion of this parameter will trigger the creation of the [Constraint on spinning downward ramps](../mathematical_formulation/constraints.md#Constraint-on-spinning-downward-ramps)
   * `ramp_up_cost` : cost associated with upward ramping
