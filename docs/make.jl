@@ -63,7 +63,7 @@ makedocs(
         "Advanced Concepts" => Any[
             "Temporal Framework"=>joinpath("advanced_concepts", "temporal_framework.md"),
             "Stochastic Framework"=>joinpath("advanced_concepts", "stochastic_framework.md"),
-            "Investment Optimization"=>joinpath("advanced_concepts", "investment_optimization.md")
+            "Investment Optimization"=>joinpath("advanced_concepts", "investment_optimization.md"),
             "Ramping Constraints"=>joinpath("advanced_concepts", "ramping_constraints.md"),
             "Unit Commitment"=>joinpath("advanced_concepts", "unit_commitment.md")
         ],
