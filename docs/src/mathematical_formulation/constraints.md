@@ -4,8 +4,9 @@
 
 ### Nodal balance
 
-In **SpineOpt** (nodes)[#node] are the place, where an energy balance is enforced. As universal aggregators,
-they are the glue that brings all components of the energy system together. The energy balance is enforced by the following constraint:
+In **SpineOpt**, [node](@ref) is the place where an energy balance is enforced. As universal aggregators,
+they are the glue that brings all components of the energy system together.
+The energy balance is enforced by the following constraint:
 
 ```math
 \begin{aligned}
@@ -75,7 +76,8 @@ To limit the storage content, the $node_{state}$ variable needs be constrained b
 \end{aligned}
 ```
 The discharging and charging behavior of storage nodes can be described through unit(s), representing the link between the storage node and the supply node.
-Note that the dis-/charging efficiencies and capacities are properties of these units. See [Define unit/technology capacity](#Define-unit/technology-capacity) and [Conversion constraint](#Fixed-ratio-between-output-and-input-unit_{flow}s)
+Note that the dis-/charging efficiencies and capacities are properties of these units.
+See [Define unit/technology capacity](@ref) and [Conversion constraint / limiting flow shares inprocess / relationship in process](@ref)
 
 TODO: investment storages
 ## Unit operation
@@ -180,7 +182,7 @@ The number of available units itself is constrained by the parameter $p_{number\
 \end{aligned}
 ```
 
-The investment formulation is described in chapter [Investments](#Investments). (TODO)
+The investment formulation is described in chapter [Investments](@ref). (TODO)
 
 The units on status is furtheron constraint by shutting down and starting up actions. This transition is defined as follows:
 
@@ -221,7 +223,7 @@ units_{shut\_down}(u,s,t') \\
 \end{aligned}
 ```
 
-This constraint can be extended to the use reserves. See [Reserve constraints](#reserve_constraints)
+This constraint can be extended to the use reserves. See [Reserve constraints](@ref)
 
 ##### Minimum up time (basic version)
 
@@ -233,7 +235,7 @@ units_{started\_up}(u,s,t') \\
 & \forall (u,s,t) \in ind(units_{on})\\
 \end{aligned}
 ```
-This constraint can be extended to the use reserves. See [Reserve constraints](#reserve_constraints)
+This constraint can be extended to the use reserves. See [Reserve constraints](@ref)
 
 
 #### Ramping and reserve constraints
@@ -277,8 +279,8 @@ Similarly, the downward ramp of a unit is split into online, shut-down and non-s
 \end{aligned}
 ```
 
-##### Constraint on spinning upward ramps
-The online ramp up ability of a unit can be constraint by the [`ramp_up_limit`](@ref), expressed as a share of the [`unit_capacity`](@ref). With this constraint, ramps can be applied to groups of commodities (e.g. electricity + balancing capacity). Moreover, balancing product might have specific ramping requirements, which can herewith also be enforced.
+##### Constraint on spinning upwards ramp_up
+The online ramp up ability of a unit can be constraint by the [ramp\_up\_limit](@ref), expressed as a share of the [unit\_capacity](@ref). With this constraint, ramps can be applied to groups of commodities (e.g. electricity + balancing capacity). Moreover, balancing product might have specific ramping requirements, which can herewith also be enforced.
 
 ```math
 \begin{aligned}
@@ -338,7 +340,7 @@ units_{shut\_down}(u,s,t') \\
 ```
 TODO: add correct forall, how to simplify?
 
-The ramp a non-spinning unit can provide is constraint through the [`max_res_startup_ramp`](@ref).
+The ramp a non-spinning unit can provide is constraint through the [max\_res\_startup\_ramp](@ref).
 
 ```math
 \begin{aligned}
@@ -408,7 +410,7 @@ units_{started\_up}(u,s,t') \\
 ```
 TODO: add correct forall, how to simplify?
 
-The ramp a non-spinning unit can provide is constraint through the [`max_res_shutdown_ramp`](@ref).
+The ramp a non-spinning unit can provide is constraint through the [max\_res\_shutdown\_ramp](@ref).
 
 ```math
 \begin{aligned}

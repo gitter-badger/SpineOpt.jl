@@ -208,7 +208,7 @@ function add_constraint_unit_constraint!(m::Model)
                     *demand_coefficient[(node=n, unit_constraint=uc, stochastic_scenario=s, analysis_time=t0, t=t)]
                     *duration(t_short)
                 for n in node__unit_constraint(unit_constraint=uc)
-                for (ns, s, t_short) in node_stochastic_time_indices(m; node=n, stochastic_scenario=s, t=t_in_t(m; t_long=t))
+                for (ns, s, t_short) in node_stochastic_time_indices(m; node=n, stochastic_scenario=s, t=t_in_t(m; t_long=t));
                 init=0,            
             ),
             constraint_sense(unit_constraint=uc),
@@ -254,7 +254,7 @@ function _constraint_unit_constraint_lowest_resolution_t(m, uc, t)
         vcat(
             [ind.t for unit__node__unit_constraint in (unit__from_node__unit_constraint, unit__to_node__unit_constraint)
             for (u, n) in unit__node__unit_constraint(unit_constraint=uc)
-            for ind in unit_flow_indices(m; unit=u, node=n, t=t)],            
+            for ind in unit_flow_indices(m; unit=u, node=n, t=t)],
             [ind.t for connection__node__unit_constraint in (connection__from_node__unit_constraint, connection__to_node__unit_constraint)
             for (c, n) in connection__node__unit_constraint(unit_constraint=uc)
             for ind in connection_flow_indices(m; connection=c, node=n, t=t)],

@@ -68,6 +68,7 @@ include("variables/variable_common.jl")
 include("variables/variable_unit_flow.jl")
 include("variables/variable_unit_flow_op.jl")
 include("variables/variable_connection_flow.jl")
+include("variables/variable_connection_intact_flow.jl")
 include("variables/variable_connections_invested.jl")
 include("variables/variable_connections_invested_available.jl")
 include("variables/variable_connections_decommissioned.jl")
@@ -127,8 +128,14 @@ include("constraints/constraint_node_injection.jl")
 include("constraints/constraint_node_state_capacity.jl")
 include("constraints/constraint_ratio_unit_flow.jl")
 include("constraints/constraint_ratio_out_in_connection_flow.jl")
+include("constraints/constraint_ratio_out_in_connection_intact_flow.jl")
 include("constraints/constraint_connection_flow_capacity.jl")
-include("constraints/constraint_connection_flow_ptdf.jl")
+include("constraints/constraint_connection_intact_flow_capacity.jl")
+include("constraints/constraint_connection_flow_intact_flow.jl")
+include("constraints/constraint_connection_intact_flow_ptdf.jl")
+#include("constraints/constraint_connection_intact_flow_ptdf_in_out.jl")
+include("constraints/constraint_candidate_connection_flow_ub.jl")
+include("constraints/constraint_candidate_connection_flow_lb.jl")
 include("constraints/constraint_connection_flow_lodf.jl")
 include("constraints/constraint_connections_invested_available.jl")
 include("constraints/constraint_connections_invested_transition.jl")
@@ -146,6 +153,7 @@ include("constraints/constraint_unit_constraint.jl")
 include("constraints/constraint_units_invested_available.jl")
 include("constraints/constraint_units_invested_transition.jl")
 include("constraints/constraint_unit_lifetime.jl")
+include("constraints/constraint_unit_pw_heat_rate.jl")
 # TODO: include("constraints/constraint_ramp_cost.jl")
 include("constraints/constraint_split_ramp_up.jl")
 include("constraints/constraint_ramp_up.jl")
@@ -164,5 +172,15 @@ include("constraints/constraint_res_minimum_node_state.jl")
 include("constraints/constraint_mp_units_invested_cuts.jl")
 
 const _template = JSON.parsefile(joinpath(@__DIR__, "..", "data", "spineopt_template.json"))
+
+function template()
+	try
+		JSON.parsefile(joinpath(@__DIR__, "..", "data", "spineopt_template.json"))
+	catch
+		# Template file not found, use _template constant instead.
+		# This will happen in the SpineOpt app
+		_template
+	end
+end
 
 end

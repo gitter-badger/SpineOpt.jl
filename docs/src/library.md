@@ -18,34 +18,25 @@ Depth = 3
 ## Public interface
 
 ```@docs
-run_spineopt(::String, ::String)
-run_spineopt(::String)
+run_spineopt
 ```
-
-
-## Internals
-
-### Variables
-
-```@docs
-variable_flow
-variable_connection_flow
-variable_units_on
-flow_indices
-var_flow_indices
-fix_unit_flow_indices
-connection_flow_indices
-var_connection_flow_indices
-fix_connection_flow_indices
-units_on_indices
-var_units_on_indices
-fix_units_on_indices
-```
-
-### Constraints
 
 TODO
 
-### Objectives
+## Internals
+
+### Variable library
+
+```@docs
+unit_flow_indices
+```
+
+TODO
+
+### Constraint library
+
+TODO
+
+### Objective
 
 TODO
