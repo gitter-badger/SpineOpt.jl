@@ -59,7 +59,7 @@ function run_spineopt(
     end
 
     # High-level algorithm selection. For now, selecting based on defined model types,
-    # but may want more robust system in future     
+    # but may want more robust system in future
 
     if !isempty(model(model_type=:spineopt_master))
         rerun_spineopt_mp(
@@ -107,11 +107,11 @@ function rerun_spineopt(
     @timelog log_level 2 "Checking data structure..." check_data_structure(; log_level=log_level)
     @timelog log_level 2 "Creating temporal structure..." generate_temporal_structure!(m)
     @timelog log_level 2 "Creating stochastic structure..." generate_stochastic_structure(m)
-    @log log_level 1 "Window 1: $(current_window(m))"        
+    @log log_level 1 "Window 1: $(current_window(m))"
     init_model!(m; add_constraints=add_constraints, log_level=log_level)
-    calculate_duals = duals_calculation_needed(m) 
+    calculate_duals = duals_calculation_needed(m)
     k = 2
-    
+
 
     while optimize && optimize_model!(
         m;
@@ -275,13 +275,12 @@ function add_constraints!(m; add_constraints=m -> nothing, log_level=3)
     @timelog log_level 3 "- [constraint_unit_state_transition]" add_constraint_unit_state_transition!(m)
 
     @timelog log_level 3 "- [constraint_unit_flow_capacity_w_ramp]" add_constraint_unit_flow_capacity_w_ramp!(m)
-    @timelog log_level 3 "- [constraint_split_ramp_up]" add_constraint_split_ramp_up!(m)
+    @timelog log_level 3 "- [constraint_split_ramps]" add_constraint_split_ramps!(m)
     @timelog log_level 3 "- [constraint_ramp_up]" add_constraint_ramp_up!(m)
     @timelog log_level 3 "- [constraint_max_start_up_ramp]" add_constraint_max_start_up_ramp!(m)
     @timelog log_level 3 "- [constraint_min_start_up_ramp]" add_constraint_min_start_up_ramp!(m)
     @timelog log_level 3 "- [constraint_max_nonspin_ramp_up]" add_constraint_max_nonspin_ramp_up!(m)
     @timelog log_level 3 "- [constraint_min_nonspin_ramp_up]" add_constraint_min_nonspin_ramp_up!(m)
-    @timelog log_level 3 "- [constraint_split_ramp_down]" add_constraint_split_ramp_down!(m)
     @timelog log_level 3 "- [constraint_ramp_down]" add_constraint_ramp_down!(m)
     @timelog log_level 3 "- [constraint_max_shut_down_ramp]" add_constraint_max_shut_down_ramp!(m)
     @timelog log_level 3 "- [constraint_min_shut_down_ramp]" add_constraint_min_shut_down_ramp!(m)
@@ -289,20 +288,20 @@ function add_constraints!(m; add_constraints=m -> nothing, log_level=3)
     @timelog log_level 3 "- [constraint_min_nonspin_ramp_down]" add_constraint_min_nonspin_ramp_down!(m)
     @timelog log_level 3 "- [constraint_res_minimum_node_state]" add_constraint_res_minimum_node_state!(m)
     @timelog log_level 3 "- [constraint_user]" add_constraints(m)
-    
-    # Name constraints    
+
+    # Name constraints
     for (con_key, cons) in m.ext[:constraints]
         for (inds, con) in cons
             set_name(con, string(con_key, inds))
         end
-    end    
+    end
 end
 
 function duals_calculation_needed(m::Model)
     calculate_duals = false
-    for r in model__report(model=m.ext[:instance])        
+    for r in model__report(model=m.ext[:instance])
         for o in report__output(report=r)
-            get!(m.ext[:outputs], o.name, Dict{NamedTuple,Dict}())            
+            get!(m.ext[:outputs], o.name, Dict{NamedTuple,Dict}())
             output_name = lowercase(String(o.name))
             startswith(output_name, r"bound_|constraint_") && (calculate_duals = true)
         end
@@ -432,9 +431,9 @@ Update the given model for the next window in the rolling horizon: update variab
 update constraints and update objective.
 """
 function update_model!(m; update_constraints=m -> nothing, log_level=3)
-    # The below is needed here because we remove the integer constraints to get a dual solution 
+    # The below is needed here because we remove the integer constraints to get a dual solution
     # and then need to re-add them for the next write_mps_on_no_solve
-    # we can only do this once we have saved the solution    
+    # we can only do this once we have saved the solution
     @timelog log_level 2 "Setting integers and binaries..." unrelax_integer_vars(m)
     @timelog log_level 2 "Updating variables..." update_variables!(m)
     @timelog log_level 2 "Fixing variable values..." fix_variables!(m)
@@ -520,8 +519,8 @@ end
 
 function save_marginal_values!(m::Model)
     for (constraint_name, con) in m.ext[:constraints]
-        output_name = Symbol(string("constraint_", constraint_name))                
-        if haskey(m.ext[:outputs], output_name)        
+        output_name = Symbol(string("constraint_", constraint_name))
+        if haskey(m.ext[:outputs], output_name)
             _save_marginal_value!(m, constraint_name, output_name)
         end
     end
@@ -538,8 +537,8 @@ end
 
 function save_bound_marginal_values!(m::Model)
     for (variable_name, con) in m.ext[:variables]
-        output_name = Symbol(string("bound_", variable_name))        
-        if haskey(m.ext[:outputs], output_name)            
+        output_name = Symbol(string("bound_", variable_name))
+        if haskey(m.ext[:outputs], output_name)
             _save_bound_marginal_value!(m, variable_name, output_name)
         end
     end

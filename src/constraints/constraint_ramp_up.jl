@@ -43,17 +43,16 @@ function add_constraint_ramp_up!(m::Model)
             ) <=
             +sum(
                 (units_on[u, s, t1] - units_started_up[u, s, t1]) *
-                min(duration(t), duration(t1)) *
+                min(duration(t), duration(t1)) * ## conversion units_on to unit_flow resolution
                 ramp_up_limit[(unit=u, node=ng, direction=d, stochastic_scenario=s, analysis_time=t0, t=t)] *
                 unit_conv_cap_to_flow[(unit=u, node=ng, direction=d, stochastic_scenario=s, analysis_time=t0, t=t)] *
                 unit_capacity[(unit=u, node=ng, direction=d, stochastic_scenario=s, analysis_time=t0, t=t)]
                 for (u, s, t1) in units_on_indices(m; unit=u, stochastic_scenario=s, t=t_overlaps_t(m; t=t))
-            )
+            ) *
+            duration(t) ## [ramp_up_limit]=MW/h
         ) for (u, ng, d, s, t) in constraint_ramp_up_indices(m)
     )
 end
-
-#COPY from unit_state_transition"
 
 """
     constraint_ramp_up_indices(m::Model; filtering_options...)
@@ -74,7 +73,7 @@ function constraint_ramp_up_indices(
     unique(
         (unit=u, node=ng, direction=d, stochastic_path=path, t=t)
         for (u, ng, d) in indices(ramp_up_limit) if u in unit && ng in node && d in direction
-        for t in t_lowest_resolution(time_slice(m; temporal_block=node__temporal_block(node=members(ng)), t=t))
+        for t in t_lowest_resolution(time_slice(m; temporal_block=members(node__temporal_block(node=members(ng))), t=t))
         # How to deal with groups correctly?
         for
         path in active_stochastic_paths(unique(
