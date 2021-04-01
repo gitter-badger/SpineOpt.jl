@@ -1214,7 +1214,7 @@ TODO
 
 ## `ramp_down_limit`
 
-Limit the maximum ramp-down rate of an online unit. Max. ramp down limit of online units
+Limit the maximum ramp-down rate of an online unit, given as a fraction of the unit_capacity. [ramp_down_limit] = %/t, e.g. 0.2/h
 
 Related [Relationship Classes](@ref): [unit\_\_from\_node](@ref) and [unit\_\_to\_node](@ref)
 
@@ -1244,9 +1244,19 @@ TODO
 
 ## `ramp_up_limit`
 
-Limit the maximum ramp-up rate of a `unit_flow` variable. Limit the maximum ramp-up rate of an online unit.
+Limit the maximum ramp-up rate of an online unit, given as a fraction of the unit_capacity. [ramp_up_limit] = %/t, e.g. 0.2/h
 
 Related [Relationship Classes](@ref): [unit\_\_from\_node](@ref) and [unit\_\_to\_node](@ref)
+
+Default value: nothing
+
+TODO
+
+## `representative_periods_mapping`
+
+Mapping from real timelices to their corresponding representative days
+
+Related [Object Classes](@ref): [temporal\_block](@ref)
 
 Default value: nothing
 
@@ -1264,9 +1274,9 @@ TODO
 
 ## `reserve_procurement_cost`
 
-Procurement cost for reserves?
+Procurement cost for reserves
 
-Related [Object Classes](@ref): [node](@ref)
+Related [Relationship Classes](@ref): [unit\_\_from\_node](@ref) and [unit\_\_to\_node](@ref)
 
 Default value: nothing
 
@@ -1558,6 +1568,16 @@ Variable operating costs of a `unit_flow` variable. E.g. EUR/MWh.
 Related [Relationship Classes](@ref): [unit\_\_from\_node](@ref) and [unit\_\_to\_node](@ref)
 
 Default value: nothing
+
+TODO
+
+## `weight`
+
+Weighting factor of the temporal block associated with the objective function
+
+Related [Object Classes](@ref): [temporal\_block](@ref)
+
+Default value: 1.0
 
 TODO
 
