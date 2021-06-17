@@ -1,10 +1,12 @@
 index,indices,Description
 ..,ind(*parameter*),"Tuple of all objects, for which the parameter is defined"
-t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'.
-t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'.
+t,time_slices,"Set of timeslices, which can be defined by using ??"
+t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'
+t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'
 t,t_in_t(t_short=t'),Set of timeslices that contain timeslice t'
 t,t_in_t(t_long=t'),Set of timeslices that are contained in timeslice t'
 t,t_overlaps_t(t'),Set of timeslices that overlap with timeslice t'
+t,'t_lowest_resolution(node=n, temporal_block=tb)',
 [s_path],full_stochastic_paths,Set of all possible scenario branches
 [s_path],active_stochastic_paths(s),"Set of all active scenario branches, based on active scenarios s"
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,
@@ -30,3 +32,28 @@ t,t_overlaps_t(t'),Set of timeslices that overlap with timeslice t'
 "(unit=u, node=n, direction=d, i=i, stochastic_scenario=s, t=t)",unit_flow_op_indices,
 "(unit=u, stochastic_scenario=s, t=t)",units_invested_available_indices,
 "(unit=u, stochastic_scenario=s, t=t)",units_on_indices,
+"(node=n, stochastic_scenario=s, t=t)",node_stochastic_time_indices,
+ng,groups(node=n),Set of nodes that belong to the same [node\_group](@ref)
+"(node=n, stochastic_scenario=s, t=t)",node_state_indices,
+"(node=n, t=t)",node_time_indices,
+s,stochastic_scenario_path,
+"(node=n, stochastic_scenario=s, t=t, t=t)",constraint_cyclic_node_state_indices,
+"(node=n, stochastic_scenario=s, t=t)",operating_point_indices,
+"(unit=u, node=n, node=n, stochastic_scenario=s, t=t)",unit_pw_heat_rate_indices,
+"(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,
+"(connection=conn, node=n, stochastic_scenario=s, t=t)",connection_ptdf_flow_indices,
+"(connection=conn, connection=conn, stochastic_scenario=s, t=t)",constraint_connection_flow_lodf_indices,
+"(node=n, stochastic_scenario=s, t=t)",unit_investment_lifetime_indices,
+(connection=conn),candidate_connections_indices,
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",constraint_candidate_connection_flow_lb_indices,
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",constraint_candidate_connection_flow_ub_indices,
+"(connection=conn, stochastic_scenario=s, t=t)",connection_investment_lifetime_indices,
+"(node=n, stochastic_scenario=s, t=t)",storage_investment_lifetime_indices,
+"(unit_constraint=uc, t=t, stochastic_scenario=s)",constraint_unit_constraint_indices,
+n,node,
+u,unit,
+conn,connection,
+d,direction,
+s,stochastic_scenario,
+"(u, n)",unit__node,
+...?,,
