@@ -1,37 +1,36 @@
 index,indices,Description
 ..,ind(*parameter*),"Tuple of all objects, for which the parameter is defined"
-t,time_slices,"Set of all timeslices in the model"
+t,time_slices,"Set of all [time_slice](@ref)s in the model"
 t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'
 t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'
 t,t_in_t(t_short=t'),Set of timeslices that contain timeslice t'
 t,t_in_t(t_long=t'),Set of timeslices that are contained in timeslice t'
 t,t_overlaps_t(t'),Set of timeslices that overlap with timeslice t'
 t,"t_lowest_resolution(node=n, temporal_block=tb)", Set of the lowest resolution timeslices in node n and temporal block tb
-[s_path],full_stochastic_paths,Set of all possible sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves.
+[s_path],full_stochastic_paths,Set of all possible sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves
 [s_path],active_stochastic_paths(s),"Set of sequences of stochastic scenarios that contain the active scenarios s"
-n,node,[node](@ref)
-u,unit,[unit](@ref)
-uc,unit_constraint,[unit_constraint](@ref)
-conn,connection,[connection](@ref)
-d,direction,
-s,stochastic_scenario,
-s,stochastic_path,
-tb,temporal_block,
-ng,groups(node=n),Set of nodes that belong to the same [node\_group](@ref)
-op,operating_points(u),"appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1"
-"(n, tb)",node__temporal_block,
-"(u, n)",unit__node,
-"(u, n, uc)",unit__node__unit_constraint,"this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1"
-"(u, uc)",unit__unit_constraint,
-"(conn, n, uc)",connection__node__unit_constraint,"this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1"
-"(u, uc)",unit__unit_constraint,
-"(n, uc)",node__unit_constraint,"this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1"
+n,node,"Set of [node](@ref)s in the model"
+u,unit,"Set of [unit](@ref)s in the model"
+uc,unit_constraint,"Set of [unit_constraint](@ref)s in the model"
+conn,connection,"Set of [connection](@ref)s in the model"
+d,direction,"Set of [commodity](@ref) flow directions relative to a node, including 'to_node' and 'from_node'"
+s,stochastic_scenario,"Set of [stochastic_scenario](@ref)s in the model"
+s,stochastic_path,"Set of unique sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves"
+tb,temporal_block,"Set of [temporal_block](@ref)s in the model"
+ng,groups(node=n),"Set of nodes that belong to the same [node\_group](@ref)"
+op,operating_points(u),"Set of [operating_points](@ref)s of a unit"
+"(n, tb)",node__temporal_block,Set of tuples of node and temporal block being defined under the relationship [node__temporal_block](@ref)
+"(u, n)",unit__node,Set of tuples of unit and node being defined under the relationship [unit__node](@ref)
+"(u, n, uc)",unit__node__unit_constraint,"Set of tuples of unit, node and unit constraint being defined under the relationship [unit__node__unit_constraint](@ref) (this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
+"(conn, n, uc)",connection__node__unit_constraint,"Set of tuples of connection, node and unit constraint being defined under the relationship [connection__node__unit_constraint](@ref) (this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
+"(u, uc)",unit__unit_constraint,Set of tuples of unit and unit constraint being defined under the relationship [unit__unit_constraint](@ref)
+"(n, uc)",node__unit_constraint,"Set of tuples of node and unit constraint being defined under the relationship [node__unit_constraint](@ref) (this does not exist in the spineopt db structure yet, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
 "(unit_constraint=uc, stochastic_path=s, t=t)",constraint_unit_constraint_indices,Set of indices for the defined unit constraints
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_flow_indices,Set of valid indices for connection_flow variables
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_intact_flow_indices,
 "(connection=conn, stochastic_scenario=s, t=t)",connections_invested_available_indices,Set of valid indices for connections_invested_available variables
-(t=t),mp_objective_lowerbound_indices,
+(t=t),mp_objective_lowerbound_indices,"Set of valid indices (timeslice) for the model to update lowerbound for master problem of Benders decomposition"
 "(node=n, stochastic_scenario=s, t=t)",node_injection_indices,Set of valid indices for the node_injection variables
 "(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,Set of valid indices for the node_pressure variables
 "(node=n, stochastic_scenario=s, t=t)",node_slack_indices,Set of valid indices for the node_slack variables
@@ -53,7 +52,7 @@ op,operating_points(u),"appears in https://spine-project.github.io/SpineOpt.jl/l
 "(node=n, stochastic_scenario=s, t=t)",node_stochastic_time_indices,Set of valid stochastic scenario and timeslice indices for a node
 "(node=n, stochastic_scenario=s, t=t)",node_state_indices,Set of valid indices for the node_state variables
 "(node=n, t=t)",node_time_indices,Set of valid timeslice indices for a node
-"(node=n, stochastic_scenario=s, t=t, t=t)",constraint_cyclic_node_state_indices,
+"(node=n, stochastic_scenario=s, t=t, t=t)",constraint_cyclic_node_state_indices,"Set of valid indices for the cyclic node_state constraint"
 "(unit=u, node=n, direction=d)",operating_point_indices,Set of unit flows that use operating points
 "(unit=u, node=n, node=n, stochastic_scenario=s, t=t)",unit_pw_heat_rate_indices,Set of indices for piece-wise linear heat rate approximations for units
 "(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,Set of valid indices for the node_pressure variables
@@ -66,4 +65,3 @@ op,operating_points(u),"appears in https://spine-project.github.io/SpineOpt.jl/l
 "(connection=conn, stochastic_scenario=s, t=t)",connection_investment_lifetime_indices,Set of valid indices for the connection investment lifetime constraint
 "(node=n, stochastic_scenario=s, t=t)",storage_investment_lifetime_indices,Set of valid indices for the storage investment lifetime constraint
 "(unit_constraint=uc, t=t, stochastic_scenario=s)",constraint_unit_constraint_indices,Set of valid indices for the unit constraint
-...?,,
