@@ -26,9 +26,9 @@ op,operating_points(u),"Set of [operating_points](@ref)s of a unit"
 "(u, uc)",unit__unit_constraint,Set of tuples of unit and unit constraint being defined under the relationship [unit__unit_constraint](@ref)
 "(n, uc)",node__unit_constraint,"Set of tuples of node and unit constraint being defined under the relationship [node__unit_constraint](@ref) (this does not exist in the spineopt db structure yet, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
 "(unit_constraint=uc, stochastic_path=s, t=t)",constraint_unit_constraint_indices,Set of indices for the defined unit constraints
-"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,Set of valid indices for binary_gas_connection_flow variables
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_flow_indices,Set of valid indices for connection_flow variables
-"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_intact_flow_indices,
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_intact_flow_indices,Set of valid indices for connection_intact_flow variables
 "(connection=conn, stochastic_scenario=s, t=t)",connections_invested_available_indices,Set of valid indices for connections_invested_available variables
 (t=t),mp_objective_lowerbound_indices,"Set of valid indices (timeslice) for the model to update lowerbound for master problem of Benders decomposition"
 "(node=n, stochastic_scenario=s, t=t)",node_injection_indices,Set of valid indices for the node_injection variables
