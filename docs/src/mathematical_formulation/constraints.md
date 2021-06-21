@@ -63,7 +63,7 @@ v_{node\_state}(n2,s,t)\\
  v_{unit\_flow}(u,n',d_{out},s,t)\\
 & - demand(n,s,t)\\
 & \forall (n,t) \in node\_time\_indices : p_{has\_state}(n)\\
-& \forall s \in stochastic\_scenario\_path \\
+& \forall s \in stochastic\_path \\
 & t_{before} \in t\_before\_t(t\_after=t)\\
 \end{aligned}
 ```
@@ -610,7 +610,7 @@ The `unit_flow_op` operating segment variable is bounded by the difference betwe
        0                                     & \text{if op = 1}\\
        p_{operating\_points}(u, n, op-1, s, t) & \text{otherwise}\\
     \end{cases} \bigg) \\
-& \forall (u,n,d,s,t) \in unit\_flow\_op\_indices \\
+& \forall (u,n,d,op,s,t) \in unit\_flow\_op\_indices \\
 \end{aligned}
 ```
 
@@ -623,7 +623,7 @@ The `unit_flow_op` operating segment variable is bounded by the difference betwe
 & v_{unit\_flow}(u, n, s, t) \\
 &  = \sum_{op}  v_{unit\_flow\_op}(u, n, op, s, t) \\
 & \forall (u,n,d) \in operating\_point\_indices \\
-& \forall (u,n,d,s,t) \in unit\_flow\_op\_indices \\
+& \forall (u,n,d,op,s,t) \in unit\_flow\_op\_indices \\
 \end{aligned}
 ```
 
