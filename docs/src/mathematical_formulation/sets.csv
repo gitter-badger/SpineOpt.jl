@@ -1,14 +1,14 @@
 index,indices,Description
 ..,ind(*parameter*),"Tuple of all objects, for which the parameter is defined"
-t,time_slices,"Set of timeslices, which can be defined by using ??"
+t,time_slices,"Set of all timeslices in the model"
 t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'
 t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'
 t,t_in_t(t_short=t'),Set of timeslices that contain timeslice t'
 t,t_in_t(t_long=t'),Set of timeslices that are contained in timeslice t'
 t,t_overlaps_t(t'),Set of timeslices that overlap with timeslice t'
-t,"t_lowest_resolution(node=n, temporal_block=tb)",
-[s_path],full_stochastic_paths,Set of all possible scenario branches
-[s_path],active_stochastic_paths(s),"Set of all active scenario branches, based on active scenarios s"
+t,"t_lowest_resolution(node=n, temporal_block=tb)", Set of the lowest resolution timeslices in node n and temporal block tb
+[s_path],full_stochastic_paths,Set of all possible sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves.
+[s_path],active_stochastic_paths(s),"Set of sequences of stochastic scenarios that contain the active scenarios s"
 n,node,[node](@ref)
 u,unit,[unit](@ref)
 uc,unit_constraint,[unit_constraint](@ref)
@@ -26,44 +26,44 @@ op,operating_points(u),"appears in https://spine-project.github.io/SpineOpt.jl/l
 "(conn, n, uc)",connection__node__unit_constraint,"this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1"
 "(u, uc)",unit__unit_constraint,
 "(n, uc)",node__unit_constraint,"this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1"
-"(unit_constraint=uc, stochastic_path=s, t=t)",constraint_unit_constraint_indices,
+"(unit_constraint=uc, stochastic_path=s, t=t)",constraint_unit_constraint_indices,Set of indices for the defined unit constraints
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,
-"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_flow_indices,
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_flow_indices,Set of valid indices for connection_flow variables
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_intact_flow_indices,
-"(connection=conn, stochastic_scenario=s, t=t)",connections_invested_available_indices,
+"(connection=conn, stochastic_scenario=s, t=t)",connections_invested_available_indices,Set of valid indices for connections_invested_available variables
 (t=t),mp_objective_lowerbound_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_injection_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_slack_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_state_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_voltage_angle_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",nonspin_ramp_down_unit_flow_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",nonspin_ramp_up_unit_flow_indices,
-"(unit=u, node=n, stochastic_scenario=s, t=t)",nonspin_units_shut_down_indices,
-"(unit=u, node=n, stochastic_scenario=s, t=t)",nonspin_units_started_up_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",ramp_down_unit_flow_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",ramp_up_unit_flow_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",shut_down_unit_flow_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",start_up_unit_flow_indices,
-"(node=n, stochastic_scenario=s, t=t)",storages_invested_available_indices,
-"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",unit_flow_indices,
-"(unit=u, stochastic_scenario=s, t=t)",units_invested_available_indices,
-"(unit=u, stochastic_scenario=s, t=t)",units_on_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_stochastic_time_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_state_indices,
-"(node=n, t=t)",node_time_indices,
+"(node=n, stochastic_scenario=s, t=t)",node_injection_indices,Set of valid indices for the node_injection variables
+"(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,Set of valid indices for the node_pressure variables
+"(node=n, stochastic_scenario=s, t=t)",node_slack_indices,Set of valid indices for the node_slack variables
+"(node=n, stochastic_scenario=s, t=t)",node_state_indices,Set of valid indices for the node_state variables
+"(node=n, stochastic_scenario=s, t=t)",node_voltage_angle_indices,Set of valid indices for the node_voltage_angle variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",nonspin_ramp_down_unit_flow_indices,Set of valid indices for the nonspin_ramp_down_unit_flow variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",nonspin_ramp_up_unit_flow_indices,Set of valid indices for the nonspin_ramp_up_unit_flow variables
+"(unit=u, node=n, stochastic_scenario=s, t=t)",nonspin_units_shut_down_indices,Set of valid indices for the nonspin_units_shut_down variables
+"(unit=u, node=n, stochastic_scenario=s, t=t)",nonspin_units_started_up_indices,Set of valid indices for the nonspin_units_started_up variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",ramp_down_unit_flow_indices,Set of valid indices for the ramp_down_unit_flow variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",ramp_up_unit_flow_indices,Set of valid indices for the ramp_up_unit_flow variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",shut_down_unit_flow_indices,Set of valid indices for the shut_down_unit_flow variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",start_up_unit_flow_indices,Set of valid indices for the start_up_unit_flow variables
+"(node=n, stochastic_scenario=s, t=t)",storages_invested_available_indices,Set of valid indices for the storages_invested_available variables
+"(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",unit_flow_indices,Set of valid indices for the unit_flow variables
 "(unit=u, node=n, direction=d, op=i, stochastic_scenario=s, t=t)",unit_flow_op_indices,Set of valid indices for the nonspin_units_shut_down variables
+"(unit=u, stochastic_scenario=s, t=t)",units_invested_available_indices,Set of valid indices for the units_invested_available variables
+"(unit=u, stochastic_scenario=s, t=t)",units_on_indices,Set of valid indices for the units_on variables
+"(node=n, stochastic_scenario=s, t=t)",node_stochastic_time_indices,Set of valid stochastic scenario and timeslice indices for a node
+"(node=n, stochastic_scenario=s, t=t)",node_state_indices,Set of valid indices for the node_state variables
+"(node=n, t=t)",node_time_indices,Set of valid timeslice indices for a node
 "(node=n, stochastic_scenario=s, t=t, t=t)",constraint_cyclic_node_state_indices,
-"(node=n, stochastic_scenario=s, t=t)",operating_point_indices,
-"(unit=u, node=n, node=n, stochastic_scenario=s, t=t)",unit_pw_heat_rate_indices,
-"(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,
-"(connection=conn, node=n, stochastic_scenario=s, t=t)",connection_ptdf_flow_indices,
-"(connection=conn, connection=conn, stochastic_scenario=s, t=t)",constraint_connection_flow_lodf_indices,
-"(node=n, stochastic_scenario=s, t=t)",unit_investment_lifetime_indices,
-(connection=conn),candidate_connections_indices,
-"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",constraint_candidate_connection_flow_lb_indices,
-"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",constraint_candidate_connection_flow_ub_indices,
-"(connection=conn, stochastic_scenario=s, t=t)",connection_investment_lifetime_indices,
-"(node=n, stochastic_scenario=s, t=t)",storage_investment_lifetime_indices,
-"(unit_constraint=uc, t=t, stochastic_scenario=s)",constraint_unit_constraint_indices,
+"(unit=u, node=n, direction=d)",operating_point_indices,Set of unit flows that use operating points
+"(unit=u, node=n, node=n, stochastic_scenario=s, t=t)",unit_pw_heat_rate_indices,Set of indices for piece-wise linear heat rate approximations for units
+"(node=n, stochastic_scenario=s, t=t)",node_pressure_indices,Set of valid indices for the node_pressure variables
+"(connection=conn, node=n, stochastic_scenario=s, t=t)",connection_ptdf_flow_indices,Set of valid indices for the connection_ptdf_flow variables
+"(connection=conn, connection=conn, stochastic_scenario=s, t=t)",constraint_connection_flow_lodf_indices,Set of valid indices for the connection LODF constraint
+"(node=n, stochastic_scenario=s, t=t)",unit_investment_lifetime_indices,Set of valid indices for the unit investment lifetime constraint
+(connection=conn),candidate_connections_indices,Set of possible connections to invest in
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",constraint_candidate_connection_flow_lb_indices,Set of valid indices for the candidate connection flow lower bound constraint
+"(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",constraint_candidate_connection_flow_ub_indices,Set of valid indices for the candidate connection flow upper bound constraint
+"(connection=conn, stochastic_scenario=s, t=t)",connection_investment_lifetime_indices,Set of valid indices for the connection investment lifetime constraint
+"(node=n, stochastic_scenario=s, t=t)",storage_investment_lifetime_indices,Set of valid indices for the storage investment lifetime constraint
+"(unit_constraint=uc, t=t, stochastic_scenario=s)",constraint_unit_constraint_indices,Set of valid indices for the unit constraint
 ...?,,
