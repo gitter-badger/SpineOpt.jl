@@ -1,6 +1,8 @@
 index,indices,Description
 ..,ind(*parameter*),"Tuple of all objects, for which the parameter is defined"
-t,timeslices,"Set of specific time-index for time-varying value"
+inds,Any,"Set of indexes for navigating a `Map` value. Tuples correspond to navigating nested `Maps`"
+i,N (Int64),"Set of indexes for navigating an array value"
+t,timeslices,"Set of specific time-indexes for navigating a time-varying value"
 t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'
 t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'
 t,t_in_t(t_short=t'),Set of timeslices that contain timeslice t'
