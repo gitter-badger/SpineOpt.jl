@@ -1,6 +1,6 @@
 index,indices,Description
 ..,ind(*parameter*),"Tuple of all objects, for which the parameter is defined"
-t,time_slices,"Set of all [time_slice](@ref)s in the model"
+t,timeslices,"Set of specific time-index for time-varying value"
 t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'
 t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'
 t,t_in_t(t_short=t'),Set of timeslices that contain timeslice t'
@@ -21,10 +21,10 @@ ng,groups(node=n),"Set of nodes that belong to the same [node\_group](@ref)"
 op,operating_points(u),"Set of [operating_points](@ref)s of a unit"
 "(n, tb)",node__temporal_block,Set of tuples of node and temporal block being defined under the relationship [node__temporal_block](@ref)
 "(u, n)",unit__node,Set of tuples of unit and node being defined under the relationship [unit__node](@ref)
-"(u, n, uc)",unit__node__unit_constraint,"Set of tuples of unit, node and unit constraint being defined under the relationship [unit__node__unit_constraint](@ref) (this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
-"(conn, n, uc)",connection__node__unit_constraint,"Set of tuples of connection, node and unit constraint being defined under the relationship [connection__node__unit_constraint](@ref) (this does not exist in the spineopt db structure, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
+"(u, n, uc)",unit__node__unit_constraint,"Set of tuples of unit, node and unit constraint being defined under the relationship [unit__from_node__unit_constraint](@ref) or [unit__to_node__unit_constraint](@ref)"
+"(conn, n, uc)",connection__node__unit_constraint,"Set of tuples of connection, node and unit constraint being defined under the relationship [connection__from_node__unit_constraint](@ref) or [connection__to_node__unit_constraint](@ref)"
 "(u, uc)",unit__unit_constraint,Set of tuples of unit and unit constraint being defined under the relationship [unit__unit_constraint](@ref)
-"(n, uc)",node__unit_constraint,"Set of tuples of node and unit constraint being defined under the relationship [node__unit_constraint](@ref) (this does not exist in the spineopt db structure yet, but appears in https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/constraints/#User-constraints-1)"
+"(n, uc)",node__unit_constraint,"Set of tuples of node and unit constraint being defined under the relationship [node__unit_constraint](@ref)"
 "(unit_constraint=uc, stochastic_path=s, t=t)",constraint_unit_constraint_indices,Set of indices for the defined unit constraints
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,Set of valid indices for binary_gas_connection_flow variables
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_flow_indices,Set of valid indices for connection_flow variables
