@@ -20,6 +20,7 @@ SpineOpt.write_concept_reference_files(concept_dictionary, path)
 
 ## Create and deploy the documentation
 makedocs(
+    format=Documenter.LaTeX(),
     sitename="SpineOpt.jl",
     #format=Documenter.HTML(prettyurls=get(ENV, "CI", nothing) == "true"),
     pages=[
