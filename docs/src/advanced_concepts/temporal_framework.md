@@ -150,4 +150,4 @@ Below is an example of an advanced use case in which a rolling horizon optimizat
   * `node_2_temporal_block_B`
 The two model components that are considered have a different resolution, and their own resolution is also varying within the optimization window. Note that in this case the two optimization windows have the same size, but this is not strictly necessary. The image below visualizes the first two window optimizations of this model.
 
-![temporal structure](../figs/Temporal_structure.svg)
+![temporal structure](../figs/Temporal_structure.eps)
