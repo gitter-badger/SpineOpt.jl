@@ -1,4 +1,5 @@
 using Documenter
+using DocumenterLaTeX
 using SpineOpt
 
 ## Automatically write the `Concept Reference` files using the `spineopt_template.json` as a basis.
@@ -22,6 +23,7 @@ SpineOpt.write_concept_reference_files(concept_dictionary, path)
 makedocs(
     sitename="SpineOpt.jl",
     #format=Documenter.HTML(prettyurls=get(ENV, "CI", nothing) == "true"),
+    format=DocumenterLaTeX.LaTeX(),
     pages=[
         "Introduction" => "index.md",
         "Getting Started" => Any[
