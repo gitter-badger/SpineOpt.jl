@@ -32,6 +32,6 @@ This may take a while and nothing seems to happen, but the installation process 
 
 - You should get a new ribbon in the toolbar with *Run SpineOpt* and *Load template*
 
-![image](https://user-images.githubusercontent.com/40472544/114974012-42e65980-9e8a-11eb-9b00-edfc53b8baf0.png)
+![image](../figs/114974012-42e65980-9e8a-11eb-9b00-edfc53b8baf0.png)
 
 After this, you have SpineOpt available as a tool in Spine Toolbox, but next you need to setup a workflow including input and output dabases. Instructions are in the next section [here](https://spine-project.github.io/SpineOpt.jl/latest/getting_started/setup_workflow/).
