@@ -3,7 +3,7 @@ n,node,"Set of [node](https://spine-project.github.io/SpineOpt.jl/latest/concept
 u,unit,"Set of [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit-1) objects in the model"
 uc,unit_constraint,"Set of [unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit_constraint-1) objects in the model"
 conn,connection,"Set of [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) objects in the model"
-d,direction,"Set of flow directions relative to a node, including 'to_node' and 'from_node'"
+d,direction,"Set of flow direction associated with a node, including 'to_node' and 'from_node'"
 s,stochastic_scenario,"Set of [stochastic_scenario](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#stochastic_scenario-1) objects in the model"
 s,stochastic_path,"Set of unique sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves"
 tb,temporal_block,"Set of [temporal_block](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#temporal_block-1) objects in the model"

@@ -3,8 +3,8 @@
 ## Balance constraint
 
 ### [Nodal balance](@id constraint_nodal_balance)
-In **SpineOpt**, [node](@ref) is the place where an energy balance is enforced. As universal aggregators,
-they are the glue that brings all components of the energy system together. An energy balance is created for each [node](@ref) for all `node_stochastic_time_indices`, unless the [balance\_type](@ref) parameter of the node takes the value [balance\_type\_none](@ref balance_type_list) or if the node in question is a member of a node group, for which the [balance\_type](@ref) is [balance\_type\_group](@ref balance_type_list). The parameter [nodal\_balance\_sense](@ref) defaults to equality, but can be changed to allow overproduction ([nodal\_balance\_sense](@ref) [`>=`](@ref constraint_sense_list)) or underproduction ([nodal\_balance\_sense](@ref) [`<=`](@ref constraint_sense_list)).
+In **SpineOpt**, [node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#node-1) is the place where an energy balance is enforced. As universal aggregators,
+they are the glue that brings all components of the energy system together. An energy balance is created for each [node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#node-1) for all `node_stochastic_time_indices`, unless the [balance\_type](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#balance_type-1) parameter of the node takes the value [balance\_type\_none](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameter%20Value%20Lists/#balance_type_list-1) or if the node in question is a member of a node group, for which the [balance\_type](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#balance_type-1) is [balance\_type\_group](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameter%20Value%20Lists/#balance_type_list-1). The parameter [nodal\_balance\_sense](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#nodal_balance_sense-1) defaults to equality, but can be changed to allow overproduction ([nodal\_balance\_sense](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#nodal_balance_sense-1) [`>=`](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameter%20Value%20Lists/#constraint_sense_list-1)) or underproduction ([nodal\_balance\_sense](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#nodal_balance_sense-1) [`<=`](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameter%20Value%20Lists/#constraint_sense_list-1)).
 The energy balance is enforced by the following constraint:
 
 ```math
@@ -23,10 +23,10 @@ The energy balance is enforced by the following constraint:
 & \nexists ng \in groups(n) : balance\_type\_group \\
 \end{aligned}
 ```
-The constraint consists of the [node injections](@ref constraint_node_injection), the net [connection\_flow](@ref)s and [node slack variables](@ref Variables).
+The constraint consists of the [node injections](@ref constraint_node_injection), the net [connection\_flow](@ref Variables)s and [node slack variables](@ref Variables).
 
 ### [Node injection](@id constraint_node_injection)
-The node injection itself represents all local production and consumption, represented by the sum of all connected unit flows and the nodal demand. The node injection is created for each node in the network (unless the node is only used for parameter aggregation purposes, see [Introduction to groups of objects](@ref)).
+The node injection itself represents all local production and consumption, represented by the sum of all connected unit flows and the nodal demand. The node injection is created for each node in the network (unless the node is only used for parameter aggregation purposes, see [Introduction to groups of objects](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/the_basics/#Introduction-to-groups-of-objects-1)).
 
 ```math
 \begin{aligned}
@@ -43,7 +43,7 @@ The node injection itself represents all local production and consumption, repre
 
 ### [Node injection with storage capability](@id constraint_node_injection2)
 
-If a node corresponds to a storage node, the parameter [has\_state](@ref) should be set to [true](@ref boolean_value_list) for this node. In this case the nodal injection will translate to the following constraint:
+If a node corresponds to a storage node, the parameter [has\_state](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#has_state-1) should be set to [true](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameter%20Value%20Lists/#boolean_value_list-1) for this node. In this case the nodal injection will translate to the following constraint:
 
 ```math
 \begin{aligned}
@@ -87,7 +87,7 @@ Note that the dis-/charging efficiencies and capacities are properties of these 
 See [the capacity constraint](@ref constraint_unit_flow_capacity) and [the unit flow ratio constraints](@ref constraint_ratio_unit_flow)
 
 ### [Cyclic condition on node state variable](@id constraint_cyclic_node_state)
-To ensure that the node state at the end of the optimization is at least the same value as the initial value at the beginning of the optimization (or higher), the cyclic node state constraint can be used by setting the [cyclic\_condition](@ref) of a [node\_\_temporal\_block](@ref) to `true`. This triggers the following cyclic constraint:
+To ensure that the node state at the end of the optimization is at least the same value as the initial value at the beginning of the optimization (or higher), the cyclic node state constraint can be used by setting the [cyclic\_condition](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#cyclic_condition-1) of a [node\_\_temporal\_block](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#node__temporal_block-1) to [true](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameter%20Value%20Lists/#boolean_value_list-1). This triggers the following cyclic constraint:
 
 ```math
 \begin{aligned}
@@ -116,19 +116,19 @@ The fundamental static constraints for units within SpineOpt relate to the relat
 
 #### [Conversion constraint / limiting flow shares inprocess / relationship in process](@id constraint_ratio_unit_flow)
 
-A [unit](@ref) can have different commodity flows associated with it. The most simple relationship between these flows is a linear relationship between input and/or output nodes/node groups. SpineOpt holds constraints for each combination of flows and also for the type of relationship, i.e. whether it is a maximum, minimum or fixed ratio between commodity flows. Note that node groups can be used in order to aggregate flows, i.e. to give a ratio between a combination of units flows.
+A [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit-1) can have different commodity flows associated with it. The most simple relationship between these flows is a linear relationship between input and/or output nodes/node groups. SpineOpt holds constraints for each combination of flows and also for the type of relationship, i.e. whether it is a maximum, minimum or fixed ratio between commodity flows. Note that node groups can be used in order to aggregate flows, i.e. to give a ratio between a combination of units flows.
 
 ##### [Ratios between output and input flows of a unit](@id ratio_out_in)
-By defining the parameters [fix\_ratio\_out\_in\_unit\_flow](@ref),
-[max\_ratio\_out\_in\_unit\_flow](@ref) or [min\_ratio\_out\_in\_unit\_flow](@ref), a ratio can be set between **out**going and **in**coming flows from and to a unit.
+By defining the parameters [fix\_ratio\_out\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_ratio_out_in_unit_flow-1),
+[max\_ratio\_out\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_ratio_out_in_unit_flow-1) or [min\_ratio\_out\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_ratio_out_in_unit_flow-1), a ratio can be set between **out**going and **in**coming flows from and to a unit.
 Whenever there is only a single input node and a single output node, this relationship relates to the notion of an efficiency.
 Also, the ratio equation can for instance be used to relate emissions to input primary fuel flows.
 In the most general form of the equation, two node groups are defined (an input node group $ng_{in}$ and an output node group $ng_{out}$),
 and a linear relationship is expressed between both node groups. Note that whenever the relationship is specified between groups of multiple nodes,
 there remains a degree of freedom regarding the composition of the input node flows within group $ng_{in}$  and the output node flows within group $ng_{out}$.
 
-The constraint given below enforces a fixed, maximum or minimum ratio between outgoing and incoming [unit\_flow](@ref). Note that the potential node groups, that the parameters  [fix\_ratio\_out\_in\_unit\_flow](@ref),
-[max\_ratio\_out\_in\_unit\_flow](@ref) and [min\_ratio\_out\_in\_unit\_flow](@ref) defined on, are getting internally expanded to the members of the node group within the unit\_flow\_indices.
+The constraint given below enforces a fixed, maximum or minimum ratio between outgoing and incoming [unit\_flow](@ref Variables). Note that the potential node groups, that the parameters  [fix\_ratio\_out\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_ratio_out_in_unit_flow-1),
+[max\_ratio\_out\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_ratio_out_in_unit_flow-1) and [min\_ratio\_out\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_ratio_out_in_unit_flow-1) defined on, are getting internally expanded to the members of the node group within the unit\_flow\_indices.
 
 ```math
 \begin{aligned}
@@ -147,7 +147,7 @@ The constraint given below enforces a fixed, maximum or minimum ratio between ou
 & \forall t \in time\_slices, \forall s \in stochastic\_path
 \end{aligned}
 ```
-Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_out\_in](@ref), [max\_units\_on\_coefficient\_out\_in](@ref), [min\_units\_on\_coefficient\_out\_in](@ref), respectively.
+Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref Variables) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_out\_in](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_units_on_coefficient_out_in-1), [max\_units\_on\_coefficient\_out\_in](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_units_on_coefficient_out_in-1), [min\_units\_on\_coefficient\_out\_in](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_units_on_coefficient_out_in-1), respectively.
 
 ##### [Ratios between input and output flows of a unit](@id ratio_in_out)
 Similarly to the ratio between outgoing and incoming unit flows, a ratio can also be defined in reverse between **in**coming and **out**going flows.
@@ -169,7 +169,7 @@ Similarly to the ratio between outgoing and incoming unit flows, a ratio can als
 & \forall t \in time\_slices, \forall s \in stochastic\_path
 \end{aligned}
 ```
-Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_in\_out](@ref), [max\_units\_on\_coefficient\_in\_out](@ref), [min\_units\_on\_coefficient\_in\_out](@ref), respectively.
+Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref Variables) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_in\_out](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_units_on_coefficient_in_out-1), [max\_units\_on\_coefficient\_in\_out](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_units_on_coefficient_in_out-1), [min\_units\_on\_coefficient\_in\_out](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_units_on_coefficient_in_out-1), respectively.
 
 ##### [Ratios between input and input flows of a unit](@id ratio_in_in)
 
@@ -192,7 +192,7 @@ Similarly to the [ratio between outgoing and incoming units flows](@ref ratio_ou
 & \forall t \in time\_slices, \forall s \in stochastic\_path
 \end{aligned}
 ```
-Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_in\_in](@ref), [max\_units\_on\_coefficient\_in\_in](@ref), [min\_units\_on\_coefficient\_in\_in](@ref), respectively.
+Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref Variables) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_in\_in](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_units_on_coefficient_in_in-1), [max\_units\_on\_coefficient\_in\_in](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_units_on_coefficient_in_in-1), [min\_units\_on\_coefficient\_in\_in](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_units_on_coefficient_in_in-1), respectively.
 
 ##### [Ratios between output and output flows of a unit](@id ratio_out_out)
 
@@ -215,13 +215,13 @@ Similarly to the [ratio between outgoing and incoming units flows](@ref ratio_ou
 & \forall t \in time\_slices, \forall s \in stochastic\_path
 \end{aligned}
 ```
-Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_out\_out](@ref), [max\_units\_on\_coefficient\_out\_out](@ref), [min\_units\_on\_coefficient\_out\_out](@ref), respectively.
+Note that a right-hand side constant coefficient associated with the variable [units\_on](@ref Variables) can optionally be included, triggered by the existence of the [fix\_units\_on\_coefficient\_out\_out](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_units_on_coefficient_out_out-1), [max\_units\_on\_coefficient\_out\_out](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_units_on_coefficient_out_out-1), [min\_units\_on\_coefficient\_out\_out](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_units_on_coefficient_out_out-1), respectively.
 
 #### [Bounds on the unit capacity](@id constraint_unit_flow_capacity)
 In a multi-commodity setting, there can be different commodities entering/leaving a certain
 technology/unit. These can be energy-related commodities (e.g., electricity, natural gas, etc.),
-emissions, or other commodities (e.g., water, steel). The [unit\_capacity](@ref) be specified
-for at least one [unit\_\_to\_node](@ref) or [unit\_\_from\_node](@ref) relationship, in order to trigger a constraint on the maximum commodity
+emissions, or other commodities (e.g., water, steel). The [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1) be specified
+for at least one [unit\_\_to\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__to_node-1) or [unit\_\_from\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__from_node-1) relationship, in order to trigger a constraint on the maximum commodity
 flows to this location in each time step. When desirable, the capacity can be specified for a group of nodes (e.g. combined capacity for multiple products).
 
 ```math
@@ -238,18 +238,18 @@ flows to this location in each time step. When desirable, the capacity can be sp
 \end{aligned}
 ```
 
-Note that the conversion factor [unit\_conv\_cap\_to\_flow](@ref) has a default value of `1`, but can be adjusted in case the unit of measurement for the capacity is different to the unit flows unit of measurement.
+Note that the conversion factor [unit\_conv\_cap\_to\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_conv_cap_to_flow-1) has a default value of `1`, but can be adjusted in case the unit of measurement for the capacity is different to the unit flows unit of measurement.
 
 ### Dynamic constraints
 
 #### Commitment constraints
 For modeling certain technologies/units, it is important to not only have
-[unit\_flow](@ref) variables of
+[unit\_flow](@ref Variables) variables of
 different commodities, but also model the online ("commitment") status of the unit/technology
-at every time step. Therefore, an additional variable [units\_on](@ref) is introduced. This variable
+at every time step. Therefore, an additional variable [units\_on](@ref Variables) is introduced. This variable
 represents the number of online units of that technology (for a normal unit commitment model,
 this variable might be a binary, for investment planning purposes, this might also be an integer
-or even a continuous variable). To define the type of a commitment variable, see [online\_variable\_type](@ref).
+or even a continuous variable). To define the type of a commitment variable, see [online\_variable\_type](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#online_variable_type-1).
 Commitment variables will be introduced by the following constraints (with corresponding
 parameters):
 - constraint on `units_on`
@@ -272,7 +272,7 @@ The number of online units need to be restricted to the number of available unit
 ```
 
 ##### [Bound on available units](@id constraint_units_available)
-The number of available units itself is constrained by the parameters [unit\_availability\_factor](@ref) and [number\_of\_units](@ref), and the variable number of invested units [units\_invested\_available](@ref):
+The number of available units itself is constrained by the parameters [unit\_availability\_factor](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_availability_factor-1) and [number\_of\_units](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#number_of_units-1), and the variable number of invested units [units\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#units_invested_available-1):
 
 ```math
 \begin{aligned}
@@ -300,7 +300,7 @@ The units on status is constrained by shutting down and starting up actions. Thi
 \end{aligned}
 ```
 ##### [Constraint on minimum operating point](@id constraint_minimum_operating_point)
-The minimum operating point of a unit can be based on the [unit\_flow](@ref)s of
+The minimum operating point of a unit can be based on the [unit\_flow](@ref Variables)s of
 input or output nodes/node groups ng:
 
 ```math
@@ -319,7 +319,7 @@ input or output nodes/node groups ng:
 Note that this constraint is always generated for the lowest resolution of all involved members of the node group `ng`, i.e. the lowest resolution of the involved units flows. This is also why the term ``\min(\Delta t_{units\_on},\Delta t)`` is added for the units on variable, in order to dis-/aggregate the units on resolution to the resolution of the unit flows.
 
 ##### [Minimum down time (basic version)](@id constraint_min_down_time)
-In order to impose a minimum offline time of a unit, before it can be started up again, the [min\_down\_time](@ref) parameter needs to be defined, which triggers the generation of the following constraint:
+In order to impose a minimum offline time of a unit, before it can be started up again, the [min\_down\_time](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_down_time-1) parameter needs to be defined, which triggers the generation of the following constraint:
 
 ```math
 \begin{aligned}
@@ -334,7 +334,7 @@ v_{units\_shut\_down}(u,s,t') \\
 Note that for the use reserves the generated minimum down time constraint will include [startups for non-spinning reserves](@ref constraint_min_down_time2).
 
 ##### [Minimum up time (basic version)](@id constraint_min_up_time)
-Similarly to the [minimum down time constraint](@ref constraint_min_down_time), a minimum time that a unit needs to remain online after a startup can be imposed by defining the [min\_up\_time](@ref) parameter. This will trigger the generation of the following constraint:
+Similarly to the [minimum down time constraint](@ref constraint_min_down_time), a minimum time that a unit needs to remain online after a startup can be imposed by defining the [min\_up\_time](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_up_time-1) parameter. This will trigger the generation of the following constraint:
 
 ```math
 \begin{aligned}
@@ -351,7 +351,7 @@ This constraint can be extended to the use of nonspinning reserves. See [also](@
 
 To include ramping and reserve constraints, it is a pre requisite that [minimum operating points](@ref constraint_minimum_operating_point) and [maximum capacity constraints](@ref constraint_unit_flow_capacity) are enforced as described.
 
-For dispatchable units, additional ramping constraints can be introduced. For setting up ramping characteristics of units see [Ramping and Reserves](@ref).
+For dispatchable units, additional ramping constraints can be introduced. For setting up ramping characteristics of units see [Ramping and Reserves](https://spine-project.github.io/SpineOpt.jl/latest/advanced_concepts/ramping_and_reserves/#).
 First, the unit flows are split into their online, start-up, shut-down and non-spinning ramping contributions.
 
 #### [Splitting unit flows into ramps](@id constraint_split_ramps)
@@ -378,10 +378,10 @@ First, the unit flows are split into their online, start-up, shut-down and non-s
 & \forall t_{before} \in t\_before\_t(t\_after=t_{after}) : t_{before} \in unit\_flow\_indices \\
 \end{aligned}
 ```
-Note that each *individual* tuple of the `unit_flow_indices` is split into its ramping contributions, if any of the ramping variables exist for this tuple. How to set-up ramps for units is described in [Ramping and Reserves](@ref).
+Note that each *individual* tuple of the `unit_flow_indices` is split into its ramping contributions, if any of the ramping variables exist for this tuple. How to set-up ramps for units is described in [Ramping and Reserves](https://spine-project.github.io/SpineOpt.jl/latest/advanced_concepts/ramping_and_reserves/#).
 
 ##### [Constraint on spinning upwards ramp_up](@id constraint_ramp_up)
-The maximum online ramp up ability of a unit can be constraint by the [ramp\_up\_limit](@ref), expressed as a share of the [unit\_capacity](@ref). With this constraint, online (i.e. spinning) ramps can be applied to groups of commodities (e.g. electricity + balancing capacity). Moreover, balancing product might have specific ramping requirements, which can herewith also be enforced.
+The maximum online ramp up ability of a unit can be constraint by the [ramp\_up\_limit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#ramp_up_limit-1), expressed as a share of the [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1). With this constraint, online (i.e. spinning) ramps can be applied to groups of commodities (e.g. electricity + balancing capacity). Moreover, balancing product might have specific ramping requirements, which can herewith also be enforced.
 
 ```math
 \begin{aligned}
@@ -398,9 +398,9 @@ The maximum online ramp up ability of a unit can be constraint by the [ramp\_up\
 & \forall s \in stochastic\_path, \forall t \in time\_slice
 \end{aligned}
 ```
-Note that only online units that are not started up during this timestep are considered.
+Note that only online units that are not started up during this timeslice are considered.
 ##### [Constraint on minimum upward start up ramp_up](@id constraint_min_start_up_ramp)
-To enforce a lower bound on the ramp of a unit during start-up, the [min\_startup\_ramp](@ref) given as a share of the [unit\_capacity](@ref) needs to be defined, which triggers the constraint below. Usually, only non-reserve commodities can have a start-up ramp. However, it is possible to include them, by adding them to the ramp defining node `ng`.
+To enforce a lower bound on the ramp of a unit during start-up, the [min\_startup\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_startup_ramp-1) given as a share of the [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1) needs to be defined, which triggers the constraint below. Usually, only non-reserve commodities can have a start-up ramp. However, it is possible to include them, by adding them to the ramp defining node `ng`.
 
 ```math
 \begin{aligned}
@@ -417,7 +417,7 @@ To enforce a lower bound on the ramp of a unit during start-up, the [min\_startu
 
 ##### [Constraint on maximum upward start up ramp_up](@id constraint_max_start_up_ramp)
 
-This constraint enforces a upper limit on the unit ramp during startup process, triggered by the existence of the [max\_startup\_ramp](@ref), which should be given as a share of the [unit\_capacity](@ref). Typically, only  ramp flows to non-reserve nodes are considered during the start-up process. However, it is possible to include them, by adding them to the ramp defining node `ng`.
+This constraint enforces a upper limit on the unit ramp during startup process, triggered by the existence of the [max\_startup\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_startup_ramp-1), which should be given as a share of the [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1). Typically, only  ramp flows to non-reserve nodes are considered during the start-up process. However, it is possible to include them, by adding them to the ramp defining node `ng`.
 ```math
 \begin{aligned}
 & + \sum_{\substack{(u,n,d,s,t) \in start\_up\_unit\_flow\_indices: \\ (u,n,d) \, \in \, (u,ng,d)}} v_{start\_up\_unit\_flow}(u,n,d,s,t)  \\
@@ -449,7 +449,7 @@ v_{units\_shut\_down}(u,s,t') \\
 
 ##### [Minimum nonspinning ramp up](@id constraint_min_nonspin_ramp_up)
 
-The nonspinning ramp flows of a units [nonspin\_ramp\_up\_unit\_flow](@ref) are dependent on the units holding available for nonspinning reserve provision, i.e. [nonspin\_units\_started\_up](@ref). A lower bound on these nonspinning reserves can be enforced by defining the [min\_res\_startup\_ramp](@ref) parameter (given as a fraction of the [unit\_capacity](@ref)).
+The nonspinning ramp flows of a units [nonspin\_ramp\_up\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#nonspin_ramp_up_unit_flow-1) are dependent on the units holding available for nonspinning reserve provision, i.e. [nonspin\_units\_started\_up](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#nonspin_units_started_up-1). A lower bound on these nonspinning reserves can be enforced by defining the [min\_res\_startup\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_res_startup_ramp-1) parameter (given as a fraction of the [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1)).
 
 ```math
 \begin{aligned}
@@ -466,7 +466,7 @@ The nonspinning ramp flows of a units [nonspin\_ramp\_up\_unit\_flow](@ref) are 
 
 ##### [Maximum nonspinning ramp up](@id constraint_max_nonspin_ramp_up)
 
-The nonspinning ramp flows of a units [nonspin\_ramp\_up\_unit\_flow](@ref) are dependent on the units holding available for nonspinning reserve provision, i.e. [nonspin\_units\_started\_up](@ref). An upper bound on these nonspinning reserves can be enforced by defining the [max\_res\_startup\_ramp](@ref) parameter (given as a fraction of the [unit\_capacity](@ref)).
+The nonspinning ramp flows of a units [nonspin\_ramp\_up\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#nonspin_ramp_up_unit_flow-1) are dependent on the units holding available for nonspinning reserve provision, i.e. [nonspin\_units\_started\_up](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#nonspin_units_started_up-1). An upper bound on these nonspinning reserves can be enforced by defining the [max\_res\_startup\_ramp](@ref) parameter (given as a fraction of the [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1)).
 
 ```math
 \begin{aligned}
@@ -484,7 +484,7 @@ The nonspinning ramp flows of a units [nonspin\_ramp\_up\_unit\_flow](@ref) are 
 ##### [Constraint on spinning downward ramps](@id constraint_ramp_down)
 
 Similarly to the online [ramp up capbility](@ref constraint_ramp_up) of a unit,
-it is also possible to impose an upper bound on the online ramp down ability of unit by defining a [ramp\_down\_limit](@ref), expressed as a share of the [unit\_capacity](@ref).
+it is also possible to impose an upper bound on the online ramp down ability of unit by defining a [ramp\_down\_limit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#ramp_down_limit-1), expressed as a share of the [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1).
 
 ```math
 \begin{aligned}
@@ -503,7 +503,7 @@ it is also possible to impose an upper bound on the online ramp down ability of 
 
 ##### [Lower bound on downward shut-down ramps](@id constraint_min_shut_down_ramp)
 This constraint enforces a lower bound on the unit ramp during shutdown process. Usually, units will only provide shutdown ramps to non-reserve nodes. However, it is possible to include them, by adding them to the ramp defining node `ng`.
-The constraint is triggered by the existence of the [min\_shutdown\_ramp](@ref) parameter.
+The constraint is triggered by the existence of the [min\_shutdown\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_shutdown_ramp-1) parameter.
 
 ```math
 \begin{aligned}
@@ -519,7 +519,7 @@ The constraint is triggered by the existence of the [min\_shutdown\_ramp](@ref) 
 ```
 ##### [Upper bound on downward shut-down ramps](@id constraint_max_shut_down_ramp)
 This constraint enforces an upper bound on the unit ramp during shutdown process. Usually, units will only provide shutdown ramps to non-reserve nodes. However, it is possible to include them, by adding them to the ramp defining node `ng`.
-The constraint is triggered by the existence of the [max\_shutdown\_ramp](@ref) parameter.
+The constraint is triggered by the existence of the [max\_shutdown\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_shutdown_ramp-1) parameter.
 
 ```math
 \begin{aligned}
@@ -549,7 +549,7 @@ v_{units\_started\_up}(u,s,t') \\
 ```
 #### [Lower bound on the nonspinning downward reserve provision](@id constraint_min_nonspin_ramp_down)
 
-A lower bound on the nonspinning reserve provision of a unit can be imposed by defining the [min\_res\_shutdown\_ramp](@ref) parameter, which leads to the creation of the following constraint in the model:
+A lower bound on the nonspinning reserve provision of a unit can be imposed by defining the [min\_res\_shutdown\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_res_shutdown_ramp-1) parameter, which leads to the creation of the following constraint in the model:
 
 ```math
 \begin{aligned}
@@ -566,7 +566,7 @@ A lower bound on the nonspinning reserve provision of a unit can be imposed by d
 
 #### [Upper bound on the nonspinning downward reserve provision](@id constraint_max_nonspin_ramp_down)
 
-An upper limit on the nonspinning reserve provision of a unit can be imposed by defining the [max\_res\_shutdown\_ramp](@ref) parameter, which leads to the creation of the following constraint in the model:
+An upper limit on the nonspinning reserve provision of a unit can be imposed by defining the [max\_res\_shutdown\_ramp](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_res_shutdown_ramp-1) parameter, which leads to the creation of the following constraint in the model:
 
 ```math
 \begin{aligned}
@@ -597,7 +597,7 @@ Storage nodes can also contribute to the provision of reserves. The amount of ba
 
 ### Operating segments
 #### [Operating segments of units](@id constraint_operating_point_bounds)
-The `unit_flow_op` operating segment variable is bounded by the difference between successive [operating\_points](@ref) adjusted for [unit_capacity](@ref)
+The `unit_flow_op` operating segment variable is bounded by the difference between successive [operating\_points](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#operating_points-1) adjusted for [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1)
 
 ```math
 \begin{aligned}
@@ -644,7 +644,7 @@ The `unit_flow_op` operating segment variable is bounded by the difference betwe
 
 #### [Upper bound on cumulated unit flows](@id constraint_max_cum_in_unit_flow_bound)
 
-To impose a limit on the cumulative amount of certain commodity flows, a cumulative bound can be set by defining the parameter [max\_cum\_in\_unit\_flow\_bound](@ref) for entire optimization window:
+To impose a limit on the cumulative amount of certain commodity flows, a cumulative bound can be set by defining the parameter [max\_cum\_in\_unit\_flow\_bound](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_cum_in_unit_flow_bound-1) for entire optimization window:
 
 ```math
 \begin{aligned}
@@ -663,8 +663,8 @@ To impose a limit on the cumulative amount of certain commodity flows, a cumulat
 #### [Capacity constraint on connections](@id constraint_connection_flow_capacity)
 
 In a multi-commodity setting, there can be different commodities entering/leaving a certain connection. These can be energy-related commodities (e.g., electricity, natural gas, etc.),
-emissions, or other commodities (e.g., water, steel). The [connection\_capacity](@ref) should be specified
-for at least one [connection\_\_to\_node](@ref) or [connection\_\_from\_node](@ref) relationship, in order to trigger a constraint on the maximum commodity flows to this location in each time step. When desirable, the capacity can be specified for a group of nodes (e.g. combined capacity for multiple products). Note that the conversion factor [connection\_conv\_cap\_to\_flow](@ref) has a default value of `1`, but can be adjusted in case the unit of measurement for the capacity is different to the connection flows unit of measurement.
+emissions, or other commodities (e.g., water, steel). The [connection\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_capacity-1) should be specified
+for at least one [connection\_\_to\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__to_node-1) or [connection\_\_from\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__from_node-1) relationship, in order to trigger a constraint on the maximum commodity flows to this location in each time step. When desirable, the capacity can be specified for a group of nodes (e.g. combined capacity for multiple products). Note that the conversion factor [connection\_conv\_cap\_to\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_conv_cap_to_flow-1) has a default value of `1`, but can be adjusted in case the unit of measurement for the capacity is different to the connection flows unit of measurement.
 
 ```math
 \begin{aligned}
@@ -680,7 +680,7 @@ for at least one [connection\_\_to\_node](@ref) or [connection\_\_from\_node](@r
 \end{aligned}
 ```
 
-If the connection is a [candidate\_connections](@ref), i.e. can be invested in, the connection capacity constraint translates to:
+If the connection is a [candidate\_connections](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#candidate_connections-1), i.e. can be invested in, the connection capacity constraint translates to:
 
 ```math
 \begin{aligned}
@@ -700,15 +700,15 @@ v_{connections\_invest\_available(conn, s, t)}
 
 #### [Fixed ratio between outgoing and incoming flows of a connection](@id constraint_ratio_out_in_connection_flow)
 
-By defining the parameters [fix\_ratio\_out\_in\_connection\_flow](@ref),
-[max\_ratio\_out\_in\_connection\_flow](@ref) or [min\_ratio\_out\_in\_connection\_flow](@ref), a ratio can be set between **out**going and **in**coming flows from and to a connection.
+By defining the parameters [fix\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_ratio_out_in_connection_flow-1),
+[max\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_ratio_out_in_connection_flow-1) or [min\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_ratio_out_in_connection_flow-1), a ratio can be set between **out**going and **in**coming flows from and to a connection.
 
 In the most general form of the equation, two node groups are defined (an input node group $ng_{in}$ and an output node group $ng_{out}$),
 and a linear relationship is expressed between both node groups. Note that whenever the relationship is specified between groups of multiple nodes,
 there remains a degree of freedom regarding the composition of the input node flows within group $ng_{in}$  and the output node flows within group $ng_{out}$.
 
-The constraint given below enforces a fixed, maximum or minimum ratio between outgoing and incoming [connection\_flow](@ref). Note that the potential node groups, that the parameters  [fix\_ratio\_out\_in\_connection\_flow](@ref),
-[max\_ratio\_out\_in\_connection\_flow](@ref) and [min\_ratio\_out\_in\_connection\_flow](@ref) are defined on, are getting internally expanded to the members of the node group within the connection\_flow\_indices.
+The constraint given below enforces a fixed, maximum or minimum ratio between outgoing and incoming [connection\_flow](@ref Variables). Note that the potential node groups, that the parameters  [fix\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_ratio_out_in_connection_flow-1),
+[max\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_ratio_out_in_connection_flow-1) and [min\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_ratio_out_in_connection_flow-1) are defined on, are getting internally expanded to the members of the node group within the connection\_flow\_indices.
 
 ```math
 \begin{aligned}
@@ -731,11 +731,11 @@ In the following, the different specific network representations are introduced.
 #### [Pressure driven gas transfer](@id pressure-driven-gas-transfer-math)
 For gas pipelines it can be relevant a pressure driven gas transfer can be modelled, i.e. to account for linepack flexibility. Generally speaking, the main challenges related to pressure driven gas transfers are the non-convexities associated with the Weymouth equation. In SpineOpt, a convexified MILP representation has been implemented, which as been presented in [Schwele - Coordination of Power and Natural Gas Systems: Convexification Approaches for Linepack Modeling](https://doi.org/10.1109/PTC.2019.8810632). The approximation approach is based on the Taylor series expansion around fixed pressure points.
 
-In addition to the already known variables, such as [connection\_flow](@ref) and [node\_state](@ref), the start and end points of a gas pipeline connection are associated with the variable [node\_pressure](@ref). The variable is triggered by the [has\_pressure](@ref) parameter. For more details on how to set up a gas pipeline, see also the advanced concept section [on pressure driven gas transfer](@ref pressure-driven-gas-transfer).
+In addition to the already known variables, such as [connection\_flow](@ref Variables) and [node\_state](@ref Variables), the start and end points of a gas pipeline connection are associated with the variable [node\_pressure](@ref Variables). The variable is triggered by the [has\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#has_pressure-1) parameter. For more details on how to set up a gas pipeline, see also the advanced concept section [on pressure driven gas transfer](@ref pressure-driven-gas-transfer).
 
 ##### [Maximum node pressure](@id constraint_max_node_pressure)
 
-In order to impose an upper limit on the maximum pressure at a node the [maximum node pressure constraint](@ref constraint_max_node_pressure) can be included, by defining the parameter [max\_node\_pressure](@ref) which triggers the following constraint:
+In order to impose an upper limit on the maximum pressure at a node the [maximum node pressure constraint](@ref constraint_max_node_pressure) can be included, by defining the parameter [max\_node\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_node_pressure-1) which triggers the following constraint:
 
 ```math
 \begin{aligned}
@@ -746,10 +746,10 @@ In order to impose an upper limit on the maximum pressure at a node the [maximum
 & \forall s \in stochastic\_path
 \end{aligned}
 ```
-As indicated in the equation, the parameter [max\_node\_pressure](@ref) can also be defined on a node group, in order to impose an upper limit on the aggregated [node\_pressure](@ref) within one node group.
+As indicated in the equation, the parameter [max\_node\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_node_pressure-1) can also be defined on a node group, in order to impose an upper limit on the aggregated [node\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#node_pressure-1) within one node group.
 
 ##### [Minimum node pressure](@id constraint_min_node_pressure)
-In order to impose a lower limit on the pressure at a node the [maximum node pressure constraint](@ref constraint_min_node_pressure) can be included, by defining the parameter [min\_node\_pressure](@ref) which triggers the following constraint:
+In order to impose a lower limit on the pressure at a node the [maximum node pressure constraint](@ref constraint_min_node_pressure) can be included, by defining the parameter [min\_node\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_node_pressure-1) which triggers the following constraint:
 
 ```math
 \begin{aligned}
@@ -760,11 +760,11 @@ In order to impose a lower limit on the pressure at a node the [maximum node pre
 & \forall s \in stochastic\_path
 \end{aligned}
 ```
-As indicated in the equation, the parameter [min\_node\_pressure](@ref) can also be defined on a node group, in order to impose a lower limit on the aggregated [node\_pressure](@ref) within one node group.
+As indicated in the equation, the parameter [min\_node\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_node_pressure-1) can also be defined on a node group, in order to impose a lower limit on the aggregated [node\_pressure](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#node_pressure-1) within one node group.
 
 ##### [Constraint on the pressure ratio between two nodes](@id constraint_compression_factor)
 
-If a compression station is located in between two nodes, the connection is considered to be active and a compression ratio between the two nodes can be imposed. The parameter [compression\_factor](@ref) needs to be defined on a [connection\_\_node\_\_node](@ref) relationship, where the first node corresponds the origin node, before the compression, while the second node corresponds to the destination node, after compression. The existence of this parameter will trigger the following constraint:
+If a compression station is located in between two nodes, the connection is considered to be active and a compression ratio between the two nodes can be imposed. The parameter [compression\_factor](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#compression_factor-1) needs to be defined on a [connection\_\_node\_\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__node__node-1) relationship, where the first node corresponds the origin node, before the compression, while the second node corresponds to the destination node, after compression. The existence of this parameter will trigger the following constraint:
 
 ```math
 \begin{aligned}
@@ -839,11 +839,11 @@ The parameters [fixed\_pressure\_constant\_1](@ref) and [fixed\_pressure\_consta
 ```
 where K corrsponds to the natural gas flow constant.
 
- The [big\_m](@ref) parameter combined with the variable [binary\_gas\_connection\_flow](@ref) together with the equations [on unitary gas flow](@ref constraint_connection_unitary_gas_flow) and on the [maximum gas flow](@ref constraint_connection_flow_gas_capacity) ensure that the bound on the average flow through the fixed pressure points becomes active, if the flow is in a positive direction for the observed set of connection, node1 and node2.
+ The [big\_m](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#big_m-1) parameter combined with the variable `binary\_gas\_connection\_flow` together with the equations [on unitary gas flow](@ref constraint_connection_unitary_gas_flow) and on the [maximum gas flow](@ref constraint_connection_flow_gas_capacity) ensure that the bound on the average flow through the fixed pressure points becomes active, if the flow is in a positive direction for the observed set of connection, node1 and node2.
 
 ##### [Enforcing unidirectional flow](@id constraint_connection_unitary_gas_flow)
 
-As stated above, the flow through a connection can only be in one direction at at time. Whether a flow is active in a certain direction is indicated by the [binary\_gas\_connection\_flow](@ref) variable, which takes a value of `1` if the direction of flow is positive. To ensure that the [binary\_gas\_connection\_flow](@ref) in the opposite direction then takes the value `0`, the following constraint is enforced:
+As stated above, the flow through a connection can only be in one direction at at time. Whether a flow is active in a certain direction is indicated by the `binary\_gas\_connection\_flow` variable, which takes a value of `1` if the direction of flow is positive. To ensure that the `binary\_gas\_connection\_flow` in the opposite direction then takes the value `0`, the following constraint is enforced:
 
 ```math
 \begin{aligned}
@@ -854,7 +854,7 @@ As stated above, the flow through a connection can only be in one direction at a
 ```
 ##### [Gas connection flow capacity](@id constraint_connection_flow_gas_capacity)
 
-To enforce that the averge flow of a connection is only in one direction, the flow in the opposite direction is forced to be `0` by the following euqation. For the connection flow in the direction of flow the parameter [big\_m](@ref) should be chosen large enough to not become binding.
+To enforce that the averge flow of a connection is only in one direction, the flow in the opposite direction is forced to be `0` by the following euqation. For the connection flow in the direction of flow the parameter [big\_m](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#big_m-1) should be chosen large enough to not become binding.
 
 ```math
 \begin{aligned}
@@ -867,7 +867,7 @@ To enforce that the averge flow of a connection is only in one direction, the fl
 ```
 ##### [Linepack storage flexibility](@id constraint_storage_line_pack)
 In order to account for linepack flexibility, i.e. storage capability of a connection, the linepack storage is linked
-to the average pressure of the adjacent nodes by the following equation, triggered by the parameter [connection\_linepack\_constant](@ref):
+to the average pressure of the adjacent nodes by the following equation, triggered by the parameter [connection\_linepack\_constant](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_linepack_constant-1):
 
 ```math
 \begin{aligned}
@@ -879,17 +879,17 @@ to the average pressure of the adjacent nodes by the following equation, trigger
 \end{aligned}
 ```
 
-Note that the parameter [connection\_linepack\_constant](@ref) should be defined on a [connection\_\_node\_\_node](@ref) relationship, where
+Note that the parameter [connection\_linepack\_constant](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_linepack_constant-1) should be defined on a [connection\_\_node\_\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__node__node-1) relationship, where
 the first node corresponds to the linepack storage node, whereas the second node corresponds to the node group of both start and end nodes of the pipeline.
 
 #### [Nodebased lossless DC power flow](@id nodal-lossless-DC)
 
-For the implementation of the nodebased loss DC powerflow model, a new variable [node\_voltage\_angle](@ref) is introduced. See also [has\_voltage\_angle](@ref).
-For further explanation on setting up a database for nodal lossless DC power flow, see the advanced concept chapter on [Lossless nodal DC power flows](@ref).
+For the implementation of the nodebased loss DC powerflow model, a new variable [node\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#node_voltage_angle-1) is introduced. See also [has\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#has_voltage_angle-1).
+For further explanation on setting up a database for nodal lossless DC power flow, see the advanced concept chapter on [Lossless nodal DC power flows](https://spine-project.github.io/SpineOpt.jl/latest/advanced_concepts/Lossless_DC_power_flow/#).
 
 ##### [Maximum node voltage angle](@id constraint_max_node_voltage_angle)
 
-In order to impose an upper limit on the maximum voltage angle at a node the [maximum node voltage angle constraint](@ref constraint_max_node_voltage_angle) can be included, by defining the parameter [max\_voltage\_angle](@ref) which triggers the following constraint:
+In order to impose an upper limit on the maximum voltage angle at a node the [maximum node voltage angle constraint](@ref constraint_max_node_voltage_angle) can be included, by defining the parameter [max\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_voltage_angle-1) which triggers the following constraint:
 
 ```math
 \begin{aligned}
@@ -901,11 +901,11 @@ In order to impose an upper limit on the maximum voltage angle at a node the [ma
 & \forall s \in stochastic\_path
 \end{aligned}
 ```
-As indicated in the equation, the parameter [max\_voltage\_angle](@ref) can also be defined on a node group, in order to impose an upper limit on the aggregated [node\_voltage\_angle](@ref) within one node group.
+As indicated in the equation, the parameter [max\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#max_voltage_angle-1) can also be defined on a node group, in order to impose an upper limit on the aggregated [node\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#node_voltage_angle-1) within one node group.
 
 ##### [Minimum node voltage angle](@id constraint_min_node_voltage_angle)
 
-In order to impose a lower limit on the voltage angle at a node the [maximum node voltage angle constraint](@ref constraint_min_node_voltage_angle) can be included, by defining the parameter [min\_voltage\_angle](@ref) which triggers the following constraint:
+In order to impose a lower limit on the voltage angle at a node the [maximum node voltage angle constraint](@ref constraint_min_node_voltage_angle) can be included, by defining the parameter [min\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_voltage_angle-1) which triggers the following constraint:
 
 ```math
 \begin{aligned}
@@ -917,12 +917,12 @@ In order to impose a lower limit on the voltage angle at a node the [maximum nod
 & \forall s \in stochastic\_path
 \end{aligned}
 ```
-As indicated in the equation, the parameter [min\_voltage\_angle](@ref) can also be defined on a node group, in order to impose a lower limit on the aggregated [node\_voltage\_angle](@ref) within one node group.
+As indicated in the equation, the parameter [min\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#min_voltage_angle-1) can also be defined on a node group, in order to impose a lower limit on the aggregated [node\_voltage\_angle](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#node_voltage_angle-1) within one node group.
 
 ##### [Voltage angle to connection flows](@id constraint_node_voltage_angle)
 
 To link the flow over a connection to the voltage angles of the adjacent nodes, the following constraint is imposed. Note that this constraint is only generated if
-the parameter [connection\_reactance](@ref) is defined for a [connection\_\_node\_\_node](@ref) relationship and if a [fix\_ratio\_out\_in\_connection\_flow](@ref) is defined for the corresponding connection, node, node tuples.
+the parameter [connection\_reactance](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_reactance-1) is defined for a [connection\_\_node\_\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__node__node-1) relationship and if a [fix\_ratio\_out\_in\_connection\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fix_ratio_out_in_connection_flow-1) is defined for the corresponding (connection, node, node) tuples.
 
 ```math
 \begin{aligned}
@@ -943,19 +943,19 @@ the parameter [connection\_reactance](@ref) is defined for a [connection\_\_node
 ### [PTDF based DC lossless powerflow](@id PTDF-lossless-DC)
 
 #### [Connection intact flow PTDF](@id constraint_connection_intact_flow_ptdf)
-The power transfer distribution factors are a property of the network reactances. `ptdf(n, c)` represents the fraction of an injection at [node](@ref) n that will flow on [connection](@ref) c. The flow on [connection](@ref) c is then the sum over all nodes of `ptdf(n, c)*net_injection(c)`. [connection\_intact\_flow](@ref) represents the flow on each line of the network will all candidate connections with PTDF-based flow present in the network.
+The power transfer distribution factors are a property of the network reactances. `ptdf(n, c)` represents the fraction of an injection at [node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#node-1) n that will flow on [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) c. The flow on [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) c is then the sum over all nodes of `ptdf(n, c)*net_injection(c)`. [connection\_intact\_flow](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#connection_intact_flow-1) represents the flow on each line of the network will all candidate connections with PTDF-based flow present in the network.
 
 ```math
 \begin{aligned}
-              & + v_{connection\_intact\_flow}(c, n_{to}, d_{to}, s, t) \\
-              & - v_{connection\_intact\_flow}(c, n_{to}, d_{from}, s, t) \\
-              & == \sum_{n_{inj}} \Big( v_{node\_injection}(n_{inj}, s, t) \cdot p_{ptdf}(c, n_{inj}) \Big) \\              
-              & \forall (c,n_{to},s,t) \in connection\_ptdf\_flow\_indices \\
+              & + v_{connection\_intact\_flow}(conn, n_{to}, d_{to}, s, t) \\
+              & - v_{connection\_intact\_flow}(conn, n_{to}, d_{from}, s, t) \\
+              & == \sum_{n_{inj}} \Big( v_{node\_injection}(n_{inj}, s, t) \cdot p_{ptdf}(conn, n_{inj}) \Big) \\              
+              & \forall (conn,n_{to},s,t) \in connection\_ptdf\_flow\_indices \\
 \end{aligned}
 ```
 
 #### [N-1 post contingency connection flow limits](@id constraint_connection_flow_lodf)
- The N-1 security constraint for the post-contingency flow on monitored connection, `c_mon`, upon the outage of contingency connection, `c_conn`, is formed using line outage distribution factors (lodf). `lodf(c_con, c_mon)` represents the fraction of the pre-contingency flow on connection `c_conn` that will flow on `c_mon` if `c_conn` is disconnected. If [connection](@ref) `c_conn` is disconnected, the post-contingency flow on monitored connection [connection](@ref) `c_mon` is the pre-contingency `connection_flow` on `c_mon` plus the line outage distribution factor (`lodf`) times the pre-contingency `connection_flow` on `c_conn`. This post-contingency flow should be less than the [connection\_emergency\_capacity](@ref) of `c_mon`.
+ The N-1 security constraint for the post-contingency flow on monitored connection, `c_mon`, upon the outage of contingency connection, `c_conn`, is formed using line outage distribution factors (lodf). `lodf(c_con, c_mon)` represents the fraction of the pre-contingency flow on connection `c_conn` that will flow on `c_mon` if `c_conn` is disconnected. If [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) `c_conn` is disconnected, the post-contingency flow on monitored connection [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) `c_mon` is the pre-contingency `connection_flow` on `c_mon` plus the line outage distribution factor (`lodf`) times the pre-contingency `connection_flow` on `c_conn`. This post-contingency flow should be less than the [connection\_emergency\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_emergency_capacity-1) of `c_mon`.
 ```math
 \begin{aligned}
               & + v_{connection\_flow}(c_{mon}, n_{mon\_to}, d_{to}, s, t) \\
@@ -968,7 +968,7 @@ The power transfer distribution factors are a property of the network reactances
 \end{aligned}
 ```
 
-## Investments
+## [Investments](@id Investments)
 ### Investments in units
 #### [Economic lifetime of a unit](@id constraint_unit_lifetime)
 Enforces the minimum duration of a `unit`'s investment decision. Once a `unit` has been invested-in, it must remain invested-in for `unit_investment_lifetime`.
@@ -1015,10 +1015,10 @@ The number of available invested-in connections at any point in time is less tha
 
 ```math
 \begin{aligned}
-& v_{connections\_invested\_available}(c,s,t) \\
-& < p_{candidate\_connections}(c,s,t) \\
+& v_{connections\_invested\_available}(conn,s,t) \\
+& < p_{candidate\_connections}(conn,s,t) \\
 & \forall c \in candidate\_connections\_indices, \\
-& \forall (c,s,t) \in connections\_invested\_available\_indices\\
+& \forall (conn,s,t) \in connections\_invested\_available\_indices\\
 \end{aligned}
 ```
 
@@ -1028,38 +1028,38 @@ The number of available invested-in connections at any point in time is less tha
 
 ```math
 \begin{aligned}
-& v_{connections\_invested\_available}(c,s,t_{after}) \\
-& - v_{connections\_invested}(c,s,t_{after}) \\
-& + v_{connections\_decommissioned}(c,s,t_{after}) \\
-& == v_{connections\_invested\_available}(c,s,t_{before}) \\
-& \forall (c,s,t_{after}) \in connections\_invested\_available\_indices, \\
+& v_{connections\_invested\_available}(conn,s,t_{after}) \\
+& - v_{connections\_invested}(conn,s,t_{after}) \\
+& + v_{connections\_decommissioned}(conn,s,t_{after}) \\
+& == v_{connections\_invested\_available}(conn,s,t_{before}) \\
+& \forall (conn,s,t_{after}) \in connections\_invested\_available\_indices, \\
 & \forall t_{before} \in t\_before\_t(t\_after=t_{after}) : t_{before} \in connections\_invested\_available\_indices\\
 \end{aligned}
 ```
 #### [Intact network ptdf-based flows on connections](@id constraint_connection_flow_intact_flow)
 
-Enforces the relationship between [connection\_intact\_flow](@ref) (flow with all investments assumed in force) and [connection\_flow](@ref)
-[connection\_intact\_flow](@ref) is the flow on all lines with all investments assumed in place. This constraint ensures that the
-[connection\_flow](@ref) is [connection\_intact\_flow](@ref) plus additional flow contributions from investment connections that are not invested in.
+Enforces the relationship between [connection\_intact\_flow](@ref Variables) (flow with all investments assumed in force) and [connection\_flow](@ref Variables)
+[connection\_intact\_flow](@ref Variables) is the flow on all lines with all investments assumed in place. This constraint ensures that the
+[connection\_flow](@ref Variables) is [connection\_intact\_flow](@ref Variables) plus additional flow contributions from investment connections that are not invested in.
 
 ```math
 \begin{aligned}
-              & + v_{connection\_flow}(c, n_{to}, d_{from}, s, t) \\
-              & - v_{connection\_flow}(c, n_{to}, d_{to}, s, t) \\
-              & - v_{connection\_intact\_flow}(c, n_{to}, d_{from}, s, t) \\
-              & + v_{connection\_intact\_flow}(c, n_{to}, d_{to}, s, t) \\
+              & + v_{connection\_flow}(conn, n_{to}, d_{from}, s, t) \\
+              & - v_{connection\_flow}(conn, n_{to}, d_{to}, s, t) \\
+              & - v_{connection\_intact\_flow}(conn, n_{to}, d_{from}, s, t) \\
+              & + v_{connection\_intact\_flow}(conn, n_{to}, d_{to}, s, t) \\
               & ==\\
               & \sum_{c_{candidate}, n_{to_candidate}} p_{lodf}(c_{candidate}, c) \cdot \Big( \\
               & \qquad + v_{connection\_flow}(c_{candidate}, n_{to_candidate}, d_{from}, s, t) \\
               & \qquad - v_{connection\_flow}(c_{candidate}, n_{to_candidate}, d_{to}, s, t) \\
               & \qquad - v_{connection\_intact\_flow}(c_{candidate}, n_{to_candidate}, d_{from}, s, t) \\
               & \qquad + v_{connection\_intact\_flow}(c_{candidate}, n_{to_candidate}, d_{to}, s, t)  \Big) \\              
-              & \forall (c,n_{to},s,t) \in connection\_flow\_intact\_flow\_indices \\
+              & \forall (conn,n_{to},s,t) \in connection\_flow\_intact\_flow\_indices \\
 \end{aligned}
 ```
 
 #### [Intact connection flows capacity](@id constraint_connection_intact_flow_capacity)
-Similarly to [constraint\_connection\_flow_capacity](@ref), limits [connection\_intact\_flow](@ref) according to [connection\_capacity](@ref)
+Similarly to [constraint\_connection\_flow_capacity](@ref constraint_connection_flow_capacity), limits [connection\_intact\_flow](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#connection_intact_flow-1) according to [connection\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_capacity-1)
 
 ```math
 \begin{aligned}
@@ -1080,37 +1080,37 @@ For ptdf-based lossless DC power flow, ensures that the output flow to the `to_n
 
 ```math
 \begin{aligned}              
-              & + v_{connection\_intact\_flow}(c, n_{out}, d_{to}, s, t) \\
+              & + v_{connection\_intact\_flow}(conn, n_{out}, d_{to}, s, t) \\
               & ==\\
-              & + v_{connection\_intact\_flow}(c, n_{in}, d_{from}, s, t) \\              
-              & \forall (c,n_{in},n_{out},s,t) \in connection\_intact\_flow\_indices \\
+              & + v_{connection\_intact\_flow}(conn, n_{in}, d_{from}, s, t) \\              
+              & \forall (conn,n_{in},n_{out},s,t) \in connection\_intact\_flow\_indices \\
 \end{aligned}
 ```
 
 #### [Lower bound on candidate connection flow](@id constraint_candidate_connection_flow_lb)
 
-For candidate connections with PTDF-based poweflow, together with [constraint\_candidate\_connection\_flow\_ub](@ref), this constraint ensures that [connection\_flow](@ref) is zero if the candidate connection is not invested-in and equals [connection\_intact\_flow](@ref) otherwise.
+For candidate connections with PTDF-based poweflow, together with [constraint\_candidate\_connection\_flow\_ub](@ref constraint_candidate_connection_flow_ub), this constraint ensures that [connection\_flow](@ref Variables) is zero if the candidate connection is not invested-in and equals [connection\_intact\_flow](@ref Variables) otherwise.
 
 ```math
 \begin{aligned}              
-              & + v_{connection\_flow}(c, n, d, s, t) \\
+              & + v_{connection\_flow}(conn, n, d, s, t) \\
               & >=\\
-              & + v_{connection\_intact\_flow}(c, n, d, s, t) \\              
-              & - p_{connection\_capacity}(c, n, d, s, t) \cdot (p_{candidate\_connections}(c, s, t) - v_{connections\_invested\_available}(c, s, t))         \\
-              & \forall (c,n,d,s,t) \in constraint\_candidate\_connection\_flow\_lb\_indices \\
+              & + v_{connection\_intact\_flow}(conn, n, d, s, t) \\              
+              & - p_{connection\_capacity}(conn, n, d, s, t) \cdot (p_{candidate\_connections}(conn, s, t) - v_{connections\_invested\_available}(conn, s, t))         \\
+              & \forall (conn,n,d,s,t) \in constraint\_candidate\_connection\_flow\_lb\_indices \\
 \end{aligned}
 ```
 
 #### [Upper bound on candidate connection flow](@id constraint_candidate_connection_flow_ub)
-For candidate connections with PTDF-based poweflow, together with [constraint\_candidate\_connection\_flow\_lb](@ref), this constraint ensures that [connection\_flow](@ref) is zero if the candidate connection is not invested-in and equals [connection\_intact\_flow](@ref) otherwise.
+For candidate connections with PTDF-based poweflow, together with [constraint\_candidate\_connection\_flow\_lb](@ref constraint_candidate_connection_flow_lb), this constraint ensures that [connection\_flow](@ref Variables) is zero if the candidate connection is not invested-in and equals [connection\_intact\_flow](@ref Variables) otherwise.
 
 ```math
 \begin{aligned}              
-              & + v_{connection\_flow}(c, n, d, s, t) \\
+              & + v_{connection\_flow}(conn, n, d, s, t) \\
               & <=\\
-              & + v_{connection\_intact\_flow}(c, n, d, s, t) \\              
+              & + v_{connection\_intact\_flow}(conn, n, d, s, t) \\              
               \\
-              & \forall (c,n,d,s,t) \in constraint\_candidate\_connection\_flow\_ub\_indices \\
+              & \forall (conn,n,d,s,t) \in constraint\_candidate\_connection\_flow\_ub\_indices \\
 \end{aligned}
 ```
 
@@ -1119,10 +1119,10 @@ Enforces the minimum duration of a `connection`'s investment decision. Once a `c
 
 ```math
 \begin{aligned}
-& v_{connections\_invested\_available}(c,s,t) \\
-& >= \sum_{\substack{(c,s,t') \in connections\_invested\_available\_indices: \\ t' >=t-p_{connection\_investment\_lifetime}(c,s,t), \\ t' <= t}}
-v_{connections\_invested}(c,s,t') \\
-& \forall (c,s,t) \in connection\_investment\_lifetime\_indices\\
+& v_{connections\_invested\_available}(conn,s,t) \\
+& >= \sum_{\substack{(conn,s,t') \in connections\_invested\_available\_indices: \\ t' >=t-p_{connection\_investment\_lifetime}(conn,s,t), \\ t' <= t}}
+v_{connections\_invested}(conn,s,t') \\
+& \forall (conn,s,t) \in connection\_investment\_lifetime\_indices\\
 \end{aligned}
 ```
 #### Technical lifetime of a connection
@@ -1155,7 +1155,7 @@ The number of available invested-in storages at node n at any point in time is l
 \end{aligned}
 ```
 #### [Economic lifetime of a storage](@id constraint_storage_lifetime)
-Enforces the minimum duration of a `storage` investment decision at [node](@ref) n. Once a `storage` has been invested-in, it must remain invested-in for `storage_investment_lifetime`.
+Enforces the minimum duration of a `storage` investment decision at [node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#node-1) n. Once a `storage` has been invested-in, it must remain invested-in for `storage_investment_lifetime`.
 
 ```math
 \begin{aligned}
@@ -1189,7 +1189,7 @@ subject\ to:&
 \end{aligned}
 ```
 
-So this is a single problem that can't be decoupled over `t` because the investment variables `units_invested_available` couple the timesteps together. If `units_invested_available` were a constant in the problem, then all `t`'s could be solved individually. This is the basic idea in Benders decomposition. We decompose the problem into a master problem and sub problems with the master problem optimising the coupling investment variables which are treated as constants in the sub problems.
+So this is a single problem that can't be decoupled over `t` because the investment variables `units_invested_available` couple the timeslices together. If `units_invested_available` were a constant in the problem, then all `t`'s could be solved individually. This is the basic idea in Benders decomposition. We decompose the problem into a master problem and sub problems with the master problem optimising the coupling investment variables which are treated as constants in the sub problems.
 
 The master problem in the initial benders iteration is simply to minimise total investment costs:
 
@@ -1269,35 +1269,35 @@ The benders cuts for the problem including all investments in candidate connecti
 &v_{objective\_lower\_bound}(b)\\
 &>=\\
 & + \sum_{u,s,t} p_{units\_invested\_available\_mv}(u,t,b) \cdot \lbrack v_{units\_invested\_available}(u,s,t)-p_{units\_invested\_available\_bi}(u,t,b) \rbrack \\
-& + \sum_{c,s,t} p_{connections\_invested\_available\_mv}(c,t,b) \cdot \lbrack v_{connections\_invested\_available}(c,s,t)-p_{connections\_invested\_available\_bi}(c,t,b) \rbrack \\
+& + \sum_{conn,s,t} p_{connections\_invested\_available\_mv}(conn,t,b) \cdot \lbrack v_{connections\_invested\_available}(conn,s,t)-p_{connections\_invested\_available\_bi}(conn,t,b) \rbrack \\
 & + \sum_{n,s,t} p_{storages\_invested\_available\_mv}(n,t,b) \cdot \lbrack v_{storages\_invested\_available}(n,s,t)-p_{storages\_invested\_available\_bi}(n,t,b) \rbrack \\
 \end{aligned}
 ```
 
 where
 
-$`p_{units\_invested\_available\_mv}`$ is the reduced cost of the [units\_invested\_available](@ref) fixed sub-problem variable, representing the reduction in operating costs possible from an investment in a [unit](@ref) of this type,  
-$`p_{connections\_invested\_available\_mv}`$ is the reduced cost of the [connections\_invested\_available](@ref) fixed sub-problem variable, representing the reduction in operating costs possible from an investment in a [connection](@ref) of this type,  
-$`p_{storages\_invested\_available\_mv}`$ is the reduced cost of the [storages\_invested\_available](@ref) fixed sub-problem variable, representing the reduction in operating costs possible from an investment in a `storage` of this type,  
-$`p_{units\_invested\_available\_bi}(u,t,b)`$ is the value of the fixed sub problem variable [units\_invested\_available](@ref)(u,t) in benders iteration `b`,  
-$`p_{connections\_invested\_available\_bi}(c,t,b)`$ is the value of the fixed sub problem variable [connections\_invested\_available](@ref)(c,t) in benders iteration `b` and  
-$`p_{storages\_invested\_available\_bi}(n,t,b)`$ is the value of the fixed sub problem variable [storages\_invested\_available](@ref)(n,t) in benders iteration `b`
+$`p_{units\_invested\_available\_mv}`$ is the reduced cost of the [units\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#units_invested_available-1) fixed sub-problem variable, representing the reduction in operating costs possible from an investment in a [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit-1) of this type,  
+$`p_{connections\_invested\_available\_mv}`$ is the reduced cost of the [connections\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#connections_invested_available-1) fixed sub-problem variable, representing the reduction in operating costs possible from an investment in a [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) of this type,  
+$`p_{storages\_invested\_available\_mv}`$ is the reduced cost of the [storages\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#storages_invested_available-1) fixed sub-problem variable, representing the reduction in operating costs possible from an investment in a `storage` of this type,  
+$`p_{units\_invested\_available\_bi}(u,t,b)`$ is the value of the fixed sub problem variable [units\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#units_invested_available-1)(u,t) in benders iteration `b`,  
+$`p_{connections\_invested\_available\_bi}(conn,t,b)`$ is the value of the fixed sub problem variable [connections\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#connections_invested_available-1)(conn,t) in benders iteration `b` and  
+$`p_{storages\_invested\_available\_bi}(n,t,b)`$ is the value of the fixed sub problem variable [storages\_invested\_available](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#storages_invested_available-1)(n,t) in benders iteration `b`
 
 
 ## User constraints
 ### [Unit constraint](@id constraint_unit_constraint)
-The [unit\_constraint](@ref) is a generic data-driven [custom constraint](@ref constraint_unit_constraint),
-which allows for defining constraints involving multiple [unit](@ref)s, [node](@ref)s, or [connection](@ref)s.
-The [constraint\_sense](@ref) parameter changes the sense of the [unit\_constraint](@ref),
-while the [right\_hand\_side](@ref) parameter allows for defining the constant terms of the constraint.
+The [unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit_constraint-1) is a generic data-driven [custom constraint](@ref constraint_unit_constraint),
+which allows for defining constraints involving multiple [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit-1)s, [node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#node-1), or [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1)s.
+The [constraint\_sense](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#constraint_sense-1) parameter changes the sense of the [unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit_constraint-1),
+while the [right\_hand\_side](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#right_hand_side-1) parameter allows for defining the constant terms of the constraint.
 
-Coefficients for the different [variables](@ref Variables) appearing in the [unit\_constraint](@ref) are defined
-using relationships, like e.g. [unit\_\_from\_node\_\_unit\_constraint](@ref) and
-[connection\_\_to\_node\_\_unit\_constraint](@ref) for [unit\_flow](@ref) and [connection\_flow](@ref) variables,
-or [unit\_\_unit\_constraint](@ref) and [node\_\_unit\_constraint](@ref) for [units\_on](@ref), [units\_started\_up](@ref),
-and [node_state](@ref) variables.
+Coefficients for the different [variables](@ref Variables) appearing in the [unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit_constraint-1) are defined
+using relationships, like e.g. [unit\_\_from\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__from_node__unit_constraint-1) and
+[connection\_\_to\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__to_node__unit_constraint-1) for [unit\_flow](@ref Variables) and [connection\_flow](@ref Variables) variables,
+or [unit\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__unit_constraint-1) and [node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#node__unit_constraint-1) for [units\_on](@ref Variables), [units\_started\_up](@ref Variables),
+and [node\_state](@ref Variables) variables.
 
-For more information, see the dedicated article on [Unit Constraints](@ref)
+For more information, see the dedicated article on [Unit Constraints](https://spine-project.github.io/SpineOpt.jl/latest/advanced_concepts/unit_constraints/#Unit-Constraints-1)
 
 ```math
 \begin{aligned}
@@ -1310,7 +1310,7 @@ For more information, see the dedicated article on [Unit Constraints](@ref)
   \end{cases}\\
 &+\sum_{\substack{u \in unit\_\_unit\_constraint(uc),t,s}} v_{units\_started\_up}(u,s,t) \cdot p_{units\_started\_up\_coefficient}(u,uc,s,t)\\
 &+\sum_{\substack{u \in unit\_\_unit\_constraint(uc),t,s}} v_{units\_on}(u,s,t) \cdot p_{units\_on\_coefficient}(u,uc,s,t)\\
-&+\sum_{\substack{c,n \in connection\_\_node\_\_unit\_constraint(uc),t,s}} v_{connection\_flow}(c,n,d,s,t) \cdot p_{connection\_flow\_coefficient}(c,n,uc,s,t)\\
+&+\sum_{\substack{conn,n \in connection\_\_node\_\_unit\_constraint(uc),t,s}} v_{connection\_flow}(conn,n,d,s,t) \cdot p_{connection\_flow\_coefficient}(conn,n,uc,s,t)\\
 &+\sum_{\substack{n \in node\_\_unit\_constraint(uc),t,s}} v_{node\_state}(n,s,t) \cdot p_{node\_state\_coefficient}(n,uc,s,t)\\
 &+\sum_{\substack{n \in node\_\_unit\_constraint(uc),t,s}} p_{demand}(n,s,t) \cdot p_{demand\_coefficient}(n,uc,s,t)\\
 & \begin{cases}  
