@@ -19,9 +19,9 @@ for the different parts of a *SpineOpt.jl* model to get you started quickly.
 - The [model](@ref) object in SpineOpt is an abstraction that represents the model itself. Every SpineOpt database needs to have at least one `model` object.
 - The model object holds general information about the optimization. The whole range of functionalities is explained in **Advanced Concepts** chapter - in here a minimal set of parameters is used.
 
-![image](https://user-images.githubusercontent.com/40472544/114978841-880e8980-9e92-11eb-9272-5dc46708006f.png)
+![image](../figs/114978841-880e8980-9e92-11eb-9272-5dc46708006f.png)
 
-![image](https://user-images.githubusercontent.com/40472544/114978964-ba1feb80-9e92-11eb-9f73-14a6c11ad3bd.png)
+![image](../figs/114978964-ba1feb80-9e92-11eb-9f73-14a6c11ad3bd.png)
 
 ## Add parameter values to the model instance
 - Select the model object `instance` from the object tree.
@@ -35,7 +35,7 @@ for the different parts of a *SpineOpt.jl* model to get you started quickly.
     - Set the value to e.g. `2019-01-01T00:00:00`. 
     - Proceed accordingly for the [model\_end](@ref).  
 
-![image](https://user-images.githubusercontent.com/40472544/115030082-5cf65b00-9ecf-11eb-84c3-9dc1c03d4627.png) 
+![image](../figs/115030082-5cf65b00-9ecf-11eb-84c3-9dc1c03d4627.png) 
 
 Further reading on adding parameter values can be found [here](https://spine-toolbox.readthedocs.io/en/latest/spine_db_editor/adding_data.html).
 
@@ -46,7 +46,7 @@ Further reading on adding parameter values can be found [here](https://spine-too
 - The date time and time series parameter data can be added by using right-click to access the *Edit...* dialog. When creating the time series, use the fixed resolution with `Start time` of the model run and with `1h` resolution. Then only values need to be entered (or copy pasted) and time stamps come automatically.
 - Parameter `balance_type` needs to have value `balance_type_none` in the gas node, since it allows the node to create energy (natural gas) against a price and therefore the energy balance is not maintained.
 
-![image](https://user-images.githubusercontent.com/40472544/115030258-8f07bd00-9ecf-11eb-80aa-a717ba5df2f0.png)
+![image](../figs/115030258-8f07bd00-9ecf-11eb-80aa-a717ba5df2f0.png)
 
 ## Define temporal and stochastic structures
 - To specify the temporal structure for SpineOpt, you need to define [temporal\_block](@ref) objects. Think of a `temporal_block` as a distinctive way of 'slicing' time across the model horizon.
@@ -70,13 +70,13 @@ Further reading on adding parameter values can be found [here](https://spine-too
 - The capacity of the gas_turbine has to be sufficient to meet the highest demand for electricity, otherwise the model will be infeasible (it is possible to set penalty values, but they are not included in this example).
 - The parameter `fix_ratio_in_out_unit_flow` forces the ratio between an input and output flow to be a constant. This is one way to establish an efficiency for a conversion process.
 
-![image](https://user-images.githubusercontent.com/40472544/116714620-9dc99600-a9de-11eb-869f-60bf84482888.png)
+![image](../figs/116714620-9dc99600-a9de-11eb-869f-60bf84482888.png)
 
 ## Run the model
 - Select *SpineOpt* 
 - Press *Execute selection*.
 
-![image](https://user-images.githubusercontent.com/40472544/115010605-48599900-9eb6-11eb-930d-b2a258b61bf7.png)
+![image](../figs/115010605-48599900-9eb6-11eb-930d-b2a258b61bf7.png)
 
 ## If it fails
 - Double-check that the data is correct
@@ -86,7 +86,7 @@ Further reading on adding parameter values can be found [here](https://spine-too
 ## Explore the results 
 - Double-clicking the *Results* database.
 
-![image](https://user-images.githubusercontent.com/40472544/115010687-5d362c80-9eb6-11eb-8542-93a765c186cf.png) 
+![image](../figs/115010687-5d362c80-9eb6-11eb-8542-93a765c186cf.png) 
 
 ## Create and run scenarios and build the model further
 - Create a new alternative
@@ -94,6 +94,6 @@ Further reading on adding parameter values can be found [here](https://spine-too
 - Connect alternatives under a scenario. Toolbox modifies `Base` data with the data from the alternatives in the same scenario.
 - Execute multiple scenarios in parallel. First run in a new Julia instance will need to compile SpineOpt taking some time.
 
-![image](https://user-images.githubusercontent.com/40472544/116698265-d3658380-a9cc-11eb-9408-c46a9e06de74.png)
+![image](../figs/116698265-d3658380-a9cc-11eb-9408-c46a9e06de74.png)
 
-![image](https://user-images.githubusercontent.com/40472544/115011214-0da43080-9eb7-11eb-93e5-e2991e81b429.png)
+![image](../figs/115011214-0da43080-9eb7-11eb-93e5-e2991e81b429.png)

@@ -29,9 +29,7 @@ Here, we briefly describe the key concepts required to understand the stochastic
 
 4. **[stochastic\_structure](@ref)** is essentially a "realization" of the *stochastic DAG*, with additional information like the [stochastic\_scenario\_end](@ref) and [weight\_relative\_to\_parents](@ref) [Parameters](@ref). These become relevant when we start discussing interactions between different `stochastic structures`.
 
-```@raw html
-<img src="../../figs/dag_fullpath_path.svg" width="40%"/>
-```
+![image](../figs/dag_fullpath_path.eps)
 
 The above figure presents an example *stochastic DAG* with the individual `stochastic scenarios` labelled from `s0-s8`.
 An example *full stochastic path* `[s0, s1, s5, s8]` is highlighted in red,
@@ -45,10 +43,8 @@ With *stochastic trees*, constraints can always be unambiguously indexed using `
 since all `stochastic scenarios` only have a single parent.
 However, this is no longer the case for *stochastic DAGs*, as illustrated in the figures below:
 
-```@raw html
-<img src="../../figs/branching.svg" width="40%"/>
-<img src="../../figs/converging.svg" width="40%"/>
-```
+![image](../figs/branching.eps)
+![image](../figs/converging.eps)
 
 The example on the left illustrates the "traditional" indexing in branching *stochastic trees*,
 where backtracking through the tree always leads to unambiguous `(stochastic_scenario, time_step)` indices.
@@ -71,9 +67,7 @@ we can identify the number of unique paths necessary for constraint generation a
 
 #### Example dynamic constraint generation
 
-```@raw html
-<img src="../../figs/constraint_paths.svg" width="40%"/>
-```
+![image](../figs/constraint_paths.eps)
 
 The above figure shows examples of two different dynamic constraints generated in a *stochastic DAG*:
 the red constraint including variables from timesteps `t4-t5`
@@ -120,9 +114,7 @@ it makes no difference whether we're looking at the same [stochastic\_structure]
 or at two `stochastic structures`, one of which has been delayed, on the same `time step`.
 This is illustrated by the figure below:
 
-```@raw html
-<img src="../../figs/delayed_stochastic_paths.svg" width="50%"/>
-```
+![image](../figs/delayed_stochastic_paths.eps)
 
 The above represents constraint generation over two `stochastic structures`,
 where the lower [stochastic\_structure](@ref) has been delayed in respect to the one above.

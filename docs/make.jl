@@ -22,7 +22,7 @@ SpineOpt.write_concept_reference_files(concept_dictionary, path)
 makedocs(
     format=Documenter.LaTeX(),
     sitename="SpineOpt.jl",
-    #format=Documenter.HTML(prettyurls=get(ENV, "CI", nothing) == "true"),
+    format=Documenter.LaTeX(;platform="native"), # Uncomment for .pdf docs, change `platform="none"` for .tex only.
     pages=[
         "Introduction" => "index.md",
         "Getting Started" => Any[

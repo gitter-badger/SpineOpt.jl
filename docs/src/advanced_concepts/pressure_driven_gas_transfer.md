@@ -23,4 +23,4 @@ Here, we briefly describe the key objects and relationships required to model pr
 
 A gas pipeline and its connected nodes are illustrated below. A complete mathematical formulation can be found [here](@ref pressure-driven-gas-transfer-math).
 
-![Illustration of gas pipeline](../figs/linepack_illustration.svg)
+![Illustration of gas pipeline](../figs/linepack_illustration.eps)
