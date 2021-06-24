@@ -7,7 +7,7 @@
 
  > **Indices function (Set):** binary\_gas\_connection\_flow\_indices 
 
-Binary variable with the indices node ``n`` over the connection ``conn`` in the direction ``to\_node`` for the stochastic scenario ``s`` at timestep ``t`` describing if the direction of gas flow for a pressure drive gas transfer is in the indicated direction.  
+Binary variable with the indices node ``n`` over the connection ``conn`` in the direction ``to\_node`` for the stochastic scenario ``s`` at timeslice ``t`` describing if the direction of gas flow for a pressure drive gas transfer is in the indicated direction.  
 
 ## `connection_flow ` 
 
@@ -17,7 +17,7 @@ Binary variable with the indices node ``n`` over the connection ``conn`` in the 
 
  > **Indices function (Set):** connection\_flow\_indices 
 
-Commodity flow associated with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Commodity flow associated with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `connection_intact_flow` 
 
@@ -37,7 +37,7 @@ Commodity flow associated with node ``n`` over the connection ``conn`` in the di
 
  > **Indices function (Set):** connections\_invested\_available\_indices 
 
-Number of decomissioned connections ``conn`` for the stochastic scenario ``s`` at timestep ``t`` 
+Number of decomissioned connections ``conn`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `connections_invested` 
 
@@ -47,7 +47,7 @@ Number of decomissioned connections ``conn`` for the stochastic scenario ``s`` a
 
  > **Indices function (Set):** connections\_invested\_available\_indices 
 
-Number of connections ``conn`` invested at timestep ``t`` in for the stochastic scenario ``s`` 
+Number of connections ``conn`` invested at timeslice ``t`` in for the stochastic scenario ``s`` 
 
 ## `connections_invested_available` 
 
@@ -57,7 +57,7 @@ Number of connections ``conn`` invested at timestep ``t`` in for the stochastic 
 
  > **Indices function (Set):** connections\_invested\_available\_indices 
 
-Number of invested connections ``conn``  that are available still the stochastic scenario ``s`` at timestep ``t`` 
+Number of invested connections ``conn``  that are available still the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `mp_objective_lowerbound_indices` 
 
@@ -77,7 +77,7 @@ Updating lowerbound for master problem of Benders decomposition
 
  > **Indices function (Set):** node\_injection\_indices 
 
-Commodity injections at node ``n`` for the stochastic scenario ``s`` at timestep ``t`` 
+Commodity injections at node ``n`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `node_pressure` 
 
@@ -87,7 +87,7 @@ Commodity injections at node ``n`` for the stochastic scenario ``s`` at timestep
 
  > **Indices function (Set):** node\_pressure\_indices 
 
-Pressue at a node ``n`` for a specific stochastic scenario ``s``  and timestep ``t``. See also: [has\_pressure](@ref) 
+Pressue at a node ``n`` for a specific stochastic scenario ``s``  and timeslice ``t``. See also: [has\_pressure](@ref) 
 
 ## `node_slack_neg` 
 
@@ -97,7 +97,7 @@ Pressue at a node ``n`` for a specific stochastic scenario ``s``  and timestep `
 
  > **Indices function (Set):** node\_slack\_indices 
 
-Positive slack variable at node ``n`` for the stochastic scenario ``s`` at timestep ``t`` 
+Positive slack variable at node ``n`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `node_slack_pos` 
 
@@ -107,7 +107,7 @@ Positive slack variable at node ``n`` for the stochastic scenario ``s`` at times
 
  > **Indices function (Set):** node\_slack\_indices 
 
-Negative slack variable at node ``n`` for the stochastic scenario ``s`` at timestep ``t`` 
+Negative slack variable at node ``n`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `node_state` 
 
@@ -117,7 +117,7 @@ Negative slack variable at node ``n`` for the stochastic scenario ``s`` at times
 
  > **Indices function (Set):** node\_state\_indices 
 
-Storage state at node ``n`` for the stochastic scenario ``s`` at timestep ``t`` 
+Storage state at node ``n`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `node_voltage_angle` 
 
@@ -127,7 +127,7 @@ Storage state at node ``n`` for the stochastic scenario ``s`` at timestep ``t``
 
  > **Indices function (Set):** node\_voltage\_angle\_indices 
 
-Voltage angle at a node ``n`` for a specific stochastic scenario ``s``  and timestep ``t``. See also: [has\_voltage\_angle](@ref) 
+Voltage angle at a node ``n`` for a specific stochastic scenario ``s``  and timeslice ``t``. See also: [has\_voltage\_angle](@ref) 
 
 ## `nonspin_ramp_down_unit_flow` 
 
@@ -137,7 +137,7 @@ Voltage angle at a node ``n`` for a specific stochastic scenario ``s``  and time
 
  > **Indices function (Set):** nonspin\_ramp\_down\_unit\_flow\_indices 
 
-Non-spinning down ward reserve commodity flows of unit ``u`` at node ``n``  in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Non-spinning down ward reserve commodity flows of unit ``u`` at node ``n``  in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `nonspin_ramp_up_unit_flow` 
 
@@ -147,7 +147,7 @@ Non-spinning down ward reserve commodity flows of unit ``u`` at node ``n``  in t
 
  > **Indices function (Set):** nonspin\_ramp\_up\_unit\_flow\_indices 
 
-Non-spinning upward reserve commodity flows of unit ``u`` at node ``n``  in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Non-spinning upward reserve commodity flows of unit ``u`` at node ``n``  in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `nonspin_units_shut_down` 
 
@@ -157,7 +157,7 @@ Non-spinning upward reserve commodity flows of unit ``u`` at node ``n``  in the 
 
  > **Indices function (Set):** nonspin\_units\_shut\_down\_indices 
 
-Number of units ``u`` held available for non-spinning downward reserve provision via shutdown to node ``n``  for the stochastic scenario ``s`` at timestep ``t`` 
+Number of units ``u`` held available for non-spinning downward reserve provision via shutdown to node ``n``  for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `nonspin_units_started_up` 
 
@@ -167,7 +167,7 @@ Number of units ``u`` held available for non-spinning downward reserve provision
 
  > **Indices function (Set):** nonspin\_units\_started\_up\_indices 
 
-Number of units ``u`` held available for non-spinning upward reserve provision via startup to node ``n``  for the stochastic scenario ``s`` at timestep ``t`` 
+Number of units ``u`` held available for non-spinning upward reserve provision via startup to node ``n``  for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `ramp_down_unit_flow` 
 
@@ -177,7 +177,7 @@ Number of units ``u`` held available for non-spinning upward reserve provision v
 
  > **Indices function (Set):** ramp\_down\_unit\_flow\_indices 
 
-Spinning downward ramp commodity flow associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Spinning downward ramp commodity flow associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `ramp_up_unit_flow` 
 
@@ -187,7 +187,7 @@ Spinning downward ramp commodity flow associated with node ``n`` of unit ``u``  
 
  > **Indices function (Set):** ramp\_up\_unit\_flow\_indices 
 
-Spinning upward ramp commodity flow associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Spinning upward ramp commodity flow associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `shut_down_unit_flow` 
 
@@ -197,7 +197,7 @@ Spinning upward ramp commodity flow associated with node ``n`` of unit ``u``  wi
 
  > **Indices function (Set):** shut\_down\_unit\_flow\_indices 
 
-Downward ramp commodity flow during shutdown associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Downward ramp commodity flow during shutdown associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `start_up_unit_flow` 
 
@@ -207,7 +207,7 @@ Downward ramp commodity flow during shutdown associated with node ``n`` of unit 
 
  > **Indices function (Set):** start\_up\_unit\_flow\_indices 
 
-Upward ramp commodity flow during start-up associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+Upward ramp commodity flow during start-up associated with node ``n`` of unit ``u``  with node ``n`` over the connection ``conn`` in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `storages_decommissioned` 
 
@@ -217,7 +217,7 @@ Upward ramp commodity flow during start-up associated with node ``n`` of unit ``
 
  > **Indices function (Set):** storages\_invested\_available\_indices 
 
-Number of decomissioned storage nodes ``n`` for the stochastic scenario ``s`` at timestep ``t`` 
+Number of decomissioned storage nodes ``n`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `storages_invested` 
 
@@ -227,7 +227,7 @@ Number of decomissioned storage nodes ``n`` for the stochastic scenario ``s`` at
 
  > **Indices function (Set):** storages\_invested\_available\_indices 
 
-Number of storage nodes `` n`` invested in  at timestep ``t`` for the stochastic scenario ``s`` 
+Number of storage nodes `` n`` invested in  at timeslice ``t`` for the stochastic scenario ``s`` 
 
 ## `storages_invested_available` 
 
@@ -237,7 +237,7 @@ Number of storage nodes `` n`` invested in  at timestep ``t`` for the stochastic
 
  > **Indices function (Set):** storages\_invested\_available\_indices 
 
-Number of invested storage nodes ``n``  that are available still the stochastic scenario ``s`` at timestep ``t`` 
+Number of invested storage nodes ``n``  that are available still the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `unit_flow` 
 
@@ -247,7 +247,7 @@ Number of invested storage nodes ``n``  that are available still the stochastic 
 
  > **Indices function (Set):** unit\_flow\_indices 
 
-Commodity flow associated with node ``n`` over the unit ``u`` in the direction ``d`` for the stochastic scenario ``s`` at timestep ``t`` 
+[Commodity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#commodity-1) flow associated with node ``n`` over the unit ``u`` in the direction ``d`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `unit_flow_op` 
 
@@ -267,7 +267,7 @@ Contribution of the unit flow assocaited with operating point i
 
  > **Indices function (Set):** units\_on\_indices 
 
-Number of available units ``u`` for the stochastic scenario ``s`` at timestep ``t`` 
+Number of available units ``u`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `units_invested` 
 
@@ -277,7 +277,7 @@ Number of available units ``u`` for the stochastic scenario ``s`` at timestep ``
 
  > **Indices function (Set):** units\_invested\_available\_indices 
 
-Number of units ``u`` for the stochastic scenario ``s``  invested in at timestep ``t`` 
+Number of units ``u`` for the stochastic scenario ``s``  invested in at timeslice ``t`` 
 
 ## `units_invested_available` 
 
@@ -287,7 +287,7 @@ Number of units ``u`` for the stochastic scenario ``s``  invested in at timestep
 
  > **Indices function (Set):** units\_invested\_available\_indices 
 
-Number of invested units ``u``  that are available still the stochastic scenario ``s`` at timestep ``t`` 
+Number of invested units ``u``  that are available still the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `units_mothballed` 
 
@@ -297,7 +297,7 @@ Number of invested units ``u``  that are available still the stochastic scenario
 
  > **Indices function (Set):** units\_invested\_available\_indices 
 
-Number of units ``u`` for the stochastic scenariocenario ``s``  mothballed at timestep ``t`` 
+Number of units ``u`` for the stochastic scenariocenario ``s``  mothballed at timeslice ``t`` 
 
 ## `units_on` 
 
@@ -307,7 +307,7 @@ Number of units ``u`` for the stochastic scenariocenario ``s``  mothballed at ti
 
  > **Indices function (Set):** units\_on\_indices 
 
-Number of online units ``u`` for the stochastic scenario ``s`` at timestep ``t`` 
+Number of online units ``u`` for the stochastic scenario ``s`` at timeslice ``t`` 
 
 ## `units_shut_down` 
 
@@ -317,7 +317,7 @@ Number of online units ``u`` for the stochastic scenario ``s`` at timestep ``t``
 
  > **Indices function (Set):** units\_on\_indices 
 
-Number of units ``u`` for the stochastic scenario ``s`` that switched to offline status at timestep ``t`` 
+Number of units ``u`` for the stochastic scenario ``s`` that switched to offline status at timeslice ``t`` 
 
 ## `units_started_up` 
 
@@ -327,5 +327,5 @@ Number of units ``u`` for the stochastic scenario ``s`` that switched to offline
 
  > **Indices function (Set):** units\_on\_indices 
 
-Number of units ``u`` for the stochastic scenario ``s`` that switched to online status at timestep ``t`` 
+Number of units ``u`` for the stochastic scenario ``s`` that switched to online status at timeslice ``t`` 
 

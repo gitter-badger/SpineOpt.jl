@@ -27,7 +27,7 @@ Set of [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_r
 
  > **Index:** d 
 
-Set of flow directions relative to a node, including 'to_node' and 'from_node' 
+Set of flow direction associated with a node, including ``to_node`` and ``from_node`` 
 
 ## `stochastic_scenario` 
 
@@ -135,13 +135,13 @@ Set of tuples of unit and node being defined under the relationship [unit__to_no
 
  > **Index:** (u, n, uc) 
 
-Set of tuples of unit, node and unit constraint being defined under the relationship [unit__to_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__to_node__unit_constraint-1) or [unit__from_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__from_node__unit_constraint-1) 
+Set of tuples of unit, node and unit constraint being defined under the relationship [unit\_\_to_node\_\_unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__to_node__unit_constraint-1) or [unit\_\_from_node\_\_unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__from_node__unit_constraint-1) 
 
 ## `connection__node__unit_constraint` 
 
  > **Index:** (conn, n, uc) 
 
-Set of tuples of connection, node and unit constraint being defined under the relationship [connection__to_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__to_node__unit_constraint-1) or [connection__from_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__from_node__unit_constraint-1) 
+Set of tuples of connection, node and unit constraint being defined under the relationship [connection\_\_to_node\_\_unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__to_node__unit_constraint-1) or [connection\_\_from_node\_\_unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__from_node__unit_constraint-1) 
 
 ## `unit__unit_constraint` 
 
@@ -157,7 +157,7 @@ Set of tuples of node and unit constraint being defined under the relationship [
 
 ## `constraint_unit_constraint_indices` 
 
- > **Index:** (unit_constraint=uc, stochastic_path=s, t=t) 
+ > **Index:** (unit\_constraint=uc, stochastic\_path=s, t=t) 
 
 Set of indices for the defined unit constraints 
 
@@ -165,7 +165,7 @@ Set of indices for the defined unit constraints
 
  > **Index:** (connection=conn, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for binary_gas_connection_flow variables 
+Set of valid indices for binary\_gas\_connection_flow variables 
 
 ## `connection_flow_indices` 
 
@@ -177,13 +177,13 @@ Set of valid indices for connection_flow variables
 
  > **Index:** (connection=conn, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for connection_intact_flow variables 
+Set of valid indices for connection\_intact\_flow variables 
 
 ## `connections_invested_available_indices` 
 
  > **Index:** (connection=conn, stochastic_scenario=s, t=t) 
 
-Set of valid indices for connections_invested_available variables 
+Set of valid indices for connections\_invested\_available variables 
 
 ## `mp_objective_lowerbound_indices` 
 
@@ -219,61 +219,61 @@ Set of valid indices for the node_state variables
 
  > **Index:** (node=n, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the node_voltage_angle variables 
+Set of valid indices for the node\_voltage\_angle variables 
 
 ## `nonspin_ramp_down_unit_flow_indices` 
 
  > **Index:** (unit=u, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the nonspin_ramp_down_unit_flow variables 
+Set of valid indices for the nonspin\_ramp\_down\_unit\_flow variables 
 
 ## `nonspin_ramp_up_unit_flow_indices` 
 
  > **Index:** (unit=u, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the nonspin_ramp_up_unit_flow variables 
+Set of valid indices for the nonspin\_ramp\_up\_unit\_flow variables 
 
 ## `nonspin_units_shut_down_indices` 
 
  > **Index:** (unit=u, node=n, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the nonspin_units_shut_down variables 
+Set of valid indices for the nonspin\_units\_shut\_down variables 
 
 ## `nonspin_units_started_up_indices` 
 
  > **Index:** (unit=u, node=n, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the nonspin_units_started_up variables 
+Set of valid indices for the nonspin\_units\_started\_up variables 
 
 ## `ramp_down_unit_flow_indices` 
 
  > **Index:** (unit=u, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the ramp_down_unit_flow variables 
+Set of valid indices for the ramp\_down\_unit\_flow variables 
 
 ## `ramp_up_unit_flow_indices` 
 
  > **Index:** (unit=u, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the ramp_up_unit_flow variables 
+Set of valid indices for the ramp\_up\_unit\_flow variables 
 
 ## `shut_down_unit_flow_indices` 
 
  > **Index:** (unit=u, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the shut_down_unit_flow variables 
+Set of valid indices for the shut\_down\_unit\_flow variables 
 
 ## `start_up_unit_flow_indices` 
 
  > **Index:** (unit=u, node=n, direction=d, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the start_up_unit_flow variables 
+Set of valid indices for the start\_up\_unit\_flow variables 
 
 ## `storages_invested_available_indices` 
 
  > **Index:** (node=n, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the storages_invested_available variables 
+Set of valid indices for the storages\_invested\_available variables 
 
 ## `unit_flow_indices` 
 
@@ -291,13 +291,13 @@ Set of [operating_points](https://spine-project.github.io/SpineOpt.jl/latest/con
 
  > **Index:** (unit=u, node=n, direction=d, op=i, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the nonspin_units_shut_down variables 
+Set of valid indices for the unit\_flow\_op variables 
 
 ## `units_invested_available_indices` 
 
  > **Index:** (unit=u, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the units_invested_available variables 
+Set of valid indices for the units\_invested\_available variables 
 
 ## `units_on_indices` 
 
@@ -351,7 +351,7 @@ Set of valid indices for the node_pressure variables
 
  > **Index:** (connection=conn, node=n, stochastic_scenario=s, t=t) 
 
-Set of valid indices for the connection_ptdf_flow variables 
+Set of valid indices for the connection\_ptdf\_flow variables 
 
 ## `constraint_connection_flow_lodf_indices` 
 
@@ -397,7 +397,7 @@ Set of valid indices for the storage investment lifetime constraint
 
 ## `constraint_unit_constraint_indices` 
 
- > **Index:** (unit_constraint=uc, t=t, stochastic_scenario=s) 
+ > **Index:** (unit\_constraint=uc, t=t, stochastic\_scenario=s) 
 
 Set of valid indices for the unit constraint 
 
