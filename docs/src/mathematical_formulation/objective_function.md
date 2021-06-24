@@ -54,7 +54,7 @@ To take into account storage investments in the objective function, the paramete
 
 # Fixed O&M costs
 
-Fixed operation and maintenance costs associated with a specific unit can be accounted for by defining the parameters [fom\_cost](@ref) and [unit\_capacity](@ref). For all tuples of (unit, {node,node\_group}, direction) for which these parameters are defined, and for which tuples (unit, scenario, timeslice) exist in the set `units_on_indices`, a fixed O&M cost term is added to the objective function. Note that, as the `units_on_indices` are used to retrieve the relevant time slices, the unit of the [fom\_cost](@ref) parameter should be given per resolution of the [units\_on](@ref).
+Fixed operation and maintenance costs associated with a specific unit can be accounted for by defining the parameters [fom\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fom_cost-1) and [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1). For all tuples of (unit, {node,node\_group}, direction) for which these parameters are defined, and for which tuples (unit, scenario, timeslice) exist in the set `units_on_indices`, a fixed O&M cost term is added to the objective function. Note that, as the `units_on_indices` are used to retrieve the relevant time slices, the unit of the [fom\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fom_cost-1) parameter should be given per resolution of the [units\_on](https://spine-project.github.io/SpineOpt.jl/latest/mathematical_formulation/variables/#units_on-1).
 The total fixed O&M costs can be expressed as:
 
 ```math
@@ -70,7 +70,7 @@ The total fixed O&M costs can be expressed as:
 
 # Variable O&M costs
 
-Variable operation and maintenance costs associated with a specific unit can be accounted for by defining the parameter ([vom\_cost](@ref)). For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which this parameter is defined, a variable O&M cost term is added to the objective function. As the parameter [vom\_cost](@ref) is a dynamic parameter, the cost term is multiplied with the duration of each timeslice.
+Variable operation and maintenance costs associated with a specific unit can be accounted for by defining the parameter ([vom\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#vom_cost-1)). For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which this parameter is defined, a variable O&M cost term is added to the objective function. As the parameter [vom\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#vom_cost-1) is a dynamic parameter, the cost term is multiplied with the duration of each timeslice.
 The total variable O&M costs can be expressed as:
 
 ```math
@@ -82,7 +82,7 @@ The total variable O&M costs can be expressed as:
 ```
 
 # Fuel costs
-Fuel costs associated with a specific unit can be accounted for by defining the parameter [fuel\_cost](@ref). For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which this parameter is defined, a fuel cost term is added to the objective function. As the parameter [fuel\_cost](@ref) is a dynamic parameter, the cost term is multiplied with the duration of each timeslice. The total fuel costs can be expressed as:
+Fuel costs associated with a specific unit can be accounted for by defining the parameter [fuel\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fuel_cost-1). For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which this parameter is defined, a fuel cost term is added to the objective function. As the parameter [fuel\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#fuel_cost-1) is a dynamic parameter, the cost term is multiplied with the duration of each timeslice. The total fuel costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -93,7 +93,7 @@ Fuel costs associated with a specific unit can be accounted for by defining the 
 ```
 
 # Connection flow costs
-To account for operational costs associated with flows over a specific connection, the [connection\_flow\_cost](@ref) parameter can be defined. For all tuples of (conn, {node,node\_group}, direction, scenario, timeslice) in the set `connection_flow_indices` for which this parameter is defined, a connection flow cost term is added to the objective function. The total connection flow costs can be expressed as:
+To account for operational costs associated with flows over a specific connection, the [connection\_flow\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#connection_flow_cost-1) parameter can be defined. For all tuples of (conn, {node,node\_group}, direction, scenario, timeslice) in the set `connection_flow_indices` for which this parameter is defined, a connection flow cost term is added to the objective function. The total connection flow costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -105,7 +105,7 @@ v_{connection\_flow }(conn, n, d, s, t) \cdot  p_{connection\_flow\_cost}(conn,s
 
 
 # Start up costs
-Start up costs associated with a specific unit can be included by defining the [start\_up\_cost](@ref) parameter. For all tuples of (unit, scenario, timeslice) in the set `units_on_indices` for which this parameter is defined, a start up cost term is added to the objective function. The total start up costs can be expressed as:
+Start up costs associated with a specific unit can be included by defining the [start\_up\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#start_up_cost-1) parameter. For all tuples of (unit, scenario, timeslice) in the set `units_on_indices` for which this parameter is defined, a start up cost term is added to the objective function. The total start up costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -115,7 +115,7 @@ Start up costs associated with a specific unit can be included by defining the [
 \end{aligned}
 ```
 # Shut down costs
-Shut down costs associated with a specific unit can be included by defining the [shut\_down\_cost](@ref) parameter. For all tuples of (unit, scenario, timeslice) in the set `units_on_indices` for which this parameter is defined, a shut down cost term is added to the objective function. The total shut down costs can be expressed as:
+Shut down costs associated with a specific unit can be included by defining the [shut\_down\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#shut_down_cost-1) parameter. For all tuples of (unit, scenario, timeslice) in the set `units_on_indices` for which this parameter is defined, a shut down cost term is added to the objective function. The total shut down costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -126,7 +126,7 @@ v_{units\_shut\_down}(u,s,t) \cdot p_{start\_up\_cost}(u,s,t)\cdot p_{weight}(u,
 ```
 
 # Ramping costs
-To account for the ramping costs (up and down) associated with a specific unit, the parameters [ramp\_up\_cost](@ref) and [ramp\_down\_cost](@ref) can be defined. For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the sets `ramp_up_unit_flow_indices` and `ramp_down_unit_flow_indices` for which [ramp\_up\_cost](@ref) and [ramp\_down\_cost](@ref) are  defined, respectively, a ramping cost term is added to the objective function. The total ramping costs can be expressed as:
+To account for the ramping costs (up and down) associated with a specific unit, the parameters [ramp\_up\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#ramp_up_cost-1) and [ramp\_down\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#ramp_down_cost-1) can be defined. For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the sets `ramp_up_unit_flow_indices` and `ramp_down_unit_flow_indices` for which [ramp\_up\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#ramp_up_cost-1) and [ramp\_down\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#ramp_down_cost-1) are  defined, respectively, a ramping cost term is added to the objective function. The total ramping costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -140,7 +140,7 @@ v_{ramp\_up\_unit\_flow}(u, n, d, s, t)\cdot p_{ramp\_up\_cost}(u,n,d,s,t)\cdot 
 
 
 # Reserve procurement costs
-The procurement costs for reserves provided by a specific unit can be accounted for by defining the [reserve\_procurement\_cost](@ref) parameter. For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which this parameter is defined, a reserve procurement cost term is added to the objective function. The total reserve procurement costs can be expressed as:
+The procurement costs for reserves provided by a specific unit can be accounted for by defining the [reserve\_procurement\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#reserve_procurement_cost-1) parameter. For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which this parameter is defined, a reserve procurement cost term is added to the objective function. The total reserve procurement costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -151,7 +151,7 @@ v_{unit\_flow}(u, n, d, s, t) \cdot p_{reserve\_procurement\_cost}(u,n,d,s,t) \c
 ```
 
 # Renewable curtailment costs
-The curtailment costs of renewable units can be accounted for by defining the parameters [curtailment\_cost](@ref) and [unit\_capacity](@ref). For all tuples of (unit,  {node,node\_group}, direction) for which these parameters are defined, and for which tuples (unit, scenario, timeslice\_long) exist in the set `units_on_indices`, and for which tuples (unit, {node,node\_group}, direction, scenario, timeslice\_short) exist in the set `unit_flow_indices`, a renewable curtailment cost term is added to the objective function. The total renewable curtailment costs can be expressed as:
+The curtailment costs of renewable units can be accounted for by defining the parameters [curtailment\_cost](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#curtailment_cost-1) and [unit\_capacity](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#unit_capacity-1). For all tuples of (unit,  {node,node\_group}, direction) for which these parameters are defined, and for which tuples (unit, scenario, timeslice\_long) exist in the set `units_on_indices`, and for which tuples (unit, {node,node\_group}, direction, scenario, timeslice\_short) exist in the set `unit_flow_indices`, a renewable curtailment cost term is added to the objective function. The total renewable curtailment costs can be expressed as:
 
 ```math
 \begin{aligned}
@@ -166,7 +166,7 @@ The curtailment costs of renewable units can be accounted for by defining the pa
 ```
 
 # Taxes
-To account for taxes on certain commodity flows, the tax unit flow parameters (i.e., [tax\_net\_unit\_flow](@ref), [tax\_out\_unit\_flow](@ref) and [tax\_in\_unit\_flow](@ref)) can be defined. For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which these parameters are defined, a tax term is added to the objective function. The total taxes can be expressed as:
+To account for taxes on certain commodity flows, the tax unit flow parameters (i.e., [tax\_net\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#tax_net_unit_flow-1), [tax\_out\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#tax_out_unit_flow-1) and [tax\_in\_unit\_flow](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#tax_in_unit_flow-1)) can be defined. For all tuples of (unit, {node,node\_group}, direction, scenario, timeslice) in the set `unit_flow_indices` for which these parameters are defined, a tax term is added to the objective function. The total taxes can be expressed as:
 
 ```math
 \begin{aligned}
@@ -184,7 +184,7 @@ v_{unit\_flow}(u, n, d, s, t)\cdot p_{tax\_net\_unit\_flow}(n,s,t)\cdot p_{weigh
 
 
 # Objective penalties
-Penalty cost terms associated with the slack variables of a specific constraint can be accounted for by defining a [node\_slack\_penalty](@ref) parameter. For all tuples of ({node,node\_group}, scenario, timeslice) in the set `node_slack_indices` for which this parameter is defined, a penalty term is added to the objective function. The total objective penalties can be expressed as:
+Penalty cost terms associated with the slack variables of a specific constraint can be accounted for by defining a [node\_slack\_penalty](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#node_slack_penalty-1) parameter. For all tuples of ({node,node\_group}, scenario, timeslice) in the set `node_slack_indices` for which this parameter is defined, a penalty term is added to the objective function. The total objective penalties can be expressed as:
 
 ```math
 \begin{aligned}
