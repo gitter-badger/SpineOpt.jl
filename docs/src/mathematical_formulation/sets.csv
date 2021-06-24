@@ -1,8 +1,16 @@
 index,indices,Description
+n,node,"Set of [node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#node-1) objects in the model"
+u,unit,"Set of [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit-1) objects in the model"
+uc,unit_constraint,"Set of [unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#unit_constraint-1) objects in the model"
+conn,connection,"Set of [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#connection-1) objects in the model"
+d,direction,"Set of flow directions relative to a node, including 'to_node' and 'from_node'"
+s,stochastic_scenario,"Set of [stochastic_scenario](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#stochastic_scenario-1) objects in the model"
+s,stochastic_path,"Set of unique sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves"
+tb,temporal_block,"Set of [temporal_block](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#temporal_block-1) objects in the model"
+ng,groups(node=n),"Set of node objects that belong to the same [node\_group](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/the_basics/#Introduction-to-groups-of-objects-1)"
 ..,ind(*parameter*),"Tuple of all objects, for which the parameter is defined"
-inds,Any,"Set of indexes for navigating a `Map` value. Tuples correspond to navigating nested `Maps`"
-i,N (Int64),"Set of indexes for navigating an array value"
-t,timeslices,"Set of specific time-indexes for navigating a time-varying value"
+i,N,"Set of indexes for navigating an array value"
+t,TimeSlice,"Set of specific time-indexes for navigating a time-varying value"
 t,t_before_t(t_after=t'),Set of timeslices that are directly before timeslice t'
 t,t_before_t(t_before=t'),Set of timeslices that are directly after timeslice t'
 t,t_in_t(t_short=t'),Set of timeslices that contain timeslice t'
@@ -11,22 +19,12 @@ t,t_overlaps_t(t'),Set of timeslices that overlap with timeslice t'
 t,"t_lowest_resolution(node=n, temporal_block=tb)", Set of the lowest resolution timeslices in node n and temporal block tb
 [s_path],full_stochastic_paths,Set of all possible sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves
 [s_path],active_stochastic_paths(s),"Set of sequences of stochastic scenarios that contain the active scenarios s"
-n,node,"Set of [node](@ref)s in the model"
-u,unit,"Set of [unit](@ref)s in the model"
-uc,unit_constraint,"Set of [unit_constraint](@ref)s in the model"
-conn,connection,"Set of [connection](@ref)s in the model"
-d,direction,"Set of [commodity](@ref) flow directions relative to a node, including 'to_node' and 'from_node'"
-s,stochastic_scenario,"Set of [stochastic_scenario](@ref)s in the model"
-s,stochastic_path,"Set of unique sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves"
-tb,temporal_block,"Set of [temporal_block](@ref)s in the model"
-ng,groups(node=n),"Set of nodes that belong to the same [node\_group](@ref)"
-op,operating_points(u),"Set of [operating_points](@ref)s of a unit"
-"(n, tb)",node__temporal_block,Set of tuples of node and temporal block being defined under the relationship [node__temporal_block](@ref)
-"(u, n)",unit__node,Set of tuples of unit and node being defined under the relationship [unit__node](@ref)
-"(u, n, uc)",unit__node__unit_constraint,"Set of tuples of unit, node and unit constraint being defined under the relationship [unit__from_node__unit_constraint](@ref) or [unit__to_node__unit_constraint](@ref)"
-"(conn, n, uc)",connection__node__unit_constraint,"Set of tuples of connection, node and unit constraint being defined under the relationship [connection__from_node__unit_constraint](@ref) or [connection__to_node__unit_constraint](@ref)"
-"(u, uc)",unit__unit_constraint,Set of tuples of unit and unit constraint being defined under the relationship [unit__unit_constraint](@ref)
-"(n, uc)",node__unit_constraint,"Set of tuples of node and unit constraint being defined under the relationship [node__unit_constraint](@ref)"
+"(n, tb)",node__temporal_block,Set of tuples of node and temporal block being defined under the relationship [node__temporal_block](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#node__temporal_block-1)
+"(u, n)",unit__node,Set of tuples of unit and node being defined under the relationship [unit__to_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__to_node-1) or [unit__from_node](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__from_node-1)
+"(u, n, uc)",unit__node__unit_constraint,"Set of tuples of unit, node and unit constraint being defined under the relationship [unit__to_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__to_node__unit_constraint-1) or [unit__from_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__from_node__unit_constraint-1)"
+"(conn, n, uc)",connection__node__unit_constraint,"Set of tuples of connection, node and unit constraint being defined under the relationship [connection__to_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__to_node__unit_constraint-1) or [connection__from_node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#connection__from_node__unit_constraint-1)"
+"(u, uc)",unit__unit_constraint,Set of tuples of unit and unit constraint being defined under the relationship [unit__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#unit__unit_constraint-1)
+"(n, uc)",node__unit_constraint,"Set of tuples of node and unit constraint being defined under the relationship [node__unit_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Relationship%20Classes/#node__unit_constraint-1)"
 "(unit_constraint=uc, stochastic_path=s, t=t)",constraint_unit_constraint_indices,Set of indices for the defined unit constraints
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",binary_gas_connection_flow_indices,Set of valid indices for binary_gas_connection_flow variables
 "(connection=conn, node=n, direction=d, stochastic_scenario=s, t=t)",connection_flow_indices,Set of valid indices for connection_flow variables
@@ -48,6 +46,7 @@ op,operating_points(u),"Set of [operating_points](@ref)s of a unit"
 "(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",start_up_unit_flow_indices,Set of valid indices for the start_up_unit_flow variables
 "(node=n, stochastic_scenario=s, t=t)",storages_invested_available_indices,Set of valid indices for the storages_invested_available variables
 "(unit=u, node=n, direction=d, stochastic_scenario=s, t=t)",unit_flow_indices,Set of valid indices for the unit_flow variables
+op,operating_points(u),"Set of [operating_points](https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#operating_points-1)s of a unit"
 "(unit=u, node=n, direction=d, op=i, stochastic_scenario=s, t=t)",unit_flow_op_indices,Set of valid indices for the nonspin_units_shut_down variables
 "(unit=u, stochastic_scenario=s, t=t)",units_invested_available_indices,Set of valid indices for the units_invested_available variables
 "(unit=u, stochastic_scenario=s, t=t)",units_on_indices,Set of valid indices for the units_on variables
