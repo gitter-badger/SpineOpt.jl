@@ -30,3 +30,16 @@ function write_documentation_sets_variables()
     write(io, set_string)
     close(io)
 end
+
+function write_sets_latex()
+    sets = dropmissing(DataFrame(CSV.File("$(@__DIR__)/sets_tex.csv")))
+    set_string = "# Sets \n"
+    for i in 1:size(sets, 1)
+        set_string = string(set_string, "\$$(sets.index[i]) \\in $(sets.indices[i])\$ \n")
+        set_string = string(set_string, "& $(sets.Description[i]) \\\\ \n\n")
+    end
+
+    io = open("$(@__DIR__)/sets.txt", "w")
+    write(io, set_string)
+    close(io)
+end
