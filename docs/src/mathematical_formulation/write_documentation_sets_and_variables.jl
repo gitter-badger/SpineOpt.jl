@@ -43,3 +43,17 @@ function write_sets_latex()
     write(io, set_string)
     close(io)
 end
+
+function write_parameters_latex()
+    parameters = dropmissing(DataFrame(CSV.File("$(@__DIR__)/parameters_tex.csv")))
+    parameter_string = "# Parameters \n"
+    for i in 1:size(parameters, 1)
+        parameter_string = string(parameter_string, "\$p_{$(parameters.name[i])}\$ \n")
+        parameter_string = string(parameter_string, "& $(parameters.Description[i]) \\\\ \n")
+        parameter_string = string(parameter_string, "\\multicolumn{2}{ l }{ \\hspace{2pt} \\text{-Inherent Index:} \$$(parameters.inherent_index[i]) \\in $(parameters.classes[i])\$ } \\\\ \n\n")
+    end
+
+    io = open("$(@__DIR__)/parameters.txt", "w")
+    write(io, parameter_string)
+    close(io)
+end
