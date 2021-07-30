@@ -1,8 +1,10 @@
 index,indices,Description
+m,model,"Set of \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object\%20Classes/#model}{model} objects that specifies general parameters."
 n,node,"Set of [node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#node) objects in the model"
 u,unit,"Set of [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#unit) objects in the model"
 uc,unit\_constraint,"Set of [unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#unit\_constraint) objects in the model"
 conn,connection,"Set of [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#connection) objects in the model"
+c,commodity,"Set of \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#commodity}{commodity} objects in the model."
 d,direction,"Set of flow direction associated with a node, including ``to\_node`` and ``from\_node``"
 s,stochastic\_scenario,"Set of [stochastic\_scenario](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#stochastic\_scenario) objects in the model"
 s,stochastic\_path,"Set of unique sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves"

@@ -1,30 +1,36 @@
 # Sets 
+$m \in model$ 
+& Set of \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object\%20Classes/#model}{model} objects that specifies general parameters. \\ 
+
 $n \in node$ 
-& Set of [node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#node-1) objects in the model \\ 
+& Set of [node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#node) objects in the model \\ 
 
 $u \in unit$ 
-& Set of [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#unit-1) objects in the model \\ 
+& Set of [unit](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#unit) objects in the model \\ 
 
 $uc \in unit\_constraint$ 
-& Set of [unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#unit\_constraint-1) objects in the model \\ 
+& Set of [unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#unit\_constraint) objects in the model \\ 
 
 $conn \in connection$ 
-& Set of [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#connection-1) objects in the model \\ 
+& Set of [connection](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#connection) objects in the model \\ 
+
+$c \in commodity$ 
+& Set of \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object%20Classes/#commodity}{commodity} objects in the model. \\ 
 
 $d \in direction$ 
 & Set of flow direction associated with a node, including ``to\_node`` and ``from\_node`` \\ 
 
 $s \in stochastic\_scenario$ 
-& Set of [stochastic\_scenario](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#stochastic\_scenario-1) objects in the model \\ 
+& Set of [stochastic\_scenario](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#stochastic\_scenario) objects in the model \\ 
 
 $s \in stochastic\_path$ 
 & Set of unique sequences of stochastic scenarios that traverse the stochastic direct acyclic graph (DAG) from root to leaves \\ 
 
 $tb \in temporal\_block$ 
-& Set of [temporal\_block](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#temporal\_block-1) objects in the model \\ 
+& Set of [temporal\_block](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Object%20Classes/#temporal\_block) objects in the model \\ 
 
 $ng \in groups(node=n)$ 
-& Set of node objects that belong to the same [node\_group](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/the\_basics/#Introduction-to-groups-of-objects-1) \\ 
+& Set of node objects that belong to the same [node\_group](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/the\_basics/#Introduction-to-groups-of-objects) \\ 
 
 $.. \in ind(*parameter*)$ 
 & Tuple of all objects, for which the parameter is defined \\ 
@@ -60,22 +66,22 @@ $[s\_path] \in active\_stochastic\_paths(s)$
 & Set of sequences of stochastic scenarios that contain the active scenarios s \\ 
 
 $(n, tb) \in node\_\_temporal\_block$ 
-& Set of tuples of node and temporal block being defined under the relationship [node\_\_temporal\_block](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#node\_\_temporal\_block-1) \\ 
+& Set of tuples of node and temporal block being defined under the relationship [node\_\_temporal\_block](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#node\_\_temporal\_block) \\ 
 
 $(u, n) \in unit\_\_node$ 
-& Set of tuples of unit and node being defined under the relationship [unit\_\_to\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_to\_node-1) or [unit\_\_from\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_from\_node-1) \\ 
+& Set of tuples of unit and node being defined under the relationship [unit\_\_to\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_to\_node) or [unit\_\_from\_node](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_from\_node) \\ 
 
 $(u, n, uc) \in unit\_\_node\_\_unit\_constraint$ 
-& Set of tuples of unit, node and unit constraint being defined under the relationship [unit\_\_to\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_to\_node\_\_unit\_constraint-1) or [unit\_\_from\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_from\_node\_\_unit\_constraint-1) \\ 
+& Set of tuples of unit, node and unit constraint being defined under the relationship [unit\_\_to\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_to\_node\_\_unit\_constraint) or [unit\_\_from\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_from\_node\_\_unit\_constraint) \\ 
 
 $(conn, n, uc) \in connection\_\_node\_\_unit\_constraint$ 
-& Set of tuples of connection, node and unit constraint being defined under the relationship [connection\_\_to\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#connection\_\_to\_node\_\_unit\_constraint-1) or [connection\_\_from\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#connection\_\_from\_node\_\_unit\_constraint-1) \\ 
+& Set of tuples of connection, node and unit constraint being defined under the relationship [connection\_\_to\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#connection\_\_to\_node\_\_unit\_constraint) or [connection\_\_from\_node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#connection\_\_from\_node\_\_unit\_constraint) \\ 
 
 $(u, uc) \in unit\_\_unit\_constraint$ 
-& Set of tuples of unit and unit constraint being defined under the relationship [unit\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_unit\_constraint-1) \\ 
+& Set of tuples of unit and unit constraint being defined under the relationship [unit\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#unit\_\_unit\_constraint) \\ 
 
 $(n, uc) \in node\_\_unit\_constraint$ 
-& Set of tuples of node and unit constraint being defined under the relationship [node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#node\_\_unit\_constraint-1) \\ 
+& Set of tuples of node and unit constraint being defined under the relationship [node\_\_unit\_constraint](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Relationship%20Classes/#node\_\_unit\_constraint) \\ 
 
 $(unit\_constraint=uc, stochastic\_path=s, t=t) \in constraint\_unit\_constraint\_indices$ 
 & Set of indices for the defined unit constraints \\ 
@@ -141,7 +147,7 @@ $(unit=u, node=n, direction=d, stochastic\_scenario=s, t=t) \in unit\_flow\_indi
 & Set of valid indices for the unit\_flow variables \\ 
 
 $op \in operating\_points(u)$ 
-& Set of [operating\_points](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Parameters/#operating\_points-1)s of a unit \\ 
+& Set of [operating\_points](https://spine-project.github.io/SpineOpt.jl/latest/concept\_reference/Parameters/#operating\_points)s of a unit \\ 
 
 $(unit=u, node=n, direction=d, op=i, stochastic\_scenario=s, t=t) \in unit\_flow\_op\_indices$ 
 & Set of valid indices for the unit\_flow\_op variables \\ 
