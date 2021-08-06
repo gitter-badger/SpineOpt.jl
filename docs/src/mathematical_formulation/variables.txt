@@ -1,0 +1,166 @@
+# Variables 
+$v_{binary\_gas\_connection\_flow}(conn, n, d, s, t)$ 
+& Binary variable with the indices node $n$ over the connection $conn$ in the direction $to\_node$ for the stochastic scenario $s$ at timeslice $t$ describing if the direction of gas flow for a pressure drive gas transfer is in the indicated direction. 
+Its index belongs to the set \textit{binary\_gas\_connection\_flow\_indices}. 
+\hypertarget{17}{} \\ 
+
+$v_{connection\_flow }(conn, n, d, s, t)$ 
+& Commodity flow associated with node $n$ over the connection $conn$ in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{connection\_flow\_indices}. 
+\hypertarget{3}{} \\ 
+
+$v_{connection\_intact\_flow}(conn, n, d, s, t)$ 
+& The commodity flow on all connection lines with candidate capacity for investments assumed in place. 
+Its index belongs to the set \textit{connection\_intact\_flow\_indices}. 
+\hypertarget{6678008193923544064}{} \\ 
+
+$v_{connections\_decommissioned}(conn, s, t)$ 
+& Number of decomissioned connections $conn$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{connections\_invested\_available\_indices}. 
+\hypertarget{18}{} \\ 
+
+$v_{connections\_invested}(conn, s, t)$ 
+& Number of connections $conn$ invested at timeslice $t$ in for the stochastic scenario $s$. 
+Its index belongs to the set \textit{connections\_invested\_available\_indices}. 
+\hypertarget{19}{} \\ 
+
+$v_{connections\_invested\_available}(conn, s, t)$ 
+& Number of invested connections $conn$  that are available still the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{connections\_invested\_available\_indices}. 
+\hypertarget{20}{} \\ 
+
+$v_{node\_injection}(n, s, t)$ 
+& Commodity injections at node $n$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{node\_injection\_indices}. 
+\hypertarget{2}{} \\ 
+
+$v_{node\_pressure}(n, s, t)$ 
+& Pressue at a node $n$ for a specific stochastic scenario $s$  and timeslice $t$. See also: \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#has_pressure}{has\_pressure}. 
+Its index belongs to the set \textit{node\_pressure\_indices}. 
+\hypertarget{12}{} \\ 
+
+$v_{node\_slack\_neg}(n, s, t)$ 
+& Negative slack variable at node $n$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{node\_slack\_indices}. 
+\hypertarget{4}{} \\ 
+
+$v_{node\_slack\_pos}(n, s, t)$ 
+& Positive slack variable at node $n$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{node\_slack\_indices}. 
+\hypertarget{11067384865300099072}{} \\ 
+
+$v_{node\_state}(n, s, t)$ 
+& Storage state at node $n$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{node\_state\_indices}. 
+\hypertarget{9063728754723048448}{} \\ 
+
+$v_{node\_voltage\_angle}(n, s, t)$ 
+& Voltage angle at a node $n$ for a specific stochastic scenario $s$ and timeslice $t$. See also: \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Parameters/#has_voltage_angle}{has\_voltage\_angle}. 
+Its index belongs to the set \textit{node\_voltage\_angle\_indices}. 
+\hypertarget{7430235590748706816}{} \\ 
+
+$v_{nonspin\_ramp\_down\_unit\_flow}(u, n, d, s, t)$ 
+& Non-spinning down ward reserve commodity flows of unit $u$ at node $n$  in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{nonspin\_ramp\_down\_unit\_flow\_indices}. 
+\hypertarget{16650230051442829312}{} \\ 
+
+$v_{nonspin\_ramp\_up\_unit\_flow}(u, n, d, s, t)$ 
+& Non-spinning upward reserve commodity flows of unit $u$ at node $n$  in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{nonspin\_ramp\_up\_unit\_flow\_indices}. 
+\hypertarget{18408962200680888320}{} \\ 
+
+$v_{nonspin\_units\_shut\_down}(u, n, s, t)$ 
+& Number of units $u$ held available for non-spinning downward reserve provision via shutdown to node $n$  for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{nonspin\_units\_shut\_down\_indices}. 
+\hypertarget{12597774843428835328}{} \\ 
+
+$v_{nonspin\_units\_started\_up}(u, n, s, t)$ 
+& Number of units $u$ held available for non-spinning upward reserve provision via startup to node $n$  for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{nonspin\_units\_started\_up\_indices}. 
+\hypertarget{1515449158853584640}{} \\ 
+
+$v_{ramp\_down\_unit\_flow}(u, n, d, s, t)$ 
+& Spinning downward ramp commodity flow associated with node $n$ of unit $u$  with node $n$ over the connection $conn$ in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{ramp\_down\_unit\_flow\_indices}. 
+\hypertarget{10694418525252012032}{} \\ 
+
+$v_{ramp\_up\_unit\_flow}(u, n, d, s, t)$ 
+& Spinning upward ramp commodity flow associated with node $n$ of unit $u$  with node $n$ over the connection $conn$ in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{ramp\_up\_unit\_flow\_indices}. 
+\hypertarget{9153747239218328576}{} \\ 
+
+$v_{shut\_down\_unit\_flow}(u, n, d, s, t)$ 
+& Downward ramp commodity flow during shutdown associated with node $n$ of unit $u$  with node $n$ over the connection $conn$ in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{shut\_down\_unit\_flow\_indices}. 
+\hypertarget{10023889588846761984}{} \\ 
+
+$v_{start\_up\_unit\_flow}(u, n, d, s, t)$ 
+& Upward ramp commodity flow during start-up associated with node $n$ of unit $u$  with node $n$ over the connection $conn$ in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{start\_up\_unit\_flow\_indices}. 
+\hypertarget{7814375437069316096}{} \\ 
+
+$v_{storages\_decommissioned}(n, s, t)$ 
+& Number of decomissioned storage nodes $n$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{storages\_invested\_available\_indices}. 
+\hypertarget{1599110934596455168}{} \\ 
+
+$v_{storages\_invested}(n, s, t)$ 
+& Number of storage nodes $ n$ invested in  at timeslice $t$ for the stochastic scenario $s$. 
+Its index belongs to the set \textit{storages\_invested\_available\_indices}. 
+\hypertarget{3098919883039426048}{} \\ 
+
+$v_{storages\_invested\_available}(n, s, t)$ 
+& Number of invested storage nodes $n$  that are available still the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{storages\_invested\_available\_indices}. 
+\hypertarget{13531490810864457728}{} \\ 
+
+$v_{unit\_flow}(u, n, d, s, t)$ 
+& \href{https://spine-project.github.io/SpineOpt.jl/latest/concept_reference/Object\%20Classes/#commodity-1}{Commodity} flow associated with node $n$ over the unit $u$ in the direction $d$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{unit\_flow\_indices}. 
+\hypertarget{8}{} \\ 
+
+$v_{unit\_flow\_op}(u, n, d, i=i, s, t)$ 
+& Contribution of the unit flow associated with operating point $i$. 
+Its index belongs to the set \textit{unit\_flow\_op\_indices}. 
+\hypertarget{15386520178567319552}{} \\ 
+
+$v_{units\_available}(u, s, t)$ 
+& Number of available units $u$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{units\_on\_indices}. 
+\hypertarget{1057106342780580224}{} \\ 
+
+$v_{units\_invested}(u, s, t)$ 
+& Number of units $u$ for the stochastic scenario $s$  invested in at timeslice $t$. 
+Its index belongs to the set \textit{units\_invested\_available\_indices}. 
+\hypertarget{12288876274458599424}{} \\ 
+
+$v_{units\_invested\_available}(u, s, t)$ 
+& Number of invested units $u$  that are available still the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{units\_invested\_available\_indices}. 
+\hypertarget{1476680273894782208}{} \\ 
+
+$v_{units\_on}(u, s, t)$ 
+& Number of online units $u$ for the stochastic scenario $s$ at timeslice $t$. 
+Its index belongs to the set \textit{units\_on\_indices}. 
+\hypertarget{9}{} \\ 
+
+$v_{units\_shut\_down}(u, s, t)$ 
+& Number of units $u$ for the stochastic scenario $s$ that switched to offline status at timeslice $t$. 
+Its index belongs to the set \textit{units\_on\_indices}. 
+\hypertarget{3592033272674677760}{} \\ 
+
+$v_{units\_started\_up}(u, s, t)$ 
+& Number of units $u$ for the stochastic scenario $s$ that switched to online status at timeslice $t$. 
+Its index belongs to the set \textit{units\_on\_indices}. 
+\hypertarget{3592033272674677760}{} \\ 
+
+$v_{mp\_objective\_lowerbound\_indices}(t)$ 
+& Updating lowerbound for master problem of Benders decomposition. 
+Its index belongs to the set \textit{mp\_objective\_lowerbound\_indices}. 
+\hypertarget{16670373921524643840}{} \\ 
+
+$v_{units\_mothballed}(u, s, t)$ 
+& Number of units $u$ for the stochastic scenariocenario $s$  mothballed at timeslice $t$. 
+Its index belongs to the set \textit{units\_invested\_available\_indices}. 
+\hypertarget{12958731231322585088}{} \\ 
+

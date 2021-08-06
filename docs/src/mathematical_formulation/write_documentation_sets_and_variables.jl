@@ -64,3 +64,21 @@ function write_parameters_latex()
     write(io, parameter_string)
     close(io)
 end
+
+function write_variables_latex()
+    variables = dropmissing(DataFrame(CSV.File("$(@__DIR__)/variables_tex.csv")))
+    variables.name .= replace.(variables.name, r"_" => "\\_")
+    variables.indices .= replace.(variables.indices, r"_" => "\\_")
+    variables.description .= replace.(variables.description, r"``" => "\$")
+    variable_string = "# Variables \n"
+    for i in 1:size(variables, 1)
+        variable_string = string(variable_string, "\$v_{$(variables.name[i])}$(variables.index[i])\$ \n")
+        variable_string = string(variable_string, "& $(variables.description[i]) \n")
+        variable_string = string(variable_string, "Its index belongs to the set \\textit{$(variables.indices[i])}. \n")
+        variable_string = string(variable_string, "\\hypertarget{$(BigInt(variables.hypertarget[i]))}{} \\\\ \n\n")
+    end
+
+    io = open("$(@__DIR__)/variables.txt", "w")
+    write(io, variable_string)
+    close(io)
+end
