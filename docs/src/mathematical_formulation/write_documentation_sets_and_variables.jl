@@ -48,9 +48,16 @@ function write_parameters_latex()
     parameters = dropmissing(DataFrame(CSV.File("$(@__DIR__)/parameters_tex.csv")))
     parameter_string = "# Parameters \n"
     for i in 1:size(parameters, 1)
-        parameter_string = string(parameter_string, "\$p_{$(parameters.name[i])}\$ \n")
-        parameter_string = string(parameter_string, "& $(parameters.Description[i]) \\\\ \n")
-        parameter_string = string(parameter_string, "\\multicolumn{2}{ l }{ \\hspace{2pt} \\text{-Inherent Index:} \$$(parameters.inherent_index[i]) \\in $(parameters.classes[i])\$ } \\\\ \n\n")
+        if parameters.classes[i] == "**"
+            break
+        end
+        parameter_string = string(parameter_string, "\$p_{$(parameters.name[i])}$(parameters.inherent_index[i])\$ \n")
+        parameter_string = string(parameter_string, "& $(parameters.Description[i]) \n")
+        class_type = "object"
+        if occursin("\\_\\_", parameters.classes[i])
+            class_type = "relationship"
+        end
+        parameter_string = string(parameter_string, "The parameter is defined under the SpineOpt $class_type class \\textit{$(parameters.classes[i])}. \\\\ \n\n")
     end
 
     io = open("$(@__DIR__)/parameters.txt", "w")

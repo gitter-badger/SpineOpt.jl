@@ -1,785 +1,385 @@
 # Parameters 
-$p_{commodity\_lodf\_tolerance}$ 
-& The minimum absolute value of the line outage distribution factor (LODF) that is considered meaningful. \\ 
-\text{-Inherent Index:} $c \in commodity$ \\ 
-
-$p_{commodity\_physics}$ 
-& Defines if the commodity follows lodf or ptdf physics. \\ 
-\text{-Inherent Index:} $c \in commodity$ \\ 
-
-$p_{commodity\_ptdf\_threshold}$ 
-& The minimum absolute value of the power transfer distribution factor (PTDF) that is considered meaningful. \\ 
-\text{-Inherent Index:} $c \in commodity$ \\ 
-
-$p_{candidate\_connections}$ 
-& The number of connections that may be invested in \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_availability\_factor}$ 
-& Availability of the connection, acting as a multiplier on its connection\_capacity. Typically between 0-1. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_contingency}$ 
-& A boolean flag for defining a contingency connection. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_flow\_cost}$ 
-& Variable costs of a flow through a connection. E.g. EUR/MWh of energy throughput. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_investment\_cost}$ 
-& The per unit investment cost for the connection over the connection\_investment\_lifetime \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_investment\_lifetime}$ 
-& Determines the minimum investment lifetime of a connection. Once invested, it remains in service for this long \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_investment\_variable\_type}$ 
-& Determines whether the investment variable is integer variable\_type\_integer or continuous variable\_type\_continuous \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_monitored}$ 
-& A boolean flag for defining a contingency connection. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_reactance}$ 
-& The per unit reactance of a connection. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_reactance\_base}$ 
-& If the reactance is given for a p.u.  (e.g. p.u. = 100MW), the connection\_reactance\_base can be set to perform this conversion (e.g. *100). \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_resistance}$ 
-& The per unit resistance of a connection. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{connection\_type}$ 
-& A selector between a normal and a lossless bidirectional connection. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{fix\_connections\_invested}$ 
-& Setting a value fixes the connections\_invested variable accordingly \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{fix\_connections\_invested\_available}$ 
-& Setting a value fixes the connections\_invested\_available variable accordingly \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{has\_binary\_gas\_flow}$ 
-& This parameter needs to be set to true in order to represent bidirectional pressure drive gas transfer. \\ 
-\text{-Inherent Index:} $conn \in connection$ \\ 
-
-$p_{duration\_unit}$ 
-& Defines the base temporal unit of the model. Currently supported values are either an hour or a minute. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{max\_gap}$ 
-& Specifies the maximum optimality gap for the model. Currently only used for the master problem within a decomposed structure \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{max\_iterations}$ 
-& Specifies the maximum number of iterations for the model. Currently only used for the master problem within a decomposed structure \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{model\_end}$ 
-& Defines the last timestamp to be modelled. Rolling optimisation terminates after passing this point. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{model\_start}$ 
-& Defines the first timestamp to be modelled. Relative temporal\_blocks refer to this value for their start and end. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{model\_type}$ 
-& Used to identify model objects as relating to the master problem or operational sub problems (default) \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{roll\_forward}$ 
-& Defines how much the model moves ahead in time between solves in a rolling optimisation. Without this parameter, everything is solved in as a single optimisation. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{write\_lodf\_file}$ 
-& A boolean flag for whether the LODF values should be written to a results file. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{write\_mps\_file}$ 
-& A selector for writing an .mps file of the model. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{write\_ptdf\_file}$ 
-& A boolean flag for whether the LODF values should be written to a results file. \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{big\_m}$ 
-& Sufficiently large number used for linearization bilinear terms, e.g. to enforce bidirectional flow for gas pipielines \\ 
-\text{-Inherent Index:} $m \in model$ \\ 
-
-$p_{balance\_type}$ 
-& A selector for how the :nodal\_balance constraint should be handled. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{candidate\_storages}$ 
-& Determines the maximum number of new storages which may be invested in. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{demand}$ 
-& Demand for the commodity of a node. Energy gains can be represented using negative demand. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{downward\_reserve}$ 
-& Identifier for nodes providing downward reserves \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{fix\_node\_state}$ 
-& Fixes the corresponding node\_state variable to the provided value. Can be used for e.g. fixing boundary conditions. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{fix\_storages\_invested}$ 
-& Used to fix the value of the storages\_invested variable \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{fix\_storages\_invested\_available}$ 
-& Used to fix the value of the storages\_invested\_available variable \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{fix\_node\_pressure}$ 
-& Fixes the corresponding node\_pressure variable to the provided value \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{fix\_node\_voltage\_angle}$ 
-& Fixes the corresponding node\_voltage\_angle variable to the provided value \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{frac\_state\_loss}$ 
-& Self-discharge coefficient for node\_state variables. Effectively, represents the *loss power per unit of state*. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{fractional\_demand}$ 
-& The fraction of a node group's demand applied for the node in question. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{has\_state}$ 
-& A boolean flag for whether a node has a node\_state variable. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{has\_pressure}$ 
-& A boolean flag for whether a node has a node\_pressure variable. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{has\_voltage\_angle}$ 
-& A boolean flag for whether a node has a node\_voltage\_angle variable. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{is\_reserve\_node}$ 
-& A boolean flag for whether a node is acting as a reserve\_node \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{minimum\_reserve\_activation\_time}$ 
-& Duration a certain reserve product needs to be online/available \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{nodal\_balance\_sense}$ 
-& A selector for nodal\_balance constraint sense. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{node\_opf\_type}$ 
-& A selector for the reference node (slack bus) when PTDF-based DC load-flow is enabled. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{node\_slack\_penalty}$ 
-& A penalty cost for node\_slack\_pos and node\_slack\_neg variables. The slack variables won't be included in the model unless there's a cost defined for them. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{node\_state\_cap}$ 
-& The maximum permitted value for a node\_state variable. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{node\_state\_min}$ 
-& The minimum permitted value for a node\_state variable. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{state\_coeff}$ 
-& Represents the commodity content of a node\_state variable in respect to the unit\_flow and connection\_flow variables. Essentially, acts as a coefficient on the node\_state variable in the :node\_injection constraint. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{storage\_investment\_cost}$ 
-& Determines the investment cost per unit state\_cap over the investment life of a storage \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{storage\_investment\_lifetime}$ 
-& Minimum lifetime for storage investment decisions. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{storage\_investment\_variable\_type}$ 
-& Determines whether the storage investment variable is continuous (usually representing capacity) or integer (representing discrete units invested) \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{tax\_in\_unit\_flow}$ 
-& Tax costs for incoming unit\_flows on this node. E.g. EUR/MWh. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{tax\_net\_unit\_flow}$ 
-& Tax costs for net incoming and outgoing unit\_flows on this node. Incoming flows accrue positive net taxes, and outgoing flows accrue negative net taxes. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{tax\_out\_unit\_flow}$ 
-& Tax costs for outgoing unit\_flows from this node. E.g. EUR/MWh. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{upward\_reserve}$ 
-& Identifier for nodes providing upward reserves \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{max\_node\_pressure}$ 
-& Maximum allowed gas pressure at node. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{min\_node\_pressure}$ 
-& Minimum allowed gas pressure at node. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{max\_voltage\_angle}$ 
-& Maximum allowed voltage angle at node. \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{min\_voltage\_angle}$ 
-& Minimum allowed voltage angle at node.  \\ 
-\text{-Inherent Index:} $n \in node$ \\ 
-
-$p_{block\_end}$ 
-& The end time for the temporal\_block. Can be given either as a DateTime for a static end point, or as a Duration for an end point relative to the start of the current optimisation. \\ 
-\text{-Inherent Index:} $tb \in temporal\_block$ \\ 
-
-$p_{block\_start}$ 
-& The start time for the temporal\_block. Can be given either as a DateTime for a static start point, or as a Duration for an start point relative to the start of the current optimisation. \\ 
-\text{-Inherent Index:} $tb \in temporal\_block$ \\ 
-
-$p_{resolution}$ 
-& Temporal resolution of the temporal\_block. Essentially, divides the period between block\_start and block\_end into TimeSlices with the input resolution. \\ 
-\text{-Inherent Index:} $tb \in temporal\_block$ \\ 
-
-$p_{weight}$ 
-& Weighting factor of the temporal block associated with the objective function \\ 
-\text{-Inherent Index:} $tb \in temporal\_block$ \\ 
-
-$p_{representative\_periods\_mapping}$ 
-& Mapping from real timelices to their corresponding representative days \\ 
-\text{-Inherent Index:} $tb \in temporal\_block$ \\ 
-
-$p_{candidate\_units}$ 
-& Number of units which may be additionally constructed \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{curtailment\_cost}$ 
-& Costs for curtailing generation. Essentially, accrues costs whenever unit\_flow not operating at its maximum available capacity. E.g. EUR/MWh \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{fix\_units\_invested}$ 
-& Fix the value of the units\_invested variable. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{fix\_units\_invested\_available}$ 
-& Fix the value of the units\_invested\_available variable \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{fix\_units\_on}$ 
-& Fix the value of the units\_on variable. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{fom\_cost}$ 
-& Fixed operation and maintenance costs of a unit. Essentially, a cost coefficient on the number\_of\_units and unit\_capacity parameters. E.g. EUR/MWh \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{min\_down\_time}$ 
-& Minimum downtime of a unit after it shuts down. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{min\_up\_time}$ 
-& Minimum uptime of a unit after it starts up. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{number\_of\_units}$ 
-& Denotes the number of 'sub units' aggregated to form the modelled unit. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{online\_variable\_type}$ 
-& A selector for how the units\_on variable is represented within the model. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{shut\_down\_cost}$ 
-& Costs of shutting down a 'sub unit', e.g. EUR/shutdown. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{start\_up\_cost}$ 
-& Costs of starting up a 'sub unit', e.g. EUR/startup. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{unit\_availability\_factor}$ 
-& Availability of the unit, acting as a multiplier on its unit\_capacity. Typically between 0-1. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{unit\_investment\_cost}$ 
-& Investment cost per 'sub unit' built. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{unit\_investment\_lifetime}$ 
-& Minimum lifetime for unit investment decisions. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{unit\_investment\_variable\_type}$ 
-& Determines whether investment variable is integer or continuous. \\ 
-\text{-Inherent Index:} $u \in unit$ \\ 
-
-$p_{constraint\_sense}$ 
-& A selector for the sense of the unit\_constraint. \\ 
-\text{-Inherent Index:} $uc \in unit\_constraint$ \\ 
-
-$p_{right\_hand\_side}$ 
-& The right-hand side, constant term in a unit\_constraint. Can be time-dependent and used e.g. for complicated efficiency approximations. \\ 
-\text{-Inherent Index:} $uc \in unit\_constraint$ \\ 
-
-$p_{connection\_capacity}$ 
-& Limits the connection\_flow variable from the from\_node. from\_node can be a group of nodes, in which case the sum of the connection\_flow is constrained. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_from\_node$ \\ 
-
-$p_{connection\_conv\_cap\_to\_flow}$ 
-& Optional coefficient for connection\_capacity unit conversions in the case that the connection\_capacity value is incompatible with the desired connection\_flow units. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_from\_node$ \\ 
-
-$p_{connection\_emergency\_capacity}$ 
-& Post contingency flow capacity of a connection. Sometimes referred to as emergency rating \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_from\_node$ \\ 
-
-$p_{fix\_connection\_flow}$ 
-& Fix the value of the connection\_flow variable. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_from\_node$ \\ 
-
-$p_{fix\_binary\_gas\_connection\_flow}$ 
-& Fix the value of the connection\_flow\_binary variable, and hence pre-determine the direction of flow in the connection. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_from\_node$ \\ 
-
-$p_{fix\_connection\_intact\_flow}$ 
-& Fix the value of the connection\_intact\_flow variable. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_from\_node$ \\ 
-
-$p_{connection\_flow\_coefficient}$ 
-& defines the unit constraint coefficient on the connection flow variable in the from direction \\ 
-\text{-Inherent Index:} $(conn, n, uc) \in connection\_\_from\_node\_\_unit\_constraint"$ \\ 
-
-$p_{connection\_flow\_delay}$ 
-& Delays the connection\_flows associated with the second node $n_2$ in respect to the connection\_flows associated with the first node $n_1$. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{fix\_ratio\_out\_in\_connection\_flow}$ 
-& Fix the ratio between the connection\_flow from the first node $n_1$ and the connection\_flow to the second node $n_2$. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{max\_ratio\_out\_in\_connection\_flow}$ 
-& Maximum ratio between the connection\_flow from the first node $n_1$ and the connection\_flow to the second node $n_2$. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{min\_ratio\_out\_in\_connection\_flow}$ 
-& Minimum ratio between the connection\_flow from the first node $n_1$ and the connection\_flow to the second node $n_2$. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{fixed\_pressure\_constant\_1}$ 
-& Fixed pressure points for pipelines for the outer approximation of the Weymouth approximation. The direction of flow is the first node $n_1$ in the relationship to the second node $n_2$ in the relationship. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{fixed\_pressure\_constant\_0}$ 
-& Fixed pressure points for pipelines for the outer approximation of the Weymouth approximation. The direction of flow is the first node $n_1$ in the relationship to the second node $n_2$ in the relationship. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{compression\_factor}$ 
-& The compression factor establishes a compression from an origin node to a receiving node, which are connected through a connection. The first node $n_1$ corresponds to the origin node, the second to the (compressed) destination node. Typically the value is $\geq 1$. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{connection\_linepack\_constant}$ 
-& The linepack constant is a property of gas pipelines and relates the linepack to the pressure of the adjacent nodes. \\ 
-\text{-Inherent Index:} $(conn, n_1, n_2) \in connection\_\_node\_\_node$ \\ 
-
-$p_{connection\_capacity}$ 
-& Limits the connection\_flow variable to the to\_node. to\_node can be a group of nodes, in which case the sum of the connection\_flow is constrained. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_to\_node$ \\ 
-
-$p_{connection\_conv\_cap\_to\_flow}$ 
-& Optional coefficient for connection\_capacity unit conversions in the case the connection\_capacity value is incompatible with the desired connection\_flow units. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_to\_node$ \\ 
-
-$p_{connection\_emergency\_capacity}$ 
-& The maximum post-contingency flow on a monitored connection. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_to\_node$ \\ 
-
-$p_{fix\_connection\_flow}$ 
-& Fix the value of the connection\_flow variable. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_to\_node$ \\ 
-
-$p_{fix\_connection\_intact\_flow}$ 
-& Fix the value of the connection\_intact\_flow variable. \\ 
-\text{-Inherent Index:} $(conn, n) \in connection\_\_to\_node$ \\ 
-
-$p_{connection\_flow\_coefficient}$ 
-& defines the unit constraint coefficient on the connection flow variable in the to direction \\ 
-\text{-Inherent Index:} $(conn, n, uc) \in connection\_\_to\_node\_\_unit\_constraint$ \\ 
-
-$p_{diff\_coeff}$ 
-& Commodity diffusion coefficient between two nodes $n_1$ and $n_2$. Effectively, denotes the *diffusion power per unit of state* from the first node $n_1$ to the second. \\ 
-\text{-Inherent Index:} $(n_1, n_2) \in node\_\_node$ \\ 
-
-$p_{cyclic\_condition}$ 
-& If the cyclic condition is set to true for a storage node, the node\_state at the end of the optimisation window has to be larger than or equal to the initial storage state. \\ 
-\text{-Inherent Index:} $(n, tb) \in node\_\_temporal\_block$ \\ 
-
-$p_{demand\_coefficient}$ 
-& coefficient of the specified node's demand in the specified unit constraint \\ 
-\text{-Inherent Index:} $(n, uc) \in node\_\_unit\_constraint$ \\ 
-
-$p_{node\_state\_coefficient}$ 
-& Coefficient of the specified node's state variable in the specified unit constraint. \\ 
-\text{-Inherent Index:} $(n, uc) \in node\_\_unit\_constraint$ \\ 
-
-$p_{max\_cum\_in\_unit\_flow\_bound}$ 
-& Set a maximum cumulative upper bound for a unit\_flow \\ 
-\text{-Inherent Index:} $(u, c) \in unit\_\_commodity$ \\ 
-
-$p_{fix\_nonspin\_ramp\_up\_unit\_flow}$ 
-& Fix the nonspin\_ramp\_up\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{fix\_nonspin\_units\_started\_up}$ 
-& Fix the nonspin\_units\_started\_up variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{fix\_ramp\_up\_unit\_flow}$ 
-& Fix the ramp\_up\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{fix\_start\_up\_unit\_flow}$ 
-& Fix the start\_up\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{fix\_unit\_flow}$ 
-& Fix the unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{fix\_unit\_flow\_op}$ 
-& Fix the unit\_flow\_op variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{fuel\_cost}$ 
-& Variable fuel costs than can be attributed to a unit\_flow. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{reserve\_procurement\_cost}$ 
-& Procurement cost for reserves \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{max\_res\_shutdown\_ramp}$ 
-& Max. downward reserve ramp for online units scheduled to shut down for reserve provision \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{max\_res\_startup\_ramp}$ 
-& Maximum non-spinning reserve ramp-up for startups. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{max\_shutdown\_ramp}$ 
-& Max. downward ramp for units shutting down \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{max\_startup\_ramp}$ 
-& Maximum ramp-up during startups. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{min\_res\_shutdown\_ramp}$ 
-& Minimum non-spinning reserve ramp-down for online units providing reserves during shut-downs \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{min\_res\_startup\_ramp}$ 
-& Minimum non-spinning reserve ramp-up for startups. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{min\_shutdown\_ramp}$ 
-& Minimum ramp-up during startups \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{min\_startup\_ramp}$ 
-& Minimum ramp-up during startups. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{minimum\_operating\_point}$ 
-& Minimum level for the unit\_flow relative to the units\_on online capacity. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{operating\_points}$ 
-& Operating points for piecewise-linear unit efficiency approximations. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{ramp\_down\_cost}$ 
-& Costs for ramping down \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{ramp\_down\_limit}$ 
-& Limit the maximum ramp-down rate of an online unit, given as a fraction of the unit\_capacity. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{ramp\_up\_cost}$ 
-& Costs for ramping up \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{ramp\_up\_limit}$ 
-& Limit the maximum ramp-up rate of an online unit, given as a fraction of the unit\_capacity. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{unit\_capacity}$ 
-& Maximum unit\_flow capacity of a single 'sub\_unit' of the unit. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{unit\_conv\_cap\_to\_flow}$ 
-& Optional coefficient for unit\_capacity unit conversions in the case the unit\_capacity value is incompatible with the desired unit\_flow units. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{vom\_cost}$ 
-& Variable operating costs of a unit\_flow variable. E.g. EUR/MWh. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_from\_node$ \\ 
-
-$p_{unit\_flow\_coefficient}$ 
-& Coefficient of a unit\_flow variable for a custom unit\_constraint. \\ 
-\text{-Inherent Index:} $(u, n, uc) \in unit\_\_from\_node\_\_unit\_constraint$ \\ 
-
-$p_{fix\_ratio\_in\_in\_unit\_flow}$ 
-& Fix the ratio between two unit\_flows coming into the unit from the two nodes $n_1$ and $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_ratio\_in\_out\_unit\_flow}$ 
-& Fix the ratio between an incoming unit\_flow from the first node $n_1$ and an outgoing unit\_flow to the second node $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_ratio\_out\_in\_unit\_flow}$ 
-& Fix the ratio between an outgoing unit\_flow to the first node $n_1$ and an incoming unit\_flow from the second node $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_ratio\_out\_out\_unit\_flow}$ 
-& Fix the ratio between two unit\_flows going from the unit into the two nodes $n_1$ and $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_units\_on\_coefficient\_in\_in}$ 
-& Optional coefficient for the units\_on variable impacting the fix\_ratio\_in\_in\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_units\_on\_coefficient\_in\_out}$ 
-& Optional coefficient for the units\_on variable impacting the fix\_ratio\_in\_out\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_units\_on\_coefficient\_out\_in}$ 
-& Optional coefficient for the units\_on variable impacting the fix\_ratio\_out\_in\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_units\_on\_coefficient\_out\_out}$ 
-& Optional coefficient for the units\_on variable impacting the fix\_ratio\_out\_out\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_ratio\_in\_in\_unit\_flow}$ 
-& Maximum ratio between two unit\_flows coming into the unit from the two nodes $n_1$ and $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_ratio\_in\_out\_unit\_flow}$ 
-& Maximum ratio between an incoming unit\_flow from the first node $n_1$ and an outgoing unit\_flow to the second node $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_ratio\_out\_in\_unit\_flow}$ 
-& Maximum ratio between an outgoing unit\_flow to the first node $n_1$ and an incoming unit\_flow from the second node $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_ratio\_out\_out\_unit\_flow}$ 
-& Maximum ratio between two unit\_flows going from the unit into the two nodes $n_1$ and $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_units\_on\_coefficient\_in\_in}$ 
-& Optional coefficient for the units\_on variable impacting the max\_ratio\_in\_in\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_units\_on\_coefficient\_in\_out}$ 
-& Optional coefficient for the units\_on variable impacting the max\_ratio\_in\_out\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_units\_on\_coefficient\_out\_in}$ 
-& Optional coefficient for the units\_on variable impacting the max\_ratio\_out\_in\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{max\_units\_on\_coefficient\_out\_out}$ 
-& Optional coefficient for the units\_on variable impacting the max\_ratio\_out\_out\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_ratio\_in\_in\_unit\_flow}$ 
-& Minimum ratio between two unit\_flows coming into the unit from the two nodes $n_1$ and $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_ratio\_in\_out\_unit\_flow}$ 
-& Minimum ratio between an incoming unit\_flow from the first node $n_1$ and an outgoing unit\_flow to the second node $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_ratio\_out\_in\_unit\_flow}$ 
-& Minimum ratio between an outgoing unit\_flow to the first node $n_1$ and an incoming unit\_flow from the second node $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_ratio\_out\_out\_unit\_flow}$ 
-& Minimum ratio between two unit\_flows going from the unit into the two nodes $n_1$ and $n_2$. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_units\_on\_coefficient\_in\_in}$ 
-& Optional coefficient for the units\_on variable impacting the min\_ratio\_in\_in\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_units\_on\_coefficient\_in\_out}$ 
-& Optional coefficient for the units\_on variable impacting the min\_ratio\_in\_out\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_units\_on\_coefficient\_out\_in}$ 
-& Optional coefficient for the units\_on variable impacting the min\_ratio\_out\_in\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{min\_units\_on\_coefficient\_out\_out}$ 
-& Optional coefficient for the units\_on variable impacting the min\_ratio\_out\_out\_unit\_flow constraint. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{unit\_incremental\_heat\_rate}$ 
-& Standard piecewise incremental heat rate where node1 is assumed to be the fuel and node2 is assumed to be electricity. Assumed monotonically increasing. Array type or single coefficient where the number of coefficients must match the dimensions of unit\_operating\_points \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{unit\_idle\_heat\_rate}$ 
-& Flow from node1 per unit time and per units\_on that results in no additional flow to node2 \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{unit\_start\_flow}$ 
-& Flow from node1 that is incurred when a unit is started up. \\ 
-\text{-Inherent Index:} $(u, n_1, n_2) \in unit\_\_node\_\_node$ \\ 
-
-$p_{fix\_nonspin\_ramp\_down\_unit\_flow}$ 
-& Fix the nonspin\_ramp\_down\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_nonspin\_ramp\_up\_unit\_flow}$ 
-& Fix the nonspin\_ramp\_up\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_nonspin\_units\_shut\_down}$ 
-& Fix the nonspin\_units\_shut\_down variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_nonspin\_units\_started\_up}$ 
-& Fix the nonspin\_units\_started\_up variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_ramp\_down\_unit\_flow}$ 
-& Fix the ramp\_down\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_ramp\_up\_unit\_flow}$ 
-& Fix the ramp\_up\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_shut\_down\_unit\_flow}$ 
-& Fix the shut\_down\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_start\_up\_unit\_flow}$ 
-& Fix the start\_up\_unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_unit\_flow}$ 
-& Fix the unit\_flow variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fix\_unit\_flow\_op}$ 
-& Fix the unit\_flow\_op variable. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{fuel\_cost}$ 
-& Variable fuel costs than can be attributed to a unit\_flow. E.g. EUR/MWh \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{reserve\_procurement\_cost}$ 
-& Procurement cost for reserves \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{max\_res\_shutdown\_ramp}$ 
-& Maximum non-spinning reserve ramp-down for online units providing reserves during shut-downs \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{max\_res\_startup\_ramp}$ 
-& Maximum non-spinning reserve ramp-up for offline units scheduled for reserve provision \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{max\_shutdown\_ramp}$ 
-& Maximum ramp-down during shutdowns \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{max\_startup\_ramp}$ 
-& Maximum ramp-up during startups \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{min\_res\_shutdown\_ramp}$ 
-& Minimum non-spinning reserve ramp-down for online units providing reserves during shut-downs \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{min\_res\_startup\_ramp}$ 
-& Minimum non-spinning reserve ramp-up for offline units scheduled for reserve provision \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{min\_shutdown\_ramp}$ 
-& Minimum ramp-up during startups \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{min\_startup\_ramp}$ 
-& Minimum ramp-up during startups \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{minimum\_operating\_point}$ 
-& Minimum level for the unit\_flow relative to the units\_on online capacity. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{operating\_points}$ 
-& Decomposes the flow variable into a number of separate operating segment variables. Used to in conjunction with unit\_incremental\_heat\_rate and/or unit\_constraints \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{ramp\_down\_cost}$ 
-& Costs of ramping down \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{ramp\_down\_limit}$ 
-& Limit the maximum ramp-down rate of an online unit, given as a fraction of the unit\_capacity. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{ramp\_up\_cost}$ 
-& Costs of ramping up \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{ramp\_up\_limit}$ 
-& Limit the maximum ramp-up rate of an online unit, given as a fraction of the unit\_capacity. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{unit\_capacity}$ 
-& Maximum unit\_flow capacity of a single 'sub\_unit' of the unit. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{unit\_conv\_cap\_to\_flow}$ 
-& Optional coefficient for unit\_capacity unit conversions in the case the unit\_capacity value is incompatible with the desired unit\_flow units. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{vom\_cost}$ 
-& Variable operating costs of a unit\_flow variable. E.g. EUR/MWh. \\ 
-\text{-Inherent Index:} $(u, n) \in unit\_\_to\_node$ \\ 
-
-$p_{unit\_flow\_coefficient}$ 
-& Coefficient of a unit\_flow variable for a custom unit\_constraint. \\ 
-\text{-Inherent Index:} $(u, n, uc) \in unit\_\_to\_node\_\_unit\_constraint$ \\ 
-
-$p_{units\_on\_coefficient}$ 
-& Coefficient of a units\_on variable for a custom unit\_constraint. \\ 
-\text{-Inherent Index:} $(u, uc) \in unit\_\_unit\_constraint$ \\ 
-
-$p_{units\_started\_up\_coefficient}$ 
-& Coefficient of a units\_started\_up variable for a custom unit\_constraint. \\ 
-\text{-Inherent Index:} $(u, uc) \in unit\_\_unit\_constraint$ \\ 
+$p_{candidate\_connections}(conn)$ 
+& The number of connections that may be invested in. 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{connection\_availability\_factor}(conn)$ 
+& Availability of the connection, acting as a multiplier on its connection\_capacity. Typically between 0-1. 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{connection\_flow\_cost}(conn)$ 
+& Variable costs of a flow through a connection. E.g. EUR/MWh of energy throughput. 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{connection\_investment\_cost}(conn)$ 
+& The per unit investment cost for the connection over the connection\_investment\_lifetime. 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{connection\_investment\_lifetime}(conn)$ 
+& Determines the minimum investment lifetime of a connection. Once invested, it remains in service for this long. 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{connection\_reactance}(conn)$ 
+& The per unit reactance of a connection. 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{connection\_reactance\_base}(conn)$ 
+& If the reactance is given for a p.u. (e.g. p.u. = 100MW), the connection\_reactance\_base can be set to perform this conversion (e.g. $\times 100$). 
+The parameter is defined under the SpineOpt object class \textit{connection}. \\ 
+
+$p_{big\_m}(m)$ 
+& Sufficiently large number used for linearization bilinear terms, e.g. to enforce bidirectional flow for gas pipielines. 
+The parameter is defined under the SpineOpt object class \textit{model}. \\ 
+
+$p_{balance\_type}(n)$ 
+& A selector for how the :nodal\_balance constraint should be handled. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{candidate\_storages}(n)$ 
+& Determines the maximum number of new storages which may be invested in. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{demand}(n)$ 
+& Demand for the commodity of a node. Energy gains can be represented using negative demand. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{downward\_reserve}(n)$ 
+& Identifier for nodes providing downward reserves. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{frac\_state\_loss}(n)$ 
+& Self-discharge coefficient for node\_state variables. Effectively, represents the 'loss power per unit of state'. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{has\_state}(n)$ 
+& A boolean flag for whether a node has a node\_state variable. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{is\_reserve\_node}(n)$ 
+& A boolean flag for whether a node is acting as a reserve\_node. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{minimum\_reserve\_activation\_time}(n)$ 
+& Duration a certain reserve product needs to be online/available. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{node\_slack\_penalty}(n)$ 
+& A penalty cost for node\_slack\_pos and node\_slack\_neg variables. The slack variables won't be included in the model unless there's a cost defined for them. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{node\_state\_cap}(n)$ 
+& The maximum permitted value for a node\_state variable. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{node\_state\_min}(n)$ 
+& The minimum permitted value for a node\_state variable. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{state\_coeff}(n)$ 
+& Represents the commodity content of a node\_state variable in respect to the unit\_flow and connection\_flow variables. Essentially, acts as a coefficient on the node\_state variable in the :node\_injection constraint. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{storage\_investment\_cost}(n)$ 
+& Determines the investment cost per unit state\_cap over the investment life of a storage. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{storage\_investment\_lifetime}(n)$ 
+& Minimum lifetime for storage investment decisions. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{tax\_in\_unit\_flow}(n)$ 
+& Tax costs for incoming unit\_flows on this node. E.g. EUR/MWh. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{tax\_net\_unit\_flow}(n)$ 
+& Tax costs for net incoming and outgoing unit\_flows on this node. Incoming flows accrue positive net taxes, and outgoing flows accrue negative net taxes. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{tax\_out\_unit\_flow}(n)$ 
+& Tax costs for outgoing unit\_flows from this node. E.g. EUR/MWh. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{upward\_reserve}(n)$ 
+& Identifier for nodes providing upward reserves. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{max\_node\_pressure}(n)$ 
+& Maximum allowed gas pressure at node. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{min\_node\_pressure}(n)$ 
+& Minimum allowed gas pressure at node. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{max\_voltage\_angle}(n)$ 
+& Maximum allowed voltage angle at node. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{min\_voltage\_angle}(n)$ 
+& Minimum allowed voltage angle at node. 
+The parameter is defined under the SpineOpt object class \textit{node}. \\ 
+
+$p_{weight}(tb)$ 
+& Weighting factor of the temporal block associated with the objective function. 
+The parameter is defined under the SpineOpt object class \textit{temporal\_block}. \\ 
+
+$p_{candidate\_units}(u)$ 
+& Number of units which may be additionally constructed. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{curtailment\_cost}(u)$ 
+& Costs for curtailing generation. Essentially, accrues costs whenever unit\_flow not operating at its maximum available capacity. E.g. EUR/MWh. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{fom\_cost}(u)$ 
+& Fixed operation and maintenance costs of a unit. Essentially, a cost coefficient on the number\_of\_units and unit\_capacity parameters. E.g. EUR/MW. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{min\_down\_time}(u)$ 
+& Minimum downtime of a unit after it shuts down. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{min\_up\_time}(u)$ 
+& Minimum uptime of a unit after it starts up. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{number\_of\_units}(u)$ 
+& Denotes the number of 'sub units' aggregated to form the modelled unit. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{shut\_down\_cost}(u)$ 
+& Costs of shutting down a 'sub unit', e.g. EUR/shutdown. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{start\_up\_cost}(u)$ 
+& Costs of starting up a 'sub unit', e.g. EUR/startup. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{unit\_availability\_factor}(u)$ 
+& Availability of the unit, acting as a multiplier on its unit\_capacity. Typically between 0-1. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{unit\_investment\_cost}(u)$ 
+& Investment cost per 'sub unit' built. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{unit\_investment\_lifetime}(u)$ 
+& Minimum lifetime for unit investment decisions. 
+The parameter is defined under the SpineOpt object class \textit{unit}. \\ 
+
+$p_{constraint\_sense}(uc)$ 
+& A selector for the sense of the unit\_constraint. 
+The parameter is defined under the SpineOpt object class \textit{unit\_constraint}. \\ 
+
+$p_{right\_hand\_side}(uc)$ 
+& The right-hand side, constant term in a unit\_constraint. Can be time-dependent and used e.g. for complicated efficiency approximations. 
+The parameter is defined under the SpineOpt object class \textit{unit\_constraint}. \\ 
+
+$p_{connection\_capacity}(conn, n)$ 
+& Limits the connection\_flow variable from the from\_node. from\_node can be a group of nodes, in which case the sum of the connection\_flow is constrained. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_from\_node}. \\ 
+
+$p_{connection\_conv\_cap\_to\_flow}(conn, n)$ 
+& Optional coefficient for connection\_capacity unit conversions in the case that the connection\_capacity value is incompatible with the desired connection\_flow units. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_from\_node}. \\ 
+
+$p_{connection\_emergency\_capacity}(conn, n)$ 
+& Post contingency flow capacity of a connection. Sometimes referred to as emergency rating. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_from\_node}. \\ 
+
+$p_{connection\_flow\_coefficient}(conn, n, uc)$ 
+& defines the unit constraint coefficient on the connection flow variable in the from direction. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_from\_node\_\_unit\_constraint"}. \\ 
+
+$p_{fix\_ratio\_out\_in\_connection\_flow}(conn, n_1, n_2)$ 
+& Fix the ratio between the connection\_flow from the first node $n_1$ and the connection\_flow to the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{max\_ratio\_out\_in\_connection\_flow}(conn, n_1, n_2)$ 
+& Maximum ratio between the connection\_flow from the first node $n_1$ and the connection\_flow to the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{min\_ratio\_out\_in\_connection\_flow}(conn, n_1, n_2)$ 
+& Minimum ratio between the connection\_flow from the first node $n_1$ and the connection\_flow to the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{fixed\_pressure\_constant\_1}(conn, n_1, n_2)$ 
+& Fixed pressure points for pipelines for the outer approximation of the Weymouth approximation. The direction of flow is the first node $n_1$ in the relationship to the second node $n_2$ in the relationship. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{fixed\_pressure\_constant\_0}(conn, n_1, n_2)$ 
+& Fixed pressure points for pipelines for the outer approximation of the Weymouth approximation. The direction of flow is the first node $n_1$ in the relationship to the second node $n_2$ in the relationship. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{compression\_factor}(conn, n_1, n_2)$ 
+& The compression factor establishes a compression from an origin node to a receiving node, which are connected through a connection. The first node $n_1$ corresponds to the origin node, the second to the (compressed) destination node. Typically the value is $\geq 1$. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{connection\_linepack\_constant}(conn, n_1, n_2)$ 
+& The linepack constant is a property of gas pipelines and relates the linepack to the pressure of the adjacent nodes. 
+The parameter is defined under the SpineOpt relationship class \textit{connection\_\_node\_\_node}. \\ 
+
+$p_{diff\_coeff}(n_1, n_2)$ 
+& Commodity diffusion coefficient between two nodes $n_1$ and $n_2$. Effectively, denotes the *diffusion power per unit of state* from the first node $n_1$ to the second. 
+The parameter is defined under the SpineOpt relationship class \textit{node\_\_node}. \\ 
+
+$p_{cyclic\_condition}(n, tb)$ 
+& If the cyclic condition is set to true for a storage node, the node\_state at the end of the optimisation window has to be larger than or equal to the initial storage state. 
+The parameter is defined under the SpineOpt relationship class \textit{node\_\_temporal\_block}. \\ 
+
+$p_{demand\_coefficient}(n, uc)$ 
+& coefficient of the specified node's demand in the specified unit constraint. 
+The parameter is defined under the SpineOpt relationship class \textit{node\_\_unit\_constraint}. \\ 
+
+$p_{node\_state\_coefficient}(n, uc)$ 
+& Coefficient of the specified node's state variable in the specified unit constraint. 
+The parameter is defined under the SpineOpt relationship class \textit{node\_\_unit\_constraint}. \\ 
+
+$p_{fuel\_cost}(u, n)$ 
+& Variable fuel costs than can be attributed to a unit\_flow. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{reserve\_procurement\_cost}(u, n)$ 
+& Procurement cost for reserves. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{max\_res\_shutdown\_ramp}(u, n)$ 
+& Max. downward reserve ramp for online units scheduled to shut down for reserve provision. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{max\_res\_startup\_ramp}(u, n)$ 
+& Maximum non-spinning reserve ramp-up for startups. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{max\_shutdown\_ramp}(u, n)$ 
+& Max. downward ramp for units shutting down. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{max\_startup\_ramp}(u, n)$ 
+& Maximum ramp-up during startups. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{min\_res\_shutdown\_ramp}(u, n)$ 
+& Minimum non-spinning reserve ramp-down for online units providing reserves during shut-downs. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{min\_res\_startup\_ramp}(u, n)$ 
+& Minimum non-spinning reserve ramp-up for startups. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{min\_shutdown\_ramp}(u, n)$ 
+& Minimum ramp-up during startups. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{min\_startup\_ramp}(u, n)$ 
+& Minimum ramp-up during startups. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{minimum\_operating\_point}(u, n)$ 
+& Minimum level for the unit\_flow relative to the units\_on online capacity. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{operating\_points}(u, n)$ 
+& Operating points for piecewise-linear unit efficiency approximations. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{ramp\_down\_cost}(u, n)$ 
+& Costs for ramping down. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{ramp\_down\_limit}(u, n)$ 
+& Limit the maximum ramp-down rate of an online unit, given as a fraction of the unit\_capacity. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{ramp\_up\_cost}(u, n)$ 
+& Costs for ramping up. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{ramp\_up\_limit}(u, n)$ 
+& Limit the maximum ramp-up rate of an online unit, given as a fraction of the unit\_capacity. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{unit\_capacity}(u, n)$ 
+& Maximum unit\_flow capacity of a single 'sub\_unit' of the unit. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{unit\_conv\_cap\_to\_flow}(u, n)$ 
+& Optional coefficient for unit\_capacity unit conversions in the case the unit\_capacity value is incompatible with the desired unit\_flow units. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{vom\_cost}(u, n)$ 
+& Variable operating costs of a unit\_flow variable. E.g. EUR/MWh. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node}. \\ 
+
+$p_{unit\_flow\_coefficient}(u, n, uc)$ 
+& Coefficient of a unit\_flow variable for a custom unit\_constraint. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_from\_node\_\_unit\_constraint}. \\ 
+
+$p_{fix\_ratio\_in\_in\_unit\_flow}(u, n_1, n_2)$ 
+& Fix the ratio between two unit\_flows coming into the unit from the two nodes $n_1$ and $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{fix\_ratio\_in\_out\_unit\_flow}(u, n_1, n_2)$ 
+& Fix the ratio between an incoming unit\_flow from the first node $n_1$ and an outgoing unit\_flow to the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{fix\_ratio\_out\_in\_unit\_flow}(u, n_1, n_2)$ 
+& Fix the ratio between an outgoing unit\_flow to the first node $n_1$ and an incoming unit\_flow from the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{fix\_ratio\_out\_out\_unit\_flow}(u, n_1, n_2)$ 
+& Fix the ratio between two unit\_flows going from the unit into the two nodes $n_1$ and $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{max\_ratio\_in\_in\_unit\_flow}(u, n_1, n_2)$ 
+& Maximum ratio between two unit\_flows coming into the unit from the two nodes $n_1$ and $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{max\_ratio\_in\_out\_unit\_flow}(u, n_1, n_2)$ 
+& Maximum ratio between an incoming unit\_flow from the first node $n_1$ and an outgoing unit\_flow to the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{max\_ratio\_out\_in\_unit\_flow}(u, n_1, n_2)$ 
+& Maximum ratio between an outgoing unit\_flow to the first node $n_1$ and an incoming unit\_flow from the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{max\_ratio\_out\_out\_unit\_flow}(u, n_1, n_2)$ 
+& Maximum ratio between two unit\_flows going from the unit into the two nodes $n_1$ and $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{min\_ratio\_in\_in\_unit\_flow}(u, n_1, n_2)$ 
+& Minimum ratio between two unit\_flows coming into the unit from the two nodes $n_1$ and $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{min\_ratio\_in\_out\_unit\_flow}(u, n_1, n_2)$ 
+& Minimum ratio between an incoming unit\_flow from the first node $n_1$ and an outgoing unit\_flow to the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{min\_ratio\_out\_in\_unit\_flow}(u, n_1, n_2)$ 
+& Minimum ratio between an outgoing unit\_flow to the first node $n_1$ and an incoming unit\_flow from the second node $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{min\_ratio\_out\_out\_unit\_flow}(u, n_1, n_2)$ 
+& Minimum ratio between two unit\_flows going from the unit into the two nodes $n_1$ and $n_2$. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{unit\_incremental\_heat\_rate}(u, n_1, n_2)$ 
+& Standard piecewise incremental heat rate where node1 is assumed to be the fuel and node2 is assumed to be electricity. Assumed monotonically increasing. Array type or single coefficient where the number of coefficients must match the dimensions of unit\_operating\_points. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{unit\_idle\_heat\_rate}(u, n_1, n_2)$ 
+& Flow from node1 per unit time and per units\_on that results in no additional flow to node2. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{unit\_start\_flow}(u, n_1, n_2)$ 
+& Flow from node1 that is incurred when a unit is started up. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_node\_\_node}. \\ 
+
+$p_{units\_on\_coefficient}(u, uc)$ 
+& Coefficient of a units\_on variable for a custom unit\_constraint. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_unit\_constraint}. \\ 
+
+$p_{units\_started\_up\_coefficient}(u, uc)$ 
+& Coefficient of a units\_started\_up variable for a custom unit\_constraint. 
+The parameter is defined under the SpineOpt relationship class \textit{unit\_\_unit\_constraint}. \\ 
 
