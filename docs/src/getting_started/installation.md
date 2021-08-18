@@ -12,7 +12,7 @@ SpineOpt and Spine Toolbox are under active development and the getting started 
 
 - The recommended interface to SpineOpt is [Spine Toolbox](https://github.com/Spine-project/Spine-Toolbox). Install Spine Toolbox following instructions from here: [Spine Toolbox installation](https://github.com/Spine-project/Spine-Toolbox#installation)
 
-- Setup Julia for Spine Toolbox: [Start Spine Toolbox](https://github.com/Spine-project/Spine-Toolbox#running). Go to *File* --> *Settings* --> *Tools*. Either select an existing Julia installation, or press *Install Julia* button and follow the instructions. You can download & install Julia manually from https://julialang.org/downloads/.
+- Setup Julia for Spine Toolbox: [Start Spine Toolbox](https://github.com/Spine-project/Spine-Toolbox#running). Go to *File* --> *Settings* --> *Tools*. Either select an existing Julia installation, or press *Install Julia* button and follow the instructions. You can download & install Julia manually from [Julia Download](https://julialang.org/downloads/).
 
 - [Optional] If you want to install and run SpineOpt in a specific Julia project environment (the place for Project.toml and Manifest.toml), you can set the path to the environment folder to the line edit just below the Julia executable line edit (the one that says *Using Julia default project* when empty).
 

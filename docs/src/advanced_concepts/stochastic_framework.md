@@ -1,7 +1,21 @@
 # Stochastic Framework
 
-Scenario-based stochastics in unit commitment and economic dispatch models typically only consider branching
-scenario trees.
+## Stochastic analysis for optimization problems
+
+Stochastic optimization refers to a collection of methods for minimizing or maximizing an objective function when randomness is present.
+Specific applications are varied, but include: running simulations to refine the placement of acoustic sensors on a beam, deciding when to release water from a reservoir for hydroelectric power generation, and optimizing the parameters of a statistical model for a given data set. Randomness usually enters the problem in two ways: through the cost function or the constraint set.
+
+Like deterministic optimization, there is no single solution method that works well for all problems. Structural assumptions, such as limits on the size of the decision and outcome spaces, or convexity, are needed to make problems tractable.
+
+Usually, there is a division between solution methods for problems with a single time period (single stage problems) and those with multiple time periods (multistage problems), which are the most prominent ones.
+Single stage problems try to find a single, optimal decision, such as the best set of parameters for a statistical model given data. Whereas, multistage problems try to find an optimal sequence of decisions, such as scheduling water releases from hydroelectric plants over a two year period.
+
+Single stage problems are usually solved with modified deterministic optimization methods.
+However, the dependence of future decisions on random outcomes makes direct modification of deterministic methods difficult in multistage problems. Multistage methods are more reliant on statistical approximation and strong assumptions about problem structure, such as finite decision and outcome spaces, or a compact Markovian representation of the decision process.
+
+## Stochastic analysis using *SpineOpt.jl*
+
+Scenario-based stochastics in unit commitment and economic dispatch models typically only consider branching scenario trees.
 However, sometimes the available stochastic data doesn't span over the entire desired modelling horizon,
 or all the modelled phenomena.
 Especially with increasing interest in energy system integration and sector coupling,
@@ -9,7 +23,7 @@ stochastic data of consistent quality and/or length might be hard to come by.
 
 While these data issues can be circumvented by either cloning stochastic data across multiple scenario branches
 or generating dummy forecasts, they can result in inflated problem sizes.
-Furthermore, Ensuring realistic correlations between generated forecasts is extremely difficult,
+Furthermore, ensuring realistic correlations between generated forecasts is extremely difficult,
 especially across multiple energy sectors.
 
 The stochastic framework in *SpineOpt.jl* aims to support stochastic directed acyclic graphs (DAGs)
@@ -198,7 +212,7 @@ that can be used to set [model](@ref)-wide defaults that are used if specific re
 
 Here, we'll demonstrate step-by-step how to create the simplest possible stochastic frame: the fully deterministic one.
 See the [Deterministic Stochastic Structure](@ref) [archetype](@ref Archetypes) for how the final data structure looks like,
-as well as how to connect this `stochastic_structure` to the rest of your model. 
+as well as how to connect this `stochastic_structure` to the rest of your model.
 
 1. Create a [stochastic\_scenario](@ref) called e.g. `realization` and a [stochastic\_structure](@ref) called e.g. `deterministic`.
 2. We can skip the [parent\_stochastic\_scenario\_\_child\_stochastic\_scenario](@ref) relationship, since there isn't a *stochastic DAG* in this example, and the default behaviour of each [stochastic\_scenario](@ref) being independent works for our purposes *(only one [stochastic\_scenario](@ref) anyhow)*.

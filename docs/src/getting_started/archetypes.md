@@ -4,12 +4,12 @@ Archetypes are essentially ready-made templates for different aspects of *SpineO
 They are intended to serve both as examples for *how* the data structure in *SpineOpt.jl* works,
 as well as pre-made modular parts that can be imported on top of existing model input data.
 
-The `templates/models/basic_model_template.json` contains a ready-made template for simple energy system models,
+The `templates/models/basic_model_template.json`, located [here](https://github.com/Spine-project/SpineOpt.jl/tree/master/templates/models), contains a ready-made template for simple energy system models,
 with uniform time resolution and deterministic stochastic structure.
 Essentially, it serves as a basis for testing how the modelled system is set up,
 without having to worry about setting up the temporal and stochastic structures.
 
-The rest of the different archetypes are included under `templates/archetypes` in the *SpineOpt.jl* repository.
+The rest of the different archetypes are included under `templates/archetypes`, on this [link](https://github.com/Spine-project/SpineOpt.jl/tree/master/templates/archetypes), in the *SpineOpt.jl* repository.
 Each archetype is stored as a `.json` file containing the necessary [objects](@ref introduction-to-object-classes),
 [relationships](@ref introduction-to-relationship-classes), and [parameters](@ref introduction-to-parameters)
 to form a functioning pre-made part for a *SpineOpt.jl* model.
@@ -24,7 +24,7 @@ as well as what steps the user needs to take to connect said archetype to their 
 
 This archetype contains the definitions required for an example [stochastic\_structure](@ref) called `branching`, representing a
 branching scenario tree.
-The [stochastic\_structure](@ref) starts out as a single [stochastic\_scenario](@ref) called `realistic`,
+The [stochastic\_structure](@ref) starts out as a single [stochastic\_scenario](@ref) called `realization`,
 which then branches out into three roughly equiprobable [stochastic\_scenario](@ref)s called `forecast1`, `forecast2`, and `forecast3` after 6 hours.
 This archetype is the final product of following the steps in the [Example of branching stochastics](@ref) part
 of the [Stochastic Framework](@ref) section.
