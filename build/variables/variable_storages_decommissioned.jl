@@ -18,21 +18,16 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    add_variable_storages_decommissioned!(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Add `storages_decommissioned` variables to model `m`.
 """
-function process_data_structure_pre_roll()
-
+function add_variable_storages_decommissioned!(m::Model)
+    add_variable!(
+        m,
+        :storages_decommissioned,
+        storages_invested_available_indices;
+        lb=x -> 0,
+        int=storages_invested_available_int,
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end

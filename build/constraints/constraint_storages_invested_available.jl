@@ -18,21 +18,19 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    add_constraint_storages_invested_available!(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Limit the storages_invested_available by the number of investment candidate storages.
 """
-function process_data_structure_pre_roll()
-
+function add_constraint_storages_invested_available!(m::Model)
+    @fetch storages_invested_available = m.ext[:variables]
+    t0 = _analysis_time(m)
+    m.ext[:constraints][:storages_invested_available] = Dict(
+        (node=n, stochastic_scenario=s, t=t) => @constraint(
+            m,
+            + storages_invested_available[n, s, t]
+            <=
+            + candidate_storages[(node=n, stochastic_scenario=s, analysis_time=t0, t=t)]
+        ) for (n, s, t) in storages_invested_available_indices(m)
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end

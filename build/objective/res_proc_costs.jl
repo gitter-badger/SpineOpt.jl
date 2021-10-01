@@ -18,21 +18,24 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    res_proc_costs(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Add expression for reserve procurement costs.
 """
-function process_data_structure_pre_roll()
-
+function res_proc_costs(m::Model, t1)
+    @fetch unit_flow = m.ext[:variables]
+    t0 = _analysis_time(m)
+    @expression(
+        m,
+        expr_sum(
+            unit_flow[u, n, d, s, t]
+            * duration(t)
+            * prod(weight(temporal_block=blk) for blk in blocks(t))
+            * reserve_procurement_cost[(unit=u, node=ng, direction=d, stochastic_scenario=s, analysis_time=t0, t=t)]
+            * node_stochastic_scenario_weight(m; node=ng, stochastic_scenario=s)
+            for (u, ng, d) in indices(reserve_procurement_cost)
+            for (u, n, d, s, t) in unit_flow_indices(m; unit=u, node=ng, direction=d) if end_(t) <= t1;
+            init=0,
+        )
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end

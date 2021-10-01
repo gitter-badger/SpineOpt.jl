@@ -40,7 +40,6 @@ function preprocess_data_structure(; log_level=3)
     generate_network_components()
     generate_variable_indexing_support()
     generate_benders_structure()
-    generate_test_data()
 end
 
 """
@@ -834,16 +833,4 @@ function generate_benders_structure()
         export storages_invested_available_bi
         export starting_fix_storages_invested_available
     end
-end
-
-function generate_test_data()
-    node_state_value = Parameter(:node_state_value, [node])
-    @eval begin
-        node_state_value = $node_state_value
-        export node_state_value
-    end
-
-
-
-
 end

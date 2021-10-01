@@ -18,21 +18,24 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    add_variable_connections_invested!(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Add `connections_invested` variables to model `m`.
 """
-function process_data_structure_pre_roll()
-
+function add_variable_connections_invested!(m::Model)
+    t0 = _analysis_time(m)
+    add_variable!(
+        m,
+        :connections_invested,
+        connections_invested_available_indices;
+        lb=x -> 0,
+        fix_value=x -> fix_connections_invested(
+            connection=x.connection,
+            stochastic_scenario=x.stochastic_scenario,
+            analysis_time=t0,
+            t=x.t,
+            _strict=false,
+        ),
+        int=connections_invested_available_int,
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end

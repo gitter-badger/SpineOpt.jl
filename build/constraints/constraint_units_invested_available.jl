@@ -18,21 +18,22 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    add_constraint_units_invested_available!(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Limit the units_invested_available by the number of investment candidate units.
 """
-function process_data_structure_pre_roll()
-
+function add_constraint_units_invested_available!(m::Model)
+    @fetch units_invested_available = m.ext[:variables]
+    t0 = _analysis_time(m)
+    m.ext[:constraints][:units_invested_available] = Dict(
+        (unit=u, stochastic_scenario=s, t=t) => @constraint(
+            m,
+            + units_invested_available[u, s, t]
+            <=
+            + candidate_units[(unit=u, stochastic_scenario=s, analysis_time=t0, t=t)]
+        ) for (u, s, t) in units_invested_available_indices(m)
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end
+# TODO: units_invested_available or \sum(units_invested)?
+# Candidate units: max amount of units that can be installed over model horizon
+# or max amount of units that can be available at a time?

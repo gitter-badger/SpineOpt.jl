@@ -18,21 +18,25 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    connection_flow_costs(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Create an expression for `connection_flow` costs.
 """
-function process_data_structure_pre_roll()
-
+function connection_flow_costs(m::Model, t1)
+    @fetch connection_flow = m.ext[:variables]
+    t0 = _analysis_time(m)
+    @expression(
+        m,
+        expr_sum(
+            connection_flow[conn, n, d, s, t]
+            * duration(t)
+            * prod(weight(temporal_block=blk) for blk in blocks(t))
+            * connection_flow_cost[(connection=conn, stochastic_scenario=s, analysis_time=t0, t=t)]
+            * node_stochastic_scenario_weight(m; node=n, stochastic_scenario=s)
+            for conn in indices(connection_flow_cost)
+            for (conn, n, d, s, t) in connection_flow_indices(m; connection=conn) if end_(t) <= t1;  # TODO: do we need connection_flow_costs in different directions?
+            init=0,
+        )
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end
+# TODO: add weight scenario tree

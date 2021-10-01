@@ -396,7 +396,6 @@ function save_model_results!(outputs, m)
     save_marginal_values!(m)
     save_bound_marginal_values!(m)
     save_outputs!(m)
-    save_node_state_value(m)
 end
 
 """
@@ -522,19 +521,4 @@ function _save_bound_marginal_value!(m::Model, variable_name::Symbol, output_nam
         ind => JuMP.reduced_cost(var[ind])
         for ind in indices(m; t=vcat(history_time_slice(m), time_slice(m))) if end_(ind.t) <= end_(current_window(m))
     )
-end
-
-function save_node_state_value(m::Model)
-    var = m.ext[:variables][:node_state]
-    indices = m.ext[:variables_definition][:node_state][:indices]
-    m.ext[:values][:node_state_value] = Dict(
-        ind => JuMP.reduced_cost(var[ind])
-        for ind in indices(m; t=vcat(history_time_slice(m), time_slice(m)))
-    )    
-    value = m.ext[:values][:node_state_value]    
-    existing = get!(m.ext[:outputs], :node_state_value, Dict{NamedTuple,Dict}())
-    for (k, v) in value        
-        new_k = _drop_key(k, :t)
-        push!(get!(existing, new_k, Dict{DateTime,Any}()), start(k.t) => v)
-    end
 end

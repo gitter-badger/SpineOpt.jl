@@ -1,14 +1,14 @@
 #############################################################################
 # Copyright (C) 2017 - 2018  Spine Project
 #
-# This file is part of Spine Model.
+# This file is part of SpineOpt.
 #
-# Spine Model is free software: you can redistribute it and/or modify
+# SpineOpt is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# Spine Model is distributed in the hope that it will be useful,
+# SpineOpt is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Lesser General Public License for more details.
@@ -18,21 +18,14 @@
 #############################################################################
 
 """
-    process_data_structure_pre_roll()
+    add_constraint_units_on!(m::Model)
 
-This function is called after each model solve before the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
+Limit the units_on by the number of available units.
 """
-function process_data_structure_pre_roll()
-
+function add_constraint_units_on!(m::Model)
+    @fetch units_on, units_available = m.ext[:variables]
+    m.ext[:constraints][:units_on] = Dict(
+        (unit=u, stochastic_scenario=s, t=t) => @constraint(m, + units_on[u, s, t] <= + units_available[u, s, t])
+        for (u, s, t) in units_on_indices(m)
+    )
 end
-
-"""
-    process_data_structure_post_roll()
-
-This function is called after each model solve after the temporal structure has been rolled forwards.
-
-TODO: Fix function and docstring after it actually does something?
-"""
-function process_data_structure_post_roll() end

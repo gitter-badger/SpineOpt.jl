@@ -123,19 +123,7 @@ function save_sp_marginal_values(m)
     _save_marginal_value(connection__benders_iteration, candidate_connections, out_name, var_name)
     out_name, var_name = :bound_storages_invested_available, :storages_invested_available_mv
     _save_marginal_value(node__benders_iteration, candidate_storages, out_name, var_name)
-
-
-
-    ts=last(history_time_slice(m; temporal_block=node__temporal_block(node=your_node)))
-
-
 end
-
-function save_fix_node_state_marginal_values(m)
-
-end
-
-
 
 function save_sp_objective_value_bi(m, mp)
     total_sp_obj_val = reduce(+, values(m.ext[:values][:total_costs]), init=0)

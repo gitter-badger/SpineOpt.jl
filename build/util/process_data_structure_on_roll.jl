@@ -24,9 +24,7 @@ This function is called after each model solve before the temporal structure has
 
 TODO: Fix function and docstring after it actually does something?
 """
-function process_data_structure_pre_roll()
-
-end
+function process_data_structure_pre_roll() end
 
 """
     process_data_structure_post_roll()
