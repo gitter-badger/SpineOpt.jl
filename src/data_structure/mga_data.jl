@@ -125,7 +125,7 @@ function set_objective_mga_iteration!(m;iteration=nothing, mga_alpha=nothing)
                     mga_objective[(model = m.ext[:instance],t=current_window(m))]
                     <= sum(
                     mga_aux_diff[((ind...,mga_iteration=iteration))]
-                    *(ind[1] == ind_mga_alpha ? mga_alpha : (1-mga_alpha))
+                    *(ind[1] == ind_mga_alpha ? mga_alpha : -(1-mga_alpha))
                     for ind in vcat(
                         [storages_invested_mga_indices(iteration)...,
                         connections_invested_mga_indices(iteration)...,
@@ -176,27 +176,22 @@ function _set_objective_mga_iteration!(
             d_aux = get!(m.ext[:variables], :mga_aux_diff, Dict())
             d_bin = get!(m.ext[:variables],:mga_aux_binary, Dict())
             for ind in mga_indices(mga_current_iteration)
-                d_aux[ind] = @variable(m, base_name = _base_name(:mga_aux_diff,ind), lower_bound = 0)
-                d_bin[ind] = @variable(m, base_name = _base_name(:mga_aux_binary,ind), binary=true)
+                d_aux[ind] = @variable(m, base_name = _base_name(:mga_aux_diff,ind))
             end
             @fetch mga_aux_diff, mga_aux_binary = m.ext[:variables]
             mga_results = m.ext[:outputs]
             variable = m.ext[:variables][variable_name]
             #FIXME: don't create new dict everytime, but get existing one
             d_diff_ub1 = get!(m.ext[:constraints],:mga_diff_ub1,Dict())
-            d_diff_ub2 = get!(m.ext[:constraints],:mga_diff_ub2,Dict())
-            d_diff_lb1 = get!(m.ext[:constraints],:mga_diff_lb1,Dict())
-            d_diff_lb2 = get!(m.ext[:constraints],:mga_diff_lb2,Dict())
             for ind in mga_indices()
                 d_diff_ub1[(ind...,mga_current_iteration...)] = @constraint(
                     m,
                     mga_aux_diff[((ind...,mga_iteration=mga_current_iteration))]
-                    <=
+                    ==
                     (
                         sum(
                         + (
                         variable[_ind]
-                         - mga_results[variable_name][(_drop_key(_ind,:t)..., mga_iteration=mga_current_iteration)][t0][_ind.t.start.x]
                          )
                          * reduce(*,
                              (typeof(ind_cap) == Object ? obj_capacity[NamedTuple{(ind_cap.class_name,)}(ind_cap)] : obj_capacity[(ind_cap)])
@@ -206,66 +201,9 @@ function _set_objective_mga_iteration!(
                          )
                          * scenario_weight_function(m; _drop_key(_ind,:t)...) #fix me, can also be only node or so
                          for _ind in variable_indices_function(m; ind...)
+                         )
                        )
-                       + mga_variable_bigM(;ind...)
-                       *mga_aux_binary[(ind...,mga_iteration=mga_current_iteration)])
                        * mga_scaling_function(;ind...))
-                d_diff_ub2[(ind...,mga_current_iteration...)]= @constraint(
-                    m,
-                    mga_aux_diff[((ind...,mga_iteration=mga_current_iteration))]
-                    <=
-                    (
-                        sum(
-                        - (variable[_ind]
-                          - mga_results[variable_name][(_drop_key(_ind,:t)..., mga_iteration=mga_current_iteration)][t0][_ind.t.start.x])
-                          * reduce(*,
-                              (typeof(ind_cap) == Object ? obj_capacity[NamedTuple{(ind_cap.class_name,)}(ind_cap)] : obj_capacity[(ind_cap)])
-                              for ind_cap in indices(obj_capacity; _ind ...)
-                                  if realize(use_obj_capacity_for_scaling[(typeof(ind_cap) == Object ? NamedTuple{(ind_cap.class_name,)}(ind_cap) : (ind_cap))]) == true
-                              ;init=1
-                          )
-                          * scenario_weight_function(m; _drop_key(_ind,:t)...)
-                          for _ind in variable_indices_function(m; ind...)
-                       )
-                  + mga_variable_bigM(;ind...)
-                  *(1-mga_aux_binary[(ind...,mga_iteration=mga_current_iteration)]))
-                  * mga_scaling_function(;ind...))
-                  d_diff_lb1[(ind...,mga_current_iteration...)] = @constraint(
-                    m,
-                    mga_aux_diff[((ind...,mga_iteration=mga_current_iteration))]
-                    >=
-                    sum(
-                    (variable[_ind]
-                      - mga_results[variable_name][(_drop_key(_ind,:t)..., mga_iteration=mga_current_iteration)][t0][_ind.t.start.x])
-                      * reduce(*,
-                          (typeof(ind_cap) == Object ? obj_capacity[NamedTuple{(ind_cap.class_name,)}(ind_cap)] : obj_capacity[(ind_cap)])
-                          for ind_cap in indices(obj_capacity; _ind ...)
-                              if realize(use_obj_capacity_for_scaling[(typeof(ind_cap) == Object ? NamedTuple{(ind_cap.class_name,)}(ind_cap) : (ind_cap))]) == true
-                          ;init=1
-                      )
-                      * scenario_weight_function(m; _drop_key(_ind,:t)...)
-                       for _ind in variable_indices_function(m; ind...)
-                   )
-                   * mga_scaling_function(;ind...)
-                   )
-                   d_diff_lb2[(ind...,mga_current_iteration...)] = @constraint(
-                    m,
-                    mga_aux_diff[((ind...,mga_iteration=mga_current_iteration))]
-                    >=
-                    sum(
-                    - (variable[_ind]
-                      - mga_results[variable_name][(_drop_key(_ind,:t)..., mga_iteration=mga_current_iteration)][t0][_ind.t.start.x])
-                      * reduce(*,
-                          (typeof(ind_cap) == Object ? obj_capacity[NamedTuple{(ind_cap.class_name,)}(ind_cap)] : obj_capacity[(ind_cap)])
-                          for ind_cap in indices(obj_capacity; _ind ...)
-                              if realize(use_obj_capacity_for_scaling[(typeof(ind_cap) == Object ? NamedTuple{(ind_cap.class_name,)}(ind_cap) : (ind_cap))]) == true
-                          ;init=1
-                      )
-                      * scenario_weight_function(m; _drop_key(_ind,:t)...)
-                       for _ind in variable_indices_function(m; ind...)
-                   )
-                    * mga_scaling_function(;ind...)
-                   )
                end
         end
 end
@@ -288,7 +226,7 @@ end
 
 function set_mga_objective!(m)
     m.ext[:variables][:mga_objective] = Dict(
-               (model = m.ext[:instance],t=current_window(m)) => @variable(m, base_name = _base_name(:mga_objective,(model = m.ext[:instance],t=current_window(m))), lower_bound=0)
+               (model = m.ext[:instance],t=current_window(m)) => @variable(m, base_name = _base_name(:mga_objective,(model = m.ext[:instance],t=current_window(m))))
                )
     @objective(m,
             Max,
