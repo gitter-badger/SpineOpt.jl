@@ -445,6 +445,17 @@ function _save_output!(m, out, value_or_param; iterations=nothing, mga_alpha=not
             end
             entity = (; entity..., mga_iteration=new_mga_i)
         end
+        if !isnothing(mga_alpha)
+            # FIXME: Needs to be done, befooooore we execute solve, as we need to set objective for this solve
+            new_mga_name = Symbol(string("mga_alpha_", mga_alpha))
+            if mga_weight_alpha(new_mga_name) == nothing
+                new_mga_i = Object(new_mga_name)
+                add_object!(mga_weight_alpha, new_mga_i)
+            else
+                new_mga_i = mga_weight_alpha(new_mga_name)
+            end
+            entity = (; entity..., mga_weight_alpha=new_mga_i)
+        end
         for (analysis_time, by_time_slice_non_aggr) in by_analysis_time_non_aggr
             t_highest_resolution!(by_time_slice_non_aggr)
             output_time_slices_ = output_time_slices(m, output=out)

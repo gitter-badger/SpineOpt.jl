@@ -30,7 +30,7 @@ function rerun_spineopt!(
     @timelog log_level 2 "Creating economic structure..." generate_economic_structure!(m_mga)
     init_model!(m_mga; add_user_variables=add_user_variables, add_constraints=add_constraints, log_level=log_level,alternative_objective=alternative_objective)
     init_outputs!(m_mga)
-    mga_alpha, mga_alpha_steps = define_mga_alpha!()
+    mga_alpha="init"
     k = 1
     while optimize
         @log log_level 1 "Window $k: $(current_window(m_mga))"
@@ -40,12 +40,7 @@ function rerun_spineopt!(
             iterations=mga_iterations,
             mga_alpha=mga_alpha,
         ) || break
-        for k in keys(m_mga.ext[:outputs])
-            try
-                m_mga.ext[:outputs][k] = _drop_key(m_mga.ext[:outputs][k], :mga_weight_alpha)
-            catch
-            end
-        end
+
         @timelog log_level 2 "Fixing non-anticipativity values..." fix_non_anticipativity_values!(m_mga)
         if @timelog log_level 2 "Rolling temporal structure...\n" !roll_temporal_structure!(m_mga)
             @timelog log_level 2 " ... Rolling complete\n" break
@@ -53,6 +48,7 @@ function rerun_spineopt!(
         update_model!(m_mga; update_constraints=update_constraints, log_level=log_level, update_names=update_names)
         k += 1
     end
+    mga_alpha, mga_alpha_steps = define_mga_alpha!()
     @timelog log_level 2 "Writing report..." write_report(m_mga, url_out)
     m_mga
     write_model_file(m_mga, file_name = "first_mga_iteration")
@@ -64,7 +60,7 @@ function rerun_spineopt!(
         @eval begin
             $(name_mga_obj) = $(Parameter(name_mga_obj, [model]))
         end
-        mga_iterations += 1
+        # mga_iterations += 1
         x = all_variables(m_mga)
         x_solution = value.(x)
         set_start_value.(x, x_solution)
@@ -82,49 +78,36 @@ function rerun_spineopt!(
                     end
                     # while mga_iterations <= max_mga_iteration
                     println("mga_alpha $(mga_alpha) and mga_iteration $(mga_iterations) at time $(now())")
-                    mga_it_obj = mga_iteration(Symbol("mga_it_$(mga_iterations-1)"))
+                    mga_it_obj = mga_iteration(Symbol("mga_it_$(mga_iterations)"))
                     @timelog log_level 2 "Adding mga differences of $(mga_it_obj)..." set_objective_mga_iteration!(m_mga;iteration=mga_it_obj, mga_alpha=mga_alpha)
                     @timelog log_level 2 "Cleaning output dictionary to reduce memory after iteration $(mga_iterations)..." GC.gc()
                     @timelog log_level 2 "Solving mga iteration $(mga_it_obj)..." optimize_model!(m_mga;
                                 log_level=log_level,
                                 iterations=mga_iterations,
+                                mga_alpha=mga_alpha,
                                 )  || break
                     @timelog log_level 2 "Saving mga objective of $(mga_it_obj)..." save_mga_objective_values!(m_mga)
                     write_model_file(m_mga, file_name = "mga_iteration_$(mga_iterations)__mga_alpha_$(mga_alpha)")
                     ### saving results
-                    for k in keys(m_mga.ext[:outputs])
-                            m_mga.ext[:outputs][k] = _add_key(m_mga.ext[:outputs][k], :mga_weight_alpha, mga_weight_alpha(Symbol("mga_alpha_$(mga_alpha)")))
-                    end
                     @timelog log_level 2 "Writing mga report of  mga alpha $(mga_alpha)..." write_report(m_mga, url_out)
-                    for k in keys(m_mga.ext[:outputs])
-                        m_mga.ext[:outputs][k] = _drop_key(m_mga.ext[:outputs][k], :mga_weight_alpha)
-                    end
                     ## clean-up for next alpha
                     for k in keys(m_mga.ext[:outputs])
-                        try
-                            m_mga.ext[:outputs][k] = filter(x -> x[1].mga_iteration == mga_iteration(:mga_it_0),m_mga.ext[:outputs][k])
-                       catch
-                       end
+                        m_mga.ext[:outputs][k] = Dict()
                     end
-                    GC.gc()
                     for cons in
                     [:mga_objective_ub,
                     :mga_diff_ub1,]
-                    # :mga_diff_ub2,
-                    # :mga_diff_lb1,
-                    # :mga_diff_lb2]
                         for k in keys(m_mga.ext[:constraints][cons])
                             delete(m_mga,m_mga.ext[:constraints][cons][k])
                         end
                     end
                     for vars in  [:mga_aux_diff,]
-                    # :mga_aux_binary]
                         for k in keys(m_mga.ext[:variables][vars])
                             delete(m_mga,m_mga.ext[:variables][vars][k])
                         end
                     end
                     GC.gc()
-                    mga_iterations = 1
+                    # mga_iterations = 1
             end
         else
             while mga_iterations <= max_mga_iteration
