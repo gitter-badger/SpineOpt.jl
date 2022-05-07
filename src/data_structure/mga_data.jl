@@ -125,7 +125,7 @@ function set_objective_mga_iteration!(m;iteration=nothing, mga_alpha=nothing)
                     mga_objective[(model = m.ext[:instance],t=current_window(m))]
                     <= sum(
                     mga_aux_diff[((ind...,mga_iteration=iteration))]
-                    *(ind[1] == ind_mga_alpha ? -mga_alpha : -(1-mga_alpha))
+                    *(ind[1] == ind_mga_alpha ? mga_alpha : sign(mga_alpha)(1-abs(mga_alpha)))
                     for ind in vcat(
                         [storages_invested_mga_indices(iteration)...,
                         connections_invested_mga_indices(iteration)...,
