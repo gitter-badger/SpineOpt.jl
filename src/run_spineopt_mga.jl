@@ -68,7 +68,9 @@ function rerun_spineopt!(
         @timelog log_level 2 "Setting mga slack-objective constraint..." add_mga_objective_constraint!(m_mga)
         @timelog log_level 2 "Setting mga objective..." set_mga_objective!(m_mga)
         if !isnothing(mga_alpha_steps)
-            for mga_alpha = -1:mga_alpha_steps:1
+            alpha_1 = [(x,y) for x in -1:mga_alpha_steps:0 for y = -1*(1+x)]
+            alpha_2 = [(x,y) for x in 0:mga_alpha_steps:1 for y = (1-x)]
+            for mga_alpha in vcat(alpha_1,alpha_2)
                     new_mga_alpha = Symbol(string("mga_alpha_", mga_alpha))
                     if mga_weight_alpha(new_mga_alpha) == nothing
                         new_mga_alpha_i = Object(new_mga_alpha)

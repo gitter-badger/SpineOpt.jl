@@ -111,13 +111,6 @@ function set_objective_mga_iteration!(m;iteration=nothing, mga_alpha=nothing)
                 ]
                 )
                 ind_mga_alpha = collect(indices(mga_alpha_step_length))[1]
-                @show ind_mga_alpha,ind
-                if ind_mga_alpha == ind[1]
-                    @show mga_alpha
-                else
-                    @show (1-mga_alpha)
-                    @show "multiplier otherwise"
-                end
             end
             ind_mga_alpha = collect(indices(mga_alpha_step_length))[1]#find mga_alpha #TODO add parameter!!!
             ub_objective[iteration] = @constraint(
@@ -125,7 +118,7 @@ function set_objective_mga_iteration!(m;iteration=nothing, mga_alpha=nothing)
                     mga_objective[(model = m.ext[:instance],t=current_window(m))]
                     <= sum(
                     mga_aux_diff[((ind...,mga_iteration=iteration))]
-                    *(ind[1] == ind_mga_alpha ? mga_alpha : sign(mga_alpha)*(1-abs(mga_alpha)))
+                    *(ind[1] == ind_mga_alpha ? mga_alpha[1] : mga_alpha[2])
                     for ind in vcat(
                         [storages_invested_mga_indices(iteration)...,
                         connections_invested_mga_indices(iteration)...,
