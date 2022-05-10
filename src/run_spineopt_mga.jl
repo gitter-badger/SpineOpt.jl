@@ -71,12 +71,12 @@ function rerun_spineopt!(
             alpha_1 = [(x,y) for x in -1:mga_alpha_steps:0 for y = -1*(1+x)]
             alpha_2 = [(x,y) for x in 0:mga_alpha_steps:1 for y = (1-x)]
             for mga_alpha in vcat(alpha_1,alpha_2)
-                    new_mga_name = "mga_alpha_$mga_alpha"
-                    new_mga_name = replace(new_mga_name," " => "")
-                    new_mga_name = replace(new_mga_name,"(" => "")
-                    new_mga_name = replace(new_mga_name,")" => "")
-                    new_mga_name = replace(new_mga_name,"," => "_")
-                    new_mga_name = Symbol(new_mga_name)
+                    new_mga_alpha = "mga_alpha_$mga_alpha"
+                    new_mga_alpha = replace(new_mga_alpha," " => "")
+                    new_mga_alpha = replace(new_mga_alpha,"(" => "")
+                    new_mga_alpha = replace(new_mga_alpha,")" => "")
+                    new_mga_alpha = replace(new_mga_alpha,"," => "_")
+                    new_mga_alpha = Symbol(new_mga_alpha)
                     if mga_weight_alpha(new_mga_alpha) == nothing
                         new_mga_alpha_i = Object(new_mga_alpha)
                         add_object!(mga_weight_alpha,  new_mga_alpha_i)
