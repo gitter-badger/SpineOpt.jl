@@ -447,7 +447,12 @@ function _save_output!(m, out, value_or_param; iterations=nothing, mga_alpha=not
         end
         if !isnothing(mga_alpha)
             # FIXME: Needs to be done, befooooore we execute solve, as we need to set objective for this solve
-            new_mga_name = Symbol(string("mga_alpha_", mga_alpha))
+            new_mga_name = "mga_alpha_$mga_alpha"
+            new_mga_name = replace(new_mga_name," " => "")
+            new_mga_name = replace(new_mga_name,"(" => "")
+            new_mga_name = replace(new_mga_name,")" => "")
+            new_mga_name = replace(new_mga_name,"," => "_")
+            new_mga_name = Symbol(new_mga_name)
             if mga_weight_alpha(new_mga_name) == nothing
                 new_mga_i = Object(new_mga_name)
                 add_object!(mga_weight_alpha, new_mga_i)
