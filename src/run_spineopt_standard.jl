@@ -282,23 +282,25 @@ function optimize_model!(m::Model; log_level=3, calculate_duals=false, iteration
     write_mps_file(model=m.ext[:instance]) == :write_mps_always && write_to_file(m, "model_diagnostics.mps")
     # NOTE: The above results in a lot of Warning: Variable connection_flow[...] is mentioned in BOUNDS,
     # but is not mentioned in the COLUMNS section.
-    @timelog log_level 0 "Optimizing model $(m.ext[:instance])..." optimize!(m)
-    if termination_status(m) == MOI.OPTIMAL || termination_status(m) == MOI.TIME_LIMIT
+    @timelog log_level 0 "Optimizing model $(m.ext[:instance])..." optimize!(m)    
+    if termination_status(m) == MOI.OPTIMAL || termination_status(m) == MOI.TIME_LIMIT                
         mip_solver = m.ext[:mip_solver]
         lp_solver = m.ext[:lp_solver]
         if calculate_duals
+            @timelog log_level 1 "saving variable values for LP warm start" save_variable_values!(m)        
             @log log_level 1 "Setting up final LP of $(m.ext[:instance]) to obtain duals..."
             @timelog log_level 1 "Fixing integer variables..." relax_integer_vars(m)
             if lp_solver != mip_solver
                 @timelog log_level 1 "Switching to LP solver $(lp_solver)..." set_optimizer(m, lp_solver)
             end
+            @timelog log_level 1 "warm starting variables for final LP" warm_start_variables!(m)
             @timelog log_level 1 "Optimizing final LP..." optimize!(m)
             save_marginal_values!(m)
             save_bound_marginal_values!(m)
         end
         @log log_level 1 "Optimal solution found, objective function value: $(objective_value(m))"
         @timelog log_level 2 "Saving $(m.ext[:instance]) results..." save_model_results!(m,iterations=iterations)
-        if calculate_duals
+        if calculate_duals            
             if lp_solver != mip_solver
                 @timelog log_level 1 "Switching back to MIP solver $(mip_solver)..." set_optimizer(m, mip_solver)
             end
@@ -336,6 +338,26 @@ function save_variable_values!(m::Model)
         _save_variable_value!(m, name, definition[:indices])
     end
 end
+
+"""
+Set the warm-start value of all variables.
+"""
+function warm_start_variables!(m::Model, log_level=3)        
+    for (name, definition) in m.ext[:variables_definition]    
+        _warm_start_variable!(m, name, definition[:indices])
+    end
+end
+
+"""
+Set the warm-start value of a variable.
+"""
+function _warm_start_variable!(m::Model, name::Symbol, indices::Function)
+    var = m.ext[:variables][name]
+    for ind in indices(m; t=vcat(history_time_slice(m), time_slice(m)), temporal_block=anything)
+        JuMP.set_start_value(var[ind], m.ext[:values][name][ind])          
+    end
+end
+
 
 _value(v::GenericAffExpr) = JuMP.value(v)
 _value(v) = v
