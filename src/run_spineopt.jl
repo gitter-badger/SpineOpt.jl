@@ -97,6 +97,7 @@ function run_spineopt(
     update_names=false,
     alternative="",
     use_direct_model=false,
+    dual_lp_warm_start=false,
     filters=Dict("tool" => "object_activity_control")
 )
     @log log_level 0 "Running SpineOpt for $(url_in)..."
@@ -142,7 +143,8 @@ function run_spineopt(
         optimize=optimize,
         update_names=update_names,
         alternative=alternative,
-        use_direct_model=use_direct_model
+        use_direct_model=use_direct_model,
+        dual_lp_warm_start=dual_lp_warm_start,
     )
     # FIXME: make sure use_direct_model this works with db solvers
     # possibly adapt union? + allow for conflicts if direct model is used
@@ -161,6 +163,7 @@ function rerun_spineopt(
     alternative="",
     use_direct_model=false,
     alternative_objective=m -> nothing,
+    dual_lp_warm_start=false,
 )
     m = create_model(:spineopt_standard, mip_solver, lp_solver, use_direct_model)
     mp = create_model(:spineopt_benders_master, mip_solver, lp_solver, use_direct_model)
@@ -179,7 +182,9 @@ function rerun_spineopt(
         optimize=optimize,
         update_names=update_names,
         alternative=alternative,
-        alternative_objective=alternative_objective
+        alternative_objective=alternative_objective,
+        dual_lp_warm_start=dual_lp_warm_start
+
     )
 end
 

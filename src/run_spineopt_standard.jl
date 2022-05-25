@@ -29,7 +29,8 @@ function rerun_spineopt!(
     log_level=3,
     optimize=true,
     update_names=false,
-    alternative=""
+    alternative="",
+    dual_lp_warm_start=false
 )
     @timelog log_level 2 "Preprocessing data structure..." preprocess_data_structure(; log_level=log_level)
     @timelog log_level 2 "Checking data structure..." check_data_structure(; log_level=log_level)
@@ -47,7 +48,7 @@ function rerun_spineopt!(
     calculate_duals = any(startswith(lowercase(name), r"bound_|constraint_") for name in String.(keys(m.ext[:outputs])))
     while optimize
         @log log_level 1 "Window $k: $(current_window(m))"
-        optimize_model!(m; log_level=log_level, calculate_duals=calculate_duals) || break
+        optimize_model!(m; log_level=log_level, calculate_duals=calculate_duals, dual_lp_warm_start=dual_lp_warm_start) || break
         @timelog log_level 2 "Post-processing results..." postprocess_results!(m)
         @timelog log_level 2 "Fixing non-anticipativity values..." fix_non_anticipativity_values!(m)
         if @timelog log_level 2 "Rolling temporal structure...\n" !roll_temporal_structure!(m)
@@ -276,7 +277,7 @@ end
 Optimize the given model.
 If an optimal solution is found, save results and return `true`, otherwise return `false`.
 """
-function optimize_model!(m::Model; log_level=3, calculate_duals=false, iterations=nothing)
+function optimize_model!(m::Model; log_level=3, calculate_duals=false, iterations=nothing, dual_lp_warm_start=false)
     write_mps_file(model=m.ext[:instance]) == :write_mps_always && write_to_file(m, "model_diagnostics.mps")
     # NOTE: The above results in a lot of Warning: Variable connection_flow[...] is mentioned in BOUNDS,
     # but is not mentioned in the COLUMNS section.
@@ -291,7 +292,9 @@ function optimize_model!(m::Model; log_level=3, calculate_duals=false, iteration
             if lp_solver != mip_solver
                 @timelog log_level 1 "Switching to LP solver $(lp_solver)..." set_optimizer(m, lp_solver)
             end
-            @timelog log_level 1 "warm starting variables for final LP" warm_start_variables!(m)
+            if dual_lp_warm_start
+                @timelog log_level 1 "warm starting variables for final LP" warm_start_variables!(m)
+            end
             @timelog log_level 1 "Optimizing final LP..." optimize!(m)
             save_marginal_values!(m)
             save_bound_marginal_values!(m)
