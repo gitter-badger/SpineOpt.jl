@@ -36,7 +36,7 @@ function add_constraint_unit_state_transition!(m::Model)
                     unit=u,
                     stochastic_scenario=s,
                     t=t_after,
-                    temporal_block=anything,
+                    # temporal_block=anything,
                 );
                 init=0,
             )

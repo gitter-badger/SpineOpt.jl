@@ -96,7 +96,8 @@ function run_spineopt(
     optimize=true,
     update_names=false,
     use_direct_model=false,
-    filters=Dict("tool" => "object_activity_control")
+    filters=Dict("tool" => "object_activity_control"),
+    fixed_mga_alpha=nothing
 )
     @log log_level 0 "Running SpineOpt for $(url_in)..."
     version = find_version(url_in)
@@ -140,7 +141,8 @@ function run_spineopt(
         log_level=log_level,
         optimize=optimize,
         update_names=update_names,
-        use_direct_model=use_direct_model
+        use_direct_model=use_direct_model,
+        fixed_mga_alpha=fixed_mga_alpha
     )
     # FIXME: make sure use_direct_model this works with db solvers
     # possibly adapt union? + allow for conflicts if direct model is used
@@ -158,6 +160,7 @@ function rerun_spineopt(
     update_names=false,
     use_direct_model=false,
     alternative_objective=m -> nothing,
+    fixed_mga_alpha=nothing,
 )
     m = create_model(:spineopt_standard, mip_solver, lp_solver, use_direct_model)
     mp = create_model(:spineopt_benders_master, mip_solver, lp_solver, use_direct_model)
@@ -175,7 +178,8 @@ function rerun_spineopt(
         log_level=log_level,
         optimize=optimize,
         update_names=update_names,
-        alternative_objective=alternative_objective
+        alternative_objective=alternative_objective,
+        fixed_mga_alpha=fixed_mga_alpha,
     )
 end
 

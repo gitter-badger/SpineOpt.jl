@@ -190,7 +190,7 @@ function generate_conversion_to_discounted_annuities!(m::Model, obj_cls::ObjectC
                     end
                 end
                 push!(stochastic_map_indices,s)
-                push!(stochastic_map_vals,TimeSeries(timeseries_ind,timeseries_val,false,false))
+                push!(stochastic_map_vals,TimeSeries(timeseries_ind,timeseries_val,false,false;merge_ok=true))
             end
             obj_cls.parameter_values[id][param_name] = parameter_value(SpineInterface.Map(stochastic_map_indices,stochastic_map_vals))
         end

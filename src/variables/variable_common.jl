@@ -56,7 +56,10 @@ function add_variable!(
     )
     var = m.ext[:variables][name] = Dict(
         ind => _variable(m, name, ind, lb, ub, bin, int)
-        for ind in indices(m; t=vcat(history_time_slice(m;use_long_history=use_long_history), time_slice(m)))
+        for ind in Iterators.flatten((
+                indices(m; t=history_time_slice(m;use_long_history=use_long_history), temporal_block=anything),
+                indices(m; t=time_slice(m))
+                ))
     )
     if vintage
         var = m.ext[:variables][name] = Dict(

@@ -28,7 +28,8 @@ function rerun_spineopt!(
     update_constraints=m -> nothing,
     log_level=3,
     optimize=true,
-    update_names=false
+    update_names=false,
+    fixed_mga_alpha=nothing,
 )
     @timelog log_level 2 "Preprocessing data structure..." preprocess_data_structure(; log_level=log_level)
     @timelog log_level 2 "Checking data structure..." check_data_structure(; log_level=log_level)
